@@ -1,0 +1,19 @@
+.navItemWrapper {
+    box-sizing: border-box;
+    padding: 0 15px;
+}
+
+.navItem {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: black;
+}
+
+.navItemWrapper:first-child {
+    padding: 0 15px 0 0;
+}
+
+.navItemWrapper:last-child {
+    padding: 0 0px 0 15px;
+}

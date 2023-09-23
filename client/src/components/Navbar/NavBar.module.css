@@ -1,0 +1,6 @@
+.navBar {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    justify-content: center;
+}

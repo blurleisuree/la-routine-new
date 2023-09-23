@@ -1,0 +1,83 @@
+.infoBlock {
+    width: 50%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.infoBlock__name {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.35;
+}
+
+.infoBlock__code {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.55;
+    margin-top: 4px;
+    display: block;
+}
+
+.infoBlock__code_value {
+    text-transform: uppercase;
+}
+
+.infoBlock__price {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.35;
+    margin-top: 18px;
+    display: block;
+}
+
+.infoBlock__label {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.infoBlock__select {
+    display: block;
+    margin-top: 3px;
+    min-width: 150px;
+    padding: 2px 30px 2px 6px;
+    border: 1px #ddd solid;
+    border-radius: 5px;
+    background: #f8f8f8;
+    font-size: 14px;
+    line-height: 1.55;
+    font-weight: 300;
+    color: #000;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.infoBlock__btn {
+    margin-top: 20px;
+    display: inline-block;
+    color: #ffffff;
+    background-color: #000000;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 15px 30px;
+    font-size: 14px;
+}
+
+.infoBlock__description {
+    display: block;
+    font-size: 14px;
+    line-height: 1.55;
+    font-weight: 300;
+    color: black;
+}
+
+.infoBlock__description:first-of-type {
+    margin-top: 30px;
+}

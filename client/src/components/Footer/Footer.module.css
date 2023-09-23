@@ -1,0 +1,42 @@
+.footer {
+    background-color: black;
+    display: flex;
+    width: 100% !important;
+    max-width: 100% !important;
+    align-items: center;
+    padding: 0 40px 30px;
+    background-color: #171717;
+    margin-top: auto;
+    justify-content: space-between;
+}
+
+.footerClown {
+    cursor: pointer;
+    width: 33.3%;
+    display: block;
+}
+
+.footerClown img {
+    max-width: 150px;
+}
+
+.footerTitle {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    width: 33.3%;
+    display: block;
+}
+
+.footerLinks {
+    display: flex;
+    align-items: center;
+    width: 33.3%;
+    justify-content: end;
+}
+
+.footerLink {
+    padding: 0 3px;
+    box-sizing: border-box;
+}

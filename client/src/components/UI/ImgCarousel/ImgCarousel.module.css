@@ -1,0 +1,85 @@
+.imgCarousel {
+    min-width: 560px;
+    min-height: 560px;
+    display: block;
+    width: 50%;
+    position: relative;
+}
+
+.imgCarousel__inner {
+    width: 100%;
+    display: block;
+    position: relative;
+    user-select: none;
+    min-width: 560px;
+    min-height: 560px;
+}
+
+.imgCarousel__img {
+    display: block;
+    transition: all 0.4s ease-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    user-select: none;
+    opacity: 0;
+    max-width: 560px;
+}
+
+.imgCarousel__img.active {
+    z-index: 101;
+    opacity: 1;
+}
+
+.imgCarousel__arrow {
+    display: block;
+    pointer-events: none;
+    opacity: 0;
+    position: absolute;
+    top: 280px;
+    min-height: 12px;
+    width: 7px;
+    cursor: pointer;
+    transition: all 0.4s ease-out;
+    z-index: 102;
+    user-select: none;
+}
+
+.imgCarousel__arrow_left {
+    left: 7%;
+    transform: rotate(180deg);
+}
+
+.imgCarousel__arrow_right {
+    right: 11%;
+}
+
+.imgCarousel__arrow.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.imgCarousel__mini {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+
+}
+
+.imgCarousel__imgMini {
+    display: block;
+    width: 60px;
+    cursor: pointer;
+    transition: all 0.35s ease-out;
+}
+
+.imgCarousel__imgMini:hover {
+    opacity: 0.5;
+}
+
+.imgCarousel__imgMini.active {
+    border: 1px solid rgba(0, 0, 0, .15);
+    opacity: 1;
+}

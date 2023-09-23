@@ -1,0 +1,62 @@
+.tabs {
+    display: block;
+    margin: 60px auto 0;
+    max-width: 1160px;
+}
+
+.tabsTop {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.tabsTop__title {
+    width: 50%;
+    box-sizing: border-box;
+    padding: 20px 0;
+    display: block;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.05s ease-out;
+}
+
+.tabsTop__title.active {
+    border-bottom: 1px solid black;
+}
+
+.tabsTop__title:hover {
+    border-bottom: 1px solid black;
+}
+
+.tabsContent {
+    padding-bottom: 60px;
+    box-sizing: border-box;
+    display: none;
+    min-height: 350px;
+}
+
+.tabsContent.active {
+    display: block;
+}
+
+.tabsContent__item {
+    display: block;
+    margin-top: 30px;
+}
+
+.tabsContent__title {
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.tabsContent__text {
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.tabsContent__text_size {
+    font-weight: 700;
+}

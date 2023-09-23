@@ -22,13 +22,13 @@ function App() {
     fetchCatalog()
   }, []);
 
-  console.log(typeof navItems)
-
   async function fetchCatalog() {
     const res = await fetch('http://localhost:3001/catalog');
     const json = await res.json()
     setNavItems(json)
   }
+
+  // console.log(navItems[0].name)
 
   return (
     !navItems
@@ -37,8 +37,10 @@ function App() {
         <BrowserRouter>
           <Routes >
             <Route path='/' element={<Main navItems={navItems} />}>
-              <Route index element={<Catalog navItem={'new'} itemIndex={0} />} />
+              <Route index element={<Catalog itemIndex={0} />} />
+              {/* <Route path={'/t-shirt'} element={<Catalog navItem={'t-shirt'} itemIndex={1} />} /> */}
 
+             
               {/* {navItems.map((navItem, index) =>
               navItem == 't-shirt'
                 ? console.log()

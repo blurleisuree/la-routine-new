@@ -1,17 +1,17 @@
 import React from "react";
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import classes from './NavItem.module.css';
 
-const NavItem = (props) => {
+const NavItem = ({ navItemData }) => {
 
     return (
         <li className={classes.navItemWrapper}>
             <NavLink className={classes.navItem}
-                to={props.name == 't-shirt' ? '/' : '/' + props.name}
+                to={navItemData.name == 'new' ? '/' : '/' + navItemData.name}
                 style={({ isActive }) => ({ textDecoration: isActive ? 'underline' : 'none' })}
             >
-                {props.name}
+                {navItemData.name}
             </NavLink>
         </li>
     )

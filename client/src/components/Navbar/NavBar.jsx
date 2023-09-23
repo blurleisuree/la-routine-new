@@ -4,14 +4,15 @@ import classes from './NavBar.module.css';
 
 import NavItem from '../UI/NavItem/NavItem.jsx';
 
-const NavBar = (props) => {
+const NavBar = ({navItems}) => {
 
     return (
         <ul className={classes.navBar}>
-            <NavItem name={'new'}/>
-            {props.navItems.map((navItem) =>
-                <NavItem name={navItem} />
+            <NavItem navItemData={{ name: 'new' }} />
+            {navItems.map((navItem) =>
+                <NavItem navItemData={navItem} />
             )}
+            <NavItem navItemData={{ name: 'faq' }} />
         </ul>
     );
 };

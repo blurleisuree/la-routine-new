@@ -28,7 +28,11 @@ function App() {
     setNavItems(json)
   }
 
-  // console.log(navItems[0].name)
+  // {
+  //   navItems
+  //     ? console.log(typeof navItems[0].name)
+  //     : console.log()
+  // }
 
   return (
     !navItems
@@ -38,28 +42,29 @@ function App() {
           <Routes >
             <Route path='/' element={<Main navItems={navItems} />}>
               <Route index element={<Catalog itemIndex={0} />} />
-              {/* <Route path={'/t-shirt'} element={<Catalog navItem={'t-shirt'} itemIndex={1} />} /> */}
 
-             
               {/* {navItems.map((navItem, index) =>
-              navItem == 't-shirt'
-                ? console.log()
-                : navItems == 'zip-hoodie'
-                  ? <Route path='/zipHoodie' element={<Catalog itemIndex={index} navItem={navItem} />} />
-                  : navItem == "faq"
-                    ? <Route path={'/' + navItem} element={<Faq />} />
-                    : <Route path={'/' + navItem} element={<Catalog itemIndex={index} navItem={navItem} />} />
-            )} */}
+                <Route path={'/' + navItem.name} element={<Catalog itemIndex={index} navItem={navItem.name} />} />
+              )} */}
+
+              {navItems.map((navItem, index) =>
+                <Route path={'/' + navItem.name} element={<Catalog navItem={navItem.name} />}>
+                  <Route path={':id'} element={<ItemCard />} />
+                </Route>
+              )}
 
               <Route path='*' element={<Error />} />
             </Route>
+
             {/* {navItems.map((navItem, index) =>
-            navItem == 'zip-hoodie'
-              ? <Route path='/zipHoodie/:id' element={<ItemCard navItem={navItem} itemIndex={index} items={items} />} />
-              : navItem == 'faq'
-                ? console.log()
-                : <Route path={`/${navItem}/:id`} element={<ItemCard navItem={navItem} itemIndex={index} items={items} />} />
-          )} */}
+              <Route path={`/${navItem.name}/:id`} element={<ItemCard navItem={navItem.name} itemIndex={index} />} />
+
+              // navItem == 'zip-hoodie'
+              //   ? <Route path='/zipHoodie/:id' element={<ItemCard navItem={navItem} itemIndex={index} items={items} />} />
+              //   : navItem == 'faq'
+              //     ? console.log()
+              //     : <Route path={`/${navItem}/:id`} element={<ItemCard navItem={navItem} itemIndex={index} items={items} />} />
+            )} */}
           </Routes>
         </BrowserRouter>
       </div>
@@ -98,3 +103,18 @@ function App() {
 }
 
 export default App;
+
+// db.items.insertMany([
+//   {
+//     name: '',
+//     type: '',
+//     price: '',
+//     description: '',
+//     sizes: [],
+//     colors: [],
+//     code: '',
+//     new: ,
+//     imgs: [],
+//     catalog_id: ObjectId()
+//   }
+// ])

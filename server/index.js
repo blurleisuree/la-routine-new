@@ -41,7 +41,7 @@ app.get('/items', (req, res) => {
 });
 
 // Для ItemCard
-app.get('/items/:id', (req, res) => {
+app.get('/:id/:id', (req, res) => {
     if (ObjectId.isValid(req.params.id)) {
         db.collection('items').findOne({ _id: new ObjectId(req.params.id) })
             .then((doc) => {

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useOutletContext, useLocation } from 'react-router-dom';
+import { useOutletContext, useLocation, Outlet } from 'react-router-dom';
 
 import classes from './Catalog.module.css';
 
 import Item from '../UI/Item/Item.jsx';
 
-const Catalog = (props) => {
+const Catalog = ({ navItem }) => {
 
     // let items = useOutletContext();
     // items = items[props.itemIndex];
@@ -15,22 +15,25 @@ const Catalog = (props) => {
 
     const [items, setItems] = useState(null);
 
-    const path = useLocation().pathname.slice(1)
+    const pathname = useLocation().pathname
     useEffect(() => {
-        fetchItems(path)
-    }, [path]);
+        pathname.match(/\d/) // Проверка есть ли в ссылке цифры (чтобы не перерендерить каталог когда открыт Item)
+            ? console.log()
+            : fetchItems()
+    }, [pathname]);
 
-    async function fetchItems(category) {
-        const res = await fetch(`http://localhost:3001/${category}`);
+    async function fetchItems() {
+        const res = await fetch(`http://localhost:3001${pathname}`);
         const json = await res.json()
         setItems(json)
     }
 
     return (
         <div className={classes.catalog}>
+            <Outlet />
             {items == undefined
                 ? <h1 className={classes.miss}>Товары отсутвуют.</h1>
-                : items.map((item, index) => <Item item={item} navItem={props.navItem} itemIndex={index} />)
+                : items.map((item, index) => <Item item={item} navItem={navItem} itemIndex={index} />)
             }
         </div>
     )

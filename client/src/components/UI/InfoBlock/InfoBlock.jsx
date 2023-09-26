@@ -9,9 +9,7 @@ const InfoBlock = (props) => {
     let descriptionArr = item.description;
     descriptionArr = descriptionArr.split(';')
 
-    // const gg = (e) => {
-    //     e.target.selectedIndex = 1
-    // }
+    // console.log(props)
 
     return (
         <div className={classes.infoBlock}>

@@ -13,8 +13,7 @@ function Main(props) {
     <div className={classes.main}>
       <Logo />
       <NavBar navItems={props.navItems} />
-      <Outlet />
-      {/* <Outlet context={props.items}/> */}
+      <Outlet context={props.navItems}/>
       <Footer />
     </div>
   );

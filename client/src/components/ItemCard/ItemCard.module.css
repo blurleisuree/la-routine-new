@@ -1,0 +1,49 @@
+.itemCard {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    background-color: white;
+}
+
+.itemCard__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.itemCard__more {
+    opacity: .8;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+.itemCard__more span {
+    margin-right: 5px;
+}
+
+.itemCard__more p {
+    margin-top: 2px;
+}
+
+.itemCard__cross {
+    display: block;
+    cursor: pointer;
+}
+
+.itemCard__wrapper {
+    max-width: 1160px;
+    margin: 70px auto;
+}
+
+.itemCard__inner {
+    display: flex;
+}

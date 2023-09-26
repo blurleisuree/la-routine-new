@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import classes from './Item.module.css';
 
-const Item = ({ item, navItem, itemIndex }) => {
+const Item = ({ item, navItem, itemIndex, navItems }) => {
 
     const mouseOver = (e) => {
         e.target.style.opacity = 0;
@@ -12,14 +12,16 @@ const Item = ({ item, navItem, itemIndex }) => {
         e.target.style.opacity = 1;
     }
 
-    const index = itemIndex
-
-    // navItem !== 'new' 
-    // ? 
-    // : 
+    if (!navItem) {
+        navItems.forEach(el => {
+            if (el._id == item.catalog_id) {
+                navItem = el.name
+            }
+        });
+    }
 
     return (
-        <Link to={`/${navItem}/${item._id}`} state={{ index }}>
+        <Link to={`/${navItem}/${item._id}`} state={{ itemIndex }}>
             <div className={classes.item}>
                 {/* Надо сделать чтобы если второй картинки нету показывалась размерная сетка */}
                 <img onMouseOver={mouseOver} onMouseOut={mouseOut} src={`/imgs/items/${item._id}_img1.jpg`} alt="item" className={classes.item__img + " " + classes.item__img_1} />

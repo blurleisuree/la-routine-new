@@ -7,12 +7,6 @@ import Item from '../UI/Item/Item.jsx';
 
 const Catalog = ({ navItem }) => {
 
-    // let items = useOutletContext();
-    // items = items[props.itemIndex];
-    // items != undefined
-    //     ? items = items[props.navItem]
-    //     : console.log()
-
     const [items, setItems] = useState(null);
 
     const pathname = useLocation().pathname
@@ -28,12 +22,14 @@ const Catalog = ({ navItem }) => {
         setItems(json)
     }
 
+    const navItems = useOutletContext();
+    
     return (
         <div className={classes.catalog}>
             <Outlet />
             {items == undefined
                 ? <h1 className={classes.miss}>Товары отсутвуют.</h1>
-                : items.map((item, index) => <Item item={item} navItem={navItem} itemIndex={index} />)
+                : items.map((item, index) => <Item item={item} navItem={navItem} itemIndex={index} navItems={navItems}/>)
             }
         </div>
     )

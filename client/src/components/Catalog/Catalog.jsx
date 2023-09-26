@@ -23,13 +23,20 @@ const Catalog = ({ navItem }) => {
     }
 
     const navItems = useOutletContext();
-    
+
+    // Сортировка по новым товарам (хз как работает sort)
+    if (items) {
+        items.sort((a, b) => {
+            return b.new - a.new
+        })
+    }
+
     return (
         <div className={classes.catalog}>
             <Outlet />
-            {items == undefined
+            {!items || !items[0]
                 ? <h1 className={classes.miss}>Товары отсутвуют.</h1>
-                : items.map((item, index) => <Item item={item} navItem={navItem} itemIndex={index} navItems={navItems}/>)
+                : items.map((item, index) => <Item item={item} navItem={navItem} itemIndex={index} navItems={navItems} />)
             }
         </div>
     )

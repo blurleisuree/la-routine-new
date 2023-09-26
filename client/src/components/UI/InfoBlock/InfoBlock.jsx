@@ -30,7 +30,10 @@ const InfoBlock = (props) => {
                 )}
             </select>
 
-            <div className={classes.infoBlock__btn}>buy</div>
+            {item.available
+                ? <div className={classes.infoBlock__btn}>buy</div>
+                : <div className={classes.infoBlock__btn + " " + classes.notAvailable}>not avaible</div>
+            }
             {descriptionArr.map((str) =>
                 <p className={classes.infoBlock__description}>{str}</p>
             )}

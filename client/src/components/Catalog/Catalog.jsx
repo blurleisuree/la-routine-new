@@ -39,33 +39,42 @@ const Catalog = ({ navItem }) => {
 
     const navItems = useOutletContext();
 
-    // Сортировка по новым товарам (хз как работает sort)
-    if (items) {
-        items.sort((a, b) => {
-            return b.new - a.new
-        })
-    }
+    // Оба варианта работают (оптимизировать чтобы красиво было)
+    return (
+        <>
+            <Outlet />
+            {!items || !items[0] || pathname.match(/\d/)
+                ? <h1 className={classes.miss}>Товары отсутвуют.</h1>
+                : (
+                    <>
+                        <div className={classes.catalog}>
+                            {items.map((item, index) => <Item key={item._id} item={item} navItem={navItem} itemIndex={index} navItems={navItems} />)}
+                        </div >
+                        <button onClick={loadMore} className={allProductsLoaded ? classes.catalog__btn + " " + classes.disabled : classes.catalog__btn}>Загрузить ещё</button>
+                    </>
+                )
+            }
+        </>
+    )
 
-    if (!items || !items[0] || pathname.match(/\d/)) { // последнее условие для того чтобы скрывать товары когда открыт один
-        return (
-            <>
-                <Outlet />
-                <h1 className={classes.miss}>Товары отсутвуют.</h1>
-            </>
-        )
-    } else {
-        return (
-            <>
-                <Outlet />
-                <div className={classes.catalog}>
-
-                    {items.map((item, index) => <Item item={item} navItem={navItem} itemIndex={index} navItems={navItems} />)}
-
-                </div >
-                <button onClick={loadMore} className={allProductsLoaded ? classes.catalog__btn + " " + classes.disabled : classes.catalog__btn}>Загрузить ещё</button>
-            </>
-        )
-    }
+    // if (!items || !items[0] || pathname.match(/\d/)) { // последнее условие для того чтобы скрывать товары когда открыт один
+    //     return (
+    //         <>
+    //             <Outlet />
+    //             <h1 className={classes.miss}>Товары отсутвуют.</h1>
+    //         </>
+    //     )
+    // } else {
+    //     return (
+    //         <>
+    //             <Outlet />
+    //             <div className={classes.catalog}>
+    //                 {items.map((item, index) => <Item key={item._id} item={item} navItem={navItem} itemIndex={index} navItems={navItems} />)}
+    //             </div >
+    //             <button onClick={loadMore} className={allProductsLoaded ? classes.catalog__btn + " " + classes.disabled : classes.catalog__btn}>Загрузить ещё</button>
+    //         </>
+    //     )
+    // }
 };
 
 export default Catalog;

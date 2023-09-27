@@ -2,9 +2,9 @@ import React from "react";
 
 import classes from './InfoBlock.module.css';
 
-const InfoBlock = ({ item, params, selectOption }) => {
+const InfoBlock = ({ item, params, selectOption, desc}) => {
 
-    let descriptionArr = item.description;
+    let descriptionArr = desc;
     descriptionArr = descriptionArr.split(';');
 
     return (
@@ -16,13 +16,13 @@ const InfoBlock = ({ item, params, selectOption }) => {
             <label className={classes.infoBlock__label} htmlFor="color">Color</label>
             <select className={classes.infoBlock__select} onChange={selectOption} name="color" id="infoBlock__color">
                 {item.colors.map((color) =>
-                    <option value={color} >{color}</option>
+                    <option value={color} key={color}>{color}</option>
                 )}
             </select>
             <label className={classes.infoBlock__label} htmlFor="size">Size</label>
             <select className={classes.infoBlock__select} onChange={selectOption} name="size" id="infoBlock__size">
                 {item.sizes.map((size) =>
-                    <option value={size} >{size}</option>
+                    <option value={size} key={size} >{size}</option>
                 )}
             </select>
 
@@ -30,8 +30,8 @@ const InfoBlock = ({ item, params, selectOption }) => {
                 ? <div className={classes.infoBlock__btn}>buy</div>
                 : <div className={classes.infoBlock__btn + " " + classes.notAvailable}>not avaible</div>
             }
-            {descriptionArr.map((str) =>
-                <p className={classes.infoBlock__description}>{str}</p>
+            {descriptionArr.map((str, index) =>
+                <p className={classes.infoBlock__description} key={index}>{str}</p>
             )}
         </div>
     );

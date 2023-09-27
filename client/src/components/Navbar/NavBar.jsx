@@ -10,7 +10,7 @@ const NavBar = ({navItems}) => {
         <ul className={classes.navBar}>
             <NavItem navItemData={{ name: 'new' }} />
             {navItems.map((navItem) =>
-                <NavItem navItemData={navItem} />
+                <NavItem key={navItem._id} navItemData={navItem} />
             )}
             <NavItem navItemData={{ name: 'faq' }} />
         </ul>

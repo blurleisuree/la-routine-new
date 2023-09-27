@@ -31,10 +31,10 @@ function App() {
         <BrowserRouter>
           <Routes >
             <Route path='/' element={<Main navItems={navItems} />}>
-              <Route index element={<Catalog itemIndex={0} />} />
+              <Route index element={<Catalog />} />
               {navItems.map((navItem, index) =>
-                <Route path={'/' + navItem.name} element={<Catalog navItem={navItem.name} />}>
-                  <Route path=':id' element={<ItemCard />} />
+                <Route path={'/' + navItem.name} key={navItem._id} element={<Catalog navItem={navItem.name} />}>
+                  <Route path=':id' element={<ItemCard navItem={navItem}/>} />
                 </Route>
               )}
               <Route path='/faq' element={<Faq />} />

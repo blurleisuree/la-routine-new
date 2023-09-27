@@ -64,14 +64,24 @@ app.get('/catalog', (req, res) => {
         .catch(() => handleError(res, "Something goes wrong"));
 });
 
-// Для разделов
 app.get('/:id', (req, res) => {
-    const url = req.url.replace('/', '');
+    let url = req.url.replace('/', '');
+    const n = req.query.limitCount;
+
+    // // Чтобы убирать из ссылки параметры запроса (для поиска по базе)
+    if (n) {
+        url = url.replace(`?limitCount=${n}`, '')
+    }
+
+    const limitCount = Number(n) || 3;
+    const skipCount = Number(n - 3) || 0
+
+    // console.log(limitCount, skipCount)
 
     db.collection('catalog').findOne({ name: url })
         .then((catalogItem) => {
             const items = [];
-            db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) })
+            db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).skip(skipCount).limit(limitCount)
                 .forEach((item) => items.push(item))
                 .then(() => {
                     res.status(200).json(items);

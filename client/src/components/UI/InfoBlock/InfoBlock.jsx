@@ -2,29 +2,25 @@ import React from "react";
 
 import classes from './InfoBlock.module.css';
 
-const InfoBlock = (props) => {
-
-    const item = props.item;
+const InfoBlock = ({ item, params, selectOption }) => {
 
     let descriptionArr = item.description;
-    descriptionArr = descriptionArr.split(';')
-
-    // console.log(props)
+    descriptionArr = descriptionArr.split(';');
 
     return (
         <div className={classes.infoBlock}>
             <h2 className={classes.infoBlock__name}>{item.name}</h2>
-            <span className={classes.infoBlock__code}>Артикул: <span className={classes.infoBlock__code_value}>{item.code}-{props.params.color}</span></span>
+            <span className={classes.infoBlock__code}>Артикул: <span className={classes.infoBlock__code_value}>{item.code}-{params.color}</span></span>
             <h3 className={classes.infoBlock__price}>{item.price} р.</h3>
 
             <label className={classes.infoBlock__label} htmlFor="color">Color</label>
-            <select className={classes.infoBlock__select} onChange={props.selectOption} name="color" id="infoBlock__color">
+            <select className={classes.infoBlock__select} onChange={selectOption} name="color" id="infoBlock__color">
                 {item.colors.map((color) =>
                     <option value={color} >{color}</option>
                 )}
             </select>
             <label className={classes.infoBlock__label} htmlFor="size">Size</label>
-            <select className={classes.infoBlock__select} onChange={props.selectOption} name="size" id="infoBlock__size">
+            <select className={classes.infoBlock__select} onChange={selectOption} name="size" id="infoBlock__size">
                 {item.sizes.map((size) =>
                     <option value={size} >{size}</option>
                 )}

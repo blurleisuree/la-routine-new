@@ -48,7 +48,7 @@ function App() {
 
 export default App;
 
-// db.items.insertMany([
+// db.items.insertOne(
 //   {
 //     name: '',
 //     type: '',
@@ -58,7 +58,8 @@ export default App;
 //     colors: [],
 //     code: '',
 //     new: ,
-//     imgs: [],
-//     catalog_id: ObjectId()
+//     imgs_count: ,
+//     catalog_id: ObjectId(),
+// available: ,
 //   }
-// ])
+// )

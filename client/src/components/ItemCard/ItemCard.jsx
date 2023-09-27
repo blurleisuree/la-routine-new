@@ -53,7 +53,7 @@ const ItemCard = (props) => {
                 </div>
                 <div className={classes.itemCard__wrapper}>
                     <div className={classes.itemCard__inner}>
-                        <ImgCarousel item={item} params={params} setParams={setParams} />
+                        <ImgCarousel item={item} />
                         <InfoBlock item={item} selectOption={selectOption} params={params} />
                     </div>
                     <Tabs />

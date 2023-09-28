@@ -25,7 +25,7 @@ const Item = ({ item, navItem, itemIndex, navItems }) => {
         e.target.style.display = 'none';
         e.target.previousElementSibling.style.pointerEvents = 'none';
     }
-
+    
     return (
         <Link to={`/${navItem}/${item._id}`} state={{ itemIndex }}>
             <div className={classes.item}>

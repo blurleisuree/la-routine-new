@@ -20,8 +20,8 @@ function App() {
 
   async function fetchCatalog() {
     const res = await fetch('http://localhost:3001/catalog');
-    const json = await res.json()
-    setNavItems(json)
+    const json = await res.json();
+    setNavItems(json);
   }
 
   return (
@@ -33,9 +33,9 @@ function App() {
             <Route path='/' element={<Main navItems={navItems} />}>
               <Route index element={<Catalog />} />
               {navItems.map((navItem, index) =>
-                  <Route path={'/' + navItem.name} key={navItem._id} element={< Catalog navItem={navItem.name} />}>
-                    <Route path=':id' element={<ItemCard navItem={navItem} />} />
-                  </Route>
+                <Route path={'/' + navItem.name} key={navItem._id} element={< Catalog navItem={navItem.name} />}>
+                  <Route path=':id' element={<ItemCard navItem={navItem} />} />
+                </Route>
               )}
               <Route path='/faq' element={<Faq />} />
               <Route path='*' element={<Error />} />

@@ -13,6 +13,7 @@
     user-select: none;
     min-width: 560px;
     min-height: 560px;
+    overflow: hidden;
 }
 
 .imgCarousel__img {
@@ -65,7 +66,7 @@
     align-items: center;
     width: 100%;
     flex-wrap: wrap;
-
+    margin-top: 10px;
 }
 
 .imgCarousel__imgMini {

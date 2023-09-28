@@ -4,14 +4,19 @@ import classes from './ImgCarousel.module.css';
 
 const ImgCarousel = ({ item, navItemName }) => {
 
-    let [imgActive, setImgActive] = useState(1);
+    const [imgActive, setImgActive] = useState(1);
+    const [imgsCount, setImgsCount] = useState(Number(item.imgs_count));
 
-    const arr = []
+    const arr = [];
     for (let i = 1; i <= item.imgs_count; i++) {
         arr.push(i)
     }
 
-    console.log(imgActive, item.imgs_count)
+    // На случай если картинка размерной сетки не предусмотрена
+    const disableSizesImg = (e) => {
+        e.target.style.display = 'none';
+        setImgsCount(imgsCount - 1);
+    }
 
     return (
         <div className={classes.imgCarousel}>
@@ -23,8 +28,8 @@ const ImgCarousel = ({ item, navItemName }) => {
                 {arr.map((i) =>
                     <img key={i} src={`/imgs/items/${item._id}_img${i}.jpg`} className={i == imgActive ? classes.imgCarousel__img + ' ' + classes.active : classes.imgCarousel__img}></img>
                 )}
-                <img src={`/imgs/general/${navItemName}_sizes.jpg`} className={arr.length + 1 == imgActive ? classes.imgCarousel__img + ' ' + classes.active : classes.imgCarousel__img}></img>
-                <div onClick={() => setImgActive(imgActive + 1)} className={item.imgs_count + 1 == imgActive ? classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_right : classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_right + " " + classes.active}><svg viewBox="0 0 7.3 13">
+                <img src={`/imgs/general/${navItemName}_sizes.jpg`} onError={(e) => disableSizesImg(e)} className={arr.length + 1 == imgActive ? classes.imgCarousel__img + ' ' + classes.active : classes.imgCarousel__img}></img>
+                <div onClick={() => setImgActive(imgActive + 1)} className={imgsCount + 1 == imgActive ? classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_right : classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_right + " " + classes.active}><svg viewBox="0 0 7.3 13">
                     <desc>Right</desc>
                     <polyline fill="none" stroke="#000000" strokeLinejoin="butt" strokeLinecap="butt" strokeWidth="1" points="0.5,0.5 6.5,6.5 0.5,12.5"></polyline>
                 </svg></div>
@@ -33,6 +38,7 @@ const ImgCarousel = ({ item, navItemName }) => {
                 {arr.map((i, index) =>
                     <img key={index} src={`/imgs/items/${item._id}_img${i}.jpg`} onClick={() => setImgActive(i)} className={i == imgActive ? classes.imgCarousel__imgMini + " " + classes.active : classes.imgCarousel__imgMini} />
                 )}
+                <img src={`/imgs/general/${navItemName}_sizes.jpg`} onError={(e) => disableSizesImg(e)} onClick={() => setImgActive(imgsCount + 1)} className={imgsCount + 1 == imgActive ? classes.imgCarousel__imgMini + " " + classes.active : classes.imgCarousel__imgMini}></img>
             </div>
         </div>
     );

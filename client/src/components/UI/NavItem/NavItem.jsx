@@ -11,7 +11,11 @@ const NavItem = ({ navItemData }) => {
                 to={navItemData.name == 'new' ? '/' : '/' + navItemData.name}
                 style={({ isActive }) => ({ textDecoration: isActive ? 'underline' : 'none' })}
             >
-                {navItemData.name}
+                {navItemData.name == 'magazine'
+                    ? 'magazine / photo'
+                    : navItemData.name
+                }
+
             </NavLink>
         </li>
     )

@@ -33,16 +33,16 @@ function App() {
             <Route path='/' element={<Main navItems={navItems} />}>
               <Route index element={<Catalog />} />
               {navItems.map((navItem, index) =>
-                <Route path={'/' + navItem.name} key={navItem._id} element={<Catalog navItem={navItem.name} />}>
-                  <Route path=':id' element={<ItemCard navItem={navItem}/>} />
-                </Route>
+                  <Route path={'/' + navItem.name} key={navItem._id} element={< Catalog navItem={navItem.name} />}>
+                    <Route path=':id' element={<ItemCard navItem={navItem} />} />
+                  </Route>
               )}
               <Route path='/faq' element={<Faq />} />
               <Route path='*' element={<Error />} />
             </Route>
           </Routes>
         </BrowserRouter>
-      </div>
+      </div >
   );
 }
 
@@ -53,7 +53,6 @@ export default App;
 //     name: '',
 //     type: '',
 //     price: '',
-//     description: '',
 //     sizes: [],
 //     colors: [],
 //     code: '',
@@ -63,3 +62,45 @@ export default App;
 // available: ,
 //   }
 // )
+
+// db.items.insertMany([
+//   {
+//     name: 'LA ROUTINE MAGAZINE',
+//     type: 'Version 2023',
+//     price: '2 500',
+//     sizes: [],
+//     colors: [],
+//     code: 'magazine',
+//     new: false,
+//     imgs_count: 8,
+//     catalog_id: ObjectId('6509fbe4e0c959f228fe60cf'),
+//     available: true,
+//     description: 'LA ROUTINE MAGAZINE 2023;ㅤ;2016 - 2023;ㅤ;А4 Portrait Style Book.;ㅤ;150 Pages.'
+//   },
+//   {
+//     name: 'PostCard',
+//     type: 'Index-Print',
+//     price: '300',
+//     sizes: [],
+//     colors: [],
+//     code: 'card',
+//     new: false,
+//     imgs_count: 8,
+//     catalog_id: ObjectId('6509fbe4e0c959f228fe60cf'),
+//     available: true,
+//     description: '- Размер А6.;ㅤ;-Рандом карточки;ㅤ;- В комплекте 5 индес принтов.;ㅤ;- Сделаны из картона.'
+//   },
+//   {
+//     name: 'Photo',
+//     type: '30 x 40',
+//     price: '2 500',
+//     sizes: [],
+//     colors: [],
+//     code: 'photo',
+//     new: false,
+//     imgs_count: 1,
+//     catalog_id: ObjectId('6509fbe4e0c959f228fe60cf'),
+//     available: false,
+//     description: '- Размер 30см на 40см.;ㅤ;- В комплекте 1 фотография и рамка.;ㅤ;- Является объектом домашнего декора.'
+//   },
+// ])

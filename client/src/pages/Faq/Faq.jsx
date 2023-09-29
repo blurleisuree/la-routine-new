@@ -1,4 +1,5 @@
 import React from "react";
+import {Helmet} from 'react-helmet';
 
 import classes from './Faq.module.css';
 
@@ -6,6 +7,9 @@ const Faq = () => {
 
     return (
         <div className={classes.faq}>
+            <Helmet>
+                <title>FAQ</title>
+            </Helmet>
             <h2 className={classes.faq__title}>Спасибо за заказ !</h2>
             <div className={classes.faq__line}></div>
             <p className={classes.faq__text}>Часто задаваемые вопросы по поводу заказов :</p>

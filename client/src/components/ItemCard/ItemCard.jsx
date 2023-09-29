@@ -6,6 +6,7 @@ import classes from './ItemCard.module.css';
 import InfoBlock from '../../components/UI/InfoBlock/InfoBlock.jsx';
 import Tabs from '../../components/UI/Tabs/Tabs.jsx';
 import ImgCarousel from "../../components/UI/ImgCarousel/ImgCarousel.jsx";
+import { Helmet } from 'react-helmet';
 
 const ItemCard = ({ navItem }) => {
 
@@ -42,6 +43,10 @@ const ItemCard = ({ navItem }) => {
         !item && !params
             ? console.log()
             : <div className={classes.itemCard} >
+                <Helmet>
+                    <title>{item.name}</title>
+                    <link rel="icon" href="../imgs/favicons/favicon.ico" sizes="any" />
+                </Helmet>
                 <div className={classes.itemCard__top}>
                     <Link to={".."} className={classes.itemCard__more}>
                         <span>←</span>
@@ -53,7 +58,7 @@ const ItemCard = ({ navItem }) => {
                 </div>
                 <div className={classes.itemCard__wrapper}>
                     <div className={classes.itemCard__inner}>
-                        <ImgCarousel item={item} navItemName={navItem.name}/>
+                        <ImgCarousel item={item} navItemName={navItem.name} />
                         <InfoBlock item={item} selectOption={selectOption} params={params} desc={navItem.description} />
                     </div>
                     {navItem.sizesVisible && < Tabs />}

@@ -69,7 +69,7 @@ app.get('/:id', (req, res) => {
     let url = req.url.replace('/', '');
     const n = req.query.limitCount;
 
-    // // Чтобы убирать из ссылки параметры запроса (для поиска по базе)
+    // Чтобы убирать из ссылки параметры запроса (для поиска по базе)
     if (n) {
         url = url.replace(`?limitCount=${n}`, '')
     }
@@ -80,10 +80,14 @@ app.get('/:id', (req, res) => {
     db.collection('catalog').findOne({ name: url })
         .then((catalogItem) => {
             const items = [];
-            db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).sort({new: -1}).skip(skipCount).limit(limitCount) // sort для того чтобы первые элементы были new
+            db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).sort({ new: -1 }).skip(skipCount).limit(limitCount) // sort для того чтобы первые элементы были new
                 .forEach((item) => items.push(item))
                 .then(() => {
-                    res.status(200).json(items);
+                    db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).count()
+                        .then((count) => {
+                            res.status(200).json({ items, count });
+                        })
+                    // res.status(200).json(items);
                 })
                 .catch(() => handleError(res, "Something goes wrong"));
         })
@@ -92,11 +96,26 @@ app.get('/:id', (req, res) => {
 
 // Для new (по умолчанию)
 app.get('/', (req, res) => {
+    let url = req.url;
+    const n = req.query.limitCount;
+    console.log(n)
+
+    // Чтобы убирать из ссылки параметры запроса (для поиска по базе)
+    if (n) {
+        url = url.replace(`?limitCount=${n}`, '')
+    }
+
+    const limitCount = Number(n) || 3;
+    const skipCount = Number(n - 3) || 0
+
     const items = [];
-    db.collection('items').find({ new: true })
+    db.collection('items').find({ new: true }).sort({ new: -1 }).skip(skipCount).limit(limitCount)
         .forEach((item) => items.push(item))
         .then(() => {
-            res.status(200).json(items);
+            db.collection('items').find({ new: true }).count()
+                .then((count) => {
+                    res.status(200).json({ items, count });
+                })
         })
         .catch(() => handleError(res, "Something goes wrong"));
 });

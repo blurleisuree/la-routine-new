@@ -6,7 +6,7 @@ import classes from './Catalog.module.css';
 
 import Item from '../UI/Item/Item.jsx';
 
-const Catalog = ({ navItem }) => {
+const Catalog = (props) => {
 
     const [items, setItems] = useState(null);
     const [itemsCount, setItemsCount] = useState(null);
@@ -43,11 +43,11 @@ const Catalog = ({ navItem }) => {
     const navItems = useOutletContext();
 
     let title;
-    !navItem
+    !props.navItem
         ? title = "La Routine Magazine"
-        : navItem == 'magazine'
+        : props.navItem == 'magazine'
             ? title = "Magazine / Photo"
-            : title = navItem[0].toUpperCase() + navItem.slice(1);
+            : title = props.navItem[0].toUpperCase() + props.navItem.slice(1);
 
     // Оба варианта работают (оптимизировать чтобы красиво было)
     return (
@@ -61,7 +61,7 @@ const Catalog = ({ navItem }) => {
                 : (
                     <>
                         <div className={classes.catalog}>
-                            {items.map((item, index) => <Item key={item._id} item={item} navItem={navItem} itemIndex={index} navItems={navItems} />)}
+                            {items.map((item, index) => <Item key={item._id} item={item} navItem={props.navItem} itemIndex={index} navItems={navItems} />)}
                         </div >
                         {itemsCount == items.length
                             ? console.log()

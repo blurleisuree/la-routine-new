@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import classes from './ItemCard.module.css';
 
@@ -10,9 +10,11 @@ import { Helmet } from 'react-helmet';
 
 const ItemCard = ({ navItem }) => {
 
+    const navigate = useNavigate();
+
     const [item, setItems] = useState(null);
     useEffect(() => {
-        fetchItems()
+        fetchItems();
     }, []);
 
     const pathname = useLocation().pathname
@@ -39,31 +41,39 @@ const ItemCard = ({ navItem }) => {
         });
     }
 
+    const [redirectIsActive, setRedirectIsActive] = useState(false);
+    const redirect = () => {
+        setRedirectIsActive(true);
+        setTimeout(() => navigate('..', { state: { active: true } }), 370)
+    }
+
     return (
-        !item && !params
-            ? console.log()
-            : <div className={classes.itemCard} >
-                <Helmet>
+        <div className={classes.itemCard}>
+            {item && params &&
+                <Helmet >
                     <title>{item.name}</title>
                     <link rel="icon" href="../imgs/favicons/favicon.ico" sizes="any" />
                 </Helmet>
-                <div className={classes.itemCard__top}>
-                    <Link to={".."} className={classes.itemCard__more}>
-                        <span>←</span>
-                        <p>More products</p>
-                    </Link>
-                    <Link to={".."} className={classes.itemCard__cross}>
-                        <svg width="23px" height="23px" viewBox="0 0 23 23" version="1.1" ><g stroke="none" strokeWidth="1" fill="#000000" fillRule="evenodd"><rect transform="translate(11.313708, 11.313708) rotate(-45.000000) translate(-11.313708, -11.313708) " x="10.3137085" y="-3.6862915" width="2" height="30"></rect><rect transform="translate(11.313708, 11.313708) rotate(-315.000000) translate(-11.313708, -11.313708) " x="10.3137085" y="-3.6862915" width="2" height="30"></rect></g></svg>
-                    </Link>
+            }
+            <div className={classes.itemCard__top}>
+                <div onClick={redirect} to={".."} className={classes.itemCard__more}>
+                    <span>←</span>
+                    <p>More products</p>
                 </div>
-                <div className={classes.itemCard__wrapper}>
+                <div onClick={redirect} to={".."} className={classes.itemCard__cross}>
+                    <svg width="23px" height="23px" viewBox="0 0 23 23" version="1.1" ><g stroke="none" strokeWidth="1" fill="#000000" fillRule="evenodd"><rect transform="translate(11.313708, 11.313708) rotate(-45.000000) translate(-11.313708, -11.313708) " x="10.3137085" y="-3.6862915" width="2" height="30"></rect><rect transform="translate(11.313708, 11.313708) rotate(-315.000000) translate(-11.313708, -11.313708) " x="10.3137085" y="-3.6862915" width="2" height="30"></rect></g></svg>
+                </div>
+            </div>
+            {item && params &&
+                <div className={redirectIsActive ? classes.itemCard__wrapper + " " + classes.redirect : classes.itemCard__wrapper}>
                     <div className={classes.itemCard__inner}>
                         <ImgCarousel item={item} navItemName={navItem.name} />
                         <InfoBlock item={item} selectOption={selectOption} params={params} desc={navItem.description} />
                     </div>
                     {navItem.sizesVisible && < Tabs />}
                 </div>
-            </div>
+            }
+        </div >
     );
 };
 

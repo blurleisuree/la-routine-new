@@ -7,7 +7,6 @@
     top: 0;
     left: 0;
     background-color: white;
-    
 }
 
 .itemCard__top {
@@ -25,6 +24,7 @@
     display: flex;
     align-items: center;
     color: black;
+    cursor: pointer;
 }
 
 .itemCard__more span {
@@ -43,8 +43,37 @@
 .itemCard__wrapper {
     max-width: 1160px;
     margin: 70px auto;
+    animation: unload-to-load 0.5s;
+}
+
+.itemCard__wrapper.redirect {
+    animation: load-to-unload 0.4s;
 }
 
 .itemCard__inner {
     display: flex;
+}
+
+@keyframes unload-to-load {
+    from {
+        transform: translateY(70px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes load-to-unload {
+    from {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(70px);
+        opacity: 0;
+    }
 }

@@ -6,3 +6,17 @@
     align-items: center;
     min-height: 100vh;
 }
+
+.main.active {
+    animation: load-after-item 0.3s;
+}
+
+@keyframes load-after-item {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

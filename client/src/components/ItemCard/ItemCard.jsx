@@ -17,7 +17,7 @@ const ItemCard = ({ navItem }) => {
         fetchItems();
     }, []);
 
-    const pathname = useLocation().pathname
+    const pathname = useLocation().pathname;
     async function fetchItems() {
         const res = await fetch(`http://localhost:3001${pathname}`);
         const json = await res.json()
@@ -44,7 +44,23 @@ const ItemCard = ({ navItem }) => {
     const [redirectIsActive, setRedirectIsActive] = useState(false);
     const redirect = () => {
         setRedirectIsActive(true);
-        setTimeout(() => navigate('..', { state: { active: true } }), 370)
+        // setTimeout(() => navigate(url, { state: { active: true } }), 370)
+        setTimeout(() => navigate(url, { state: { active: true } }), 370)
+    }
+
+    // let navState = useLocation().state;
+    // let isNew;
+    // {
+    //     navState != null
+    //     ? isNew = navState.isNew
+    //     : isNew = false
+    // }
+    const isNew = useLocation().state.isNew;
+    let url;
+    {
+        isNew
+            ? url = '/'
+            : url = '..'
     }
 
     return (

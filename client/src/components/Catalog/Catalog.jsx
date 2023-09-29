@@ -61,7 +61,7 @@ const Catalog = (props) => {
                 : (
                     <>
                         <div className={classes.catalog}>
-                            {items.map((item, index) => <Item key={item._id} item={item} navItem={props.navItem} itemIndex={index} navItems={navItems} />)}
+                            {items.map((item, index) => <Item key={item._id} item={item} navItem={props.navItem} navItems={navItems} />)}
                         </div >
                         {itemsCount == items.length
                             ? console.log()

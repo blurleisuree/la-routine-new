@@ -10,18 +10,38 @@ import { Helmet } from 'react-helmet';
 
 const ItemCard = ({ navItem }) => {
 
-    const navigate = useNavigate();
-
     const [item, setItems] = useState(null);
-    useEffect(() => {
-        fetchItems();
-    }, []);
-
     const pathname = useLocation().pathname;
     async function fetchItems() {
         const res = await fetch(`http://localhost:3001${pathname}`);
         const json = await res.json()
         setItems(json)
+    }
+
+    const [isNew, setIsNew] = useState(false);
+    const navState = useLocation().state;
+    let url;
+    {
+        isNew
+            ? url = '/'
+            : url = '..'
+    }
+
+    useEffect(() => {
+        fetchItems();
+
+        if (navState) {
+            setIsNew(navState.isNew)
+        } else {
+            setIsNew(false)
+        }
+    }, []);
+
+    const navigate = useNavigate();
+    const [redirectIsActive, setRedirectIsActive] = useState(false);
+    const redirect = () => {
+        setRedirectIsActive(true);
+        setTimeout(() => navigate(url, { state: { active: true } }), 370)
     }
 
     const [params, setParams] = useState(null)
@@ -39,28 +59,6 @@ const ItemCard = ({ navItem }) => {
             ...params,
             [name]: value,
         });
-    }
-
-    const [redirectIsActive, setRedirectIsActive] = useState(false);
-    const redirect = () => {
-        setRedirectIsActive(true);
-        // setTimeout(() => navigate(url, { state: { active: true } }), 370)
-        setTimeout(() => navigate(url, { state: { active: true } }), 370)
-    }
-
-    // let navState = useLocation().state;
-    // let isNew;
-    // {
-    //     navState != null
-    //     ? isNew = navState.isNew
-    //     : isNew = false
-    // }
-    const isNew = useLocation().state.isNew;
-    let url;
-    {
-        isNew
-            ? url = '/'
-            : url = '..'
     }
 
     return (

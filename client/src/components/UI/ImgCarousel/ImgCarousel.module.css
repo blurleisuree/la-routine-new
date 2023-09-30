@@ -26,6 +26,7 @@
     user-select: none;
     opacity: 0;
     max-width: 560px;
+    background: radial-gradient(circle, rgba(191,191,191,0.1) 0%, rgba(150,150,150,0.1) 50%, rgba(204,204,204,0.1) 100%);
 }
 
 .imgCarousel__img.active {
@@ -74,6 +75,7 @@
     width: 60px;
     cursor: pointer;
     transition: all 0.35s ease-out;
+    background: radial-gradient(circle, rgba(191,191,191,0.1) 0%, rgba(150,150,150,0.1) 50%, rgba(204,204,204,0.1) 100%);
 }
 
 .imgCarousel__imgMini:hover {

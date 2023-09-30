@@ -23,14 +23,8 @@ const InfoBlock = ({ item, params, selectOption, desc }) => {
             <h2 className={classes.infoBlock__name}>{item.name}</h2>
             <span className={classes.infoBlock__code}>Артикул: <span className={classes.infoBlock__code_value}>{item.code}-{params.color}</span></span>
             <h3 className={classes.infoBlock__price}>{item.price} р.</h3>
-            {item.colors[0]
-                ? <Select name={'Color'} onChange={selectOption} arr={item.colors} />
-                : console.log()
-            }
-            {item.sizes[0]
-                ? <Select name={'Size'} onChange={selectOption} arr={item.sizes} />
-                : console.log()
-            }
+            {item.colors[0] && <Select name={'Color'} onChange={selectOption} arr={item.colors} />}
+            {item.sizes[0] && <Select name={'Size'} onChange={selectOption} arr={item.sizes} />}
             {item.available
                 ? <div className={classes.infoBlock__btn}>buy</div>
                 : <div className={classes.infoBlock__btn + " " + classes.notAvailable}>not avaible</div>

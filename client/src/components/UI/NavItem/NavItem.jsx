@@ -15,7 +15,6 @@ const NavItem = ({ navItemData }) => {
                     ? 'magazine / photo'
                     : navItemData.name
                 }
-
             </NavLink>
         </li>
     )

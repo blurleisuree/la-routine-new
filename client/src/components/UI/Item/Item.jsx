@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from 'react-router-dom';
 
 import classes from './Item.module.css';
@@ -31,7 +31,6 @@ const Item = ({ item, navItem, navItems }) => {
     return (
         <Link to={`/${navItem}/${item._id}`} state={{ isNew }}>
             <div className={classes.item}>
-                {/* Надо сделать чтобы если второй картинки нету показывалась размерная сетка */}
                 <img onMouseOver={mouseOver} onMouseOut={mouseOut} src={`/imgs/items/${item._id}_img1.jpg`} alt="item" className={classes.item__img + " " + classes.item__img_1} />
                 {item.imgs_count > 1
                     ? <img onMouseOver={mouseOver} onMouseOut={mouseOut} src={`/imgs/items/${item._id}_img2.jpg`} alt="item" className={classes.item__img + " " + classes.item__img_2} />
@@ -40,7 +39,7 @@ const Item = ({ item, navItem, navItems }) => {
                 <h2 className={classes.item__name}>{item.name}</h2>
                 <p className={classes.item__type}>{item.type}</p>
                 <p className={classes.item__price}>{item.price} р.</p>
-                {item.new ? <div className={classes.item__new}><p className={classes.item__newText}>new</p></div> : false}
+                {item.new && <div className={classes.item__new}><p className={classes.item__newText}>new</p></div>}
             </div>
         </Link>
     );

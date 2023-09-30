@@ -16,6 +16,7 @@
     width: 100%;
     box-sizing: border-box;
     padding: 20px;
+    cursor: pointer;
 }
 
 .itemCard__more {
@@ -24,7 +25,6 @@
     display: flex;
     align-items: center;
     color: black;
-    cursor: pointer;
 }
 
 .itemCard__more span {
@@ -37,7 +37,6 @@
 
 .itemCard__cross {
     display: block;
-    cursor: pointer;
 }
 
 .itemCard__wrapper {

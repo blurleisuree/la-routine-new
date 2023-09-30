@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import classes from './ItemCard.module.css';
 
 import InfoBlock from '../../components/UI/InfoBlock/InfoBlock.jsx';
 import Tabs from '../../components/UI/Tabs/Tabs.jsx';
 import ImgCarousel from "../../components/UI/ImgCarousel/ImgCarousel.jsx";
-import { Helmet } from 'react-helmet';
 
 const ItemCard = ({ navItem }) => {
 
+    // Загрузка item'a
     const [item, setItems] = useState(null);
     const pathname = useLocation().pathname;
     async function fetchItems() {
@@ -18,6 +19,7 @@ const ItemCard = ({ navItem }) => {
         setItems(json)
     }
 
+    // Проверка на предыдущий каталог (для кнопок "назад")
     const [isNew, setIsNew] = useState(false);
     const navState = useLocation().state;
     let url;
@@ -29,14 +31,12 @@ const ItemCard = ({ navItem }) => {
 
     useEffect(() => {
         fetchItems();
-
         if (navState) {
             setIsNew(navState.isNew)
-        } else {
-            setIsNew(false)
         }
     }, []);
 
+    // Для кнопок "назад" + анимация выхода
     const navigate = useNavigate();
     const [redirectIsActive, setRedirectIsActive] = useState(false);
     const redirect = () => {
@@ -69,12 +69,12 @@ const ItemCard = ({ navItem }) => {
                     <link rel="icon" href="../imgs/favicons/favicon.ico" sizes="any" />
                 </Helmet>
             }
-            <div className={classes.itemCard__top}>
-                <div onClick={redirect} to={".."} className={classes.itemCard__more}>
+            <div className={classes.itemCard__top} onClick={redirect}>
+                <div  className={classes.itemCard__more}>
                     <span>←</span>
                     <p>More products</p>
                 </div>
-                <div onClick={redirect} to={".."} className={classes.itemCard__cross}>
+                <div className={classes.itemCard__cross}>
                     <svg width="23px" height="23px" viewBox="0 0 23 23" version="1.1" ><g stroke="none" strokeWidth="1" fill="#000000" fillRule="evenodd"><rect transform="translate(11.313708, 11.313708) rotate(-45.000000) translate(-11.313708, -11.313708) " x="10.3137085" y="-3.6862915" width="2" height="30"></rect><rect transform="translate(11.313708, 11.313708) rotate(-315.000000) translate(-11.313708, -11.313708) " x="10.3137085" y="-3.6862915" width="2" height="30"></rect></g></svg>
                 </div>
             </div>

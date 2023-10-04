@@ -44,6 +44,7 @@ const ItemCard = ({ navItem }) => {
         setTimeout(() => navigate(url, { state: { active: true } }), 370)
     }
 
+    // Состояние выбранных параметров товара (цвет + размер)
     const [params, setParams] = useState(null)
     useMemo(() => {
         if (item) {
@@ -61,6 +62,13 @@ const ItemCard = ({ navItem }) => {
         });
     }
 
+    const changeColor = (color) => {
+        setParams({
+            ...params,
+            color: color,
+        });
+    };
+
     return (
         <div className={classes.itemCard}>
             {item && params &&
@@ -70,7 +78,7 @@ const ItemCard = ({ navItem }) => {
                 </Helmet>
             }
             <div className={classes.itemCard__top} onClick={redirect}>
-                <div  className={classes.itemCard__more}>
+                <div className={classes.itemCard__more}>
                     <span>←</span>
                     <p>More products</p>
                 </div>
@@ -81,7 +89,7 @@ const ItemCard = ({ navItem }) => {
             {item && params &&
                 <div className={redirectIsActive ? classes.itemCard__wrapper + " " + classes.redirect : classes.itemCard__wrapper}>
                     <div className={classes.itemCard__inner}>
-                        <ImgCarousel item={item} navItemName={navItem.name} />
+                        <ImgCarousel item={item} navItemName={navItem.name} changeColor={changeColor} activeColor={params.color} />
                         <InfoBlock item={item} selectOption={selectOption} params={params} desc={navItem.description} />
                     </div>
                     {navItem.sizesVisible && < Tabs />}

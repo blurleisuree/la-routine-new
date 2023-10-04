@@ -5,6 +5,7 @@
     margin-top: 10px;
     font-size: 14px;
     line-height: 1.55;
+    text-transform: capitalize;
 }
 
 .select {
@@ -21,4 +22,5 @@
     color: #000;
     box-sizing: border-box;
     cursor: pointer;
+    text-transform: capitalize;
 }

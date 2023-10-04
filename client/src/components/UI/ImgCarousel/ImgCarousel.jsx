@@ -1,44 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 import classes from './ImgCarousel.module.css';
 
-const ImgCarousel = ({ item, navItemName }) => {
+const ImgCarousel = ({ item, navItemName, changeColor, activeColor }) => {
 
-    const [imgActive, setImgActive] = useState(1);
-    const [imgsCount, setImgsCount] = useState(Number(item.imgs_count));
-
-    const arr = [];
-    for (let i = 1; i <= item.imgs_count; i++) {
-        arr.push(i)
-    }
+    const [imgActiveIndex, setImgActiveIndex] = useState(1);
+    const [imgsCount, setImgsCount] = useState(item.imgs.length);
 
     // На случай если картинка размерной сетки не предусмотрена
     const disableSizesImg = (e) => {
         e.target.style.display = 'none';
         setImgsCount(imgsCount - 1);
-    }
+    };
+
+    // Изменение params.color от активной картинки
+    useMemo(() => {
+        setTimeout(() => {
+            const imgActive = item.imgs[imgActiveIndex - 1];
+            imgActive && activeColor != imgActive.color && changeColor(imgActive.color);
+        }, 0) // Не знаю как это работает но ошибка пропадает
+    }, [imgActiveIndex]);
+
+    // Изменение картинки от params.color + первая проверка чтобы с размерной сетки менялся
+    useMemo(() => {
+        const imgActive = item.imgs[imgActiveIndex - 1];
+        if (imgActive) {
+            if (activeColor != imgActive.color) {
+                const even = (el) => {
+                    return el.color == activeColor
+                }
+                const index = item.imgs.findIndex(even) + 1
+                setImgActiveIndex(index)
+            }
+        } else {
+            const even = (el) => {
+                return el.color == activeColor
+            }
+            const index = item.imgs.findIndex(even) + 1
+            setImgActiveIndex(index)
+        };
+    }, [activeColor]);
 
     return (
         <div className={classes.imgCarousel}>
             <div className={classes.imgCarousel__inner}>
-                <div onClick={() => setImgActive(imgActive - 1)} className={imgActive == 1 ? classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_left : classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_left + " " + classes.active}><svg viewBox="0 0 7.3 13">
-                    <desc>Left</desc>
-                    <polyline fill="none" stroke="#000000" strokeLinejoin="butt" strokeLinecap="butt" strokeWidth="1" points="0.5,0.5 6.5,6.5 0.5,12.5"></polyline>
-                </svg></div>
-                {arr.map((i) =>
-                    <img key={i} src={`/imgs/items/${item._id}_img${i}.jpg`} className={i == imgActive ? classes.imgCarousel__img + ' ' + classes.active : classes.imgCarousel__img}></img>
+                <div onClick={() => setImgActiveIndex(imgActiveIndex - 1)} className={imgActiveIndex == 1 ? classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_left : classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_left + " " + classes.active}>
+                    <img src="/imgs/icons/arrow.svg" alt="svg" />
+                </div>
+                {item.imgs.map((img) =>
+                    <img key={img.n} src={`/imgs/items/${item._id}_img${img.n}.jpg`} className={img.n == imgActiveIndex ? classes.imgCarousel__img + ' ' + classes.active : classes.imgCarousel__img}></img>
                 )}
-                <img src={`/imgs/general/${navItemName}_sizes.jpg`} onError={(e) => disableSizesImg(e)} className={arr.length + 1 == imgActive ? classes.imgCarousel__img + ' ' + classes.active : classes.imgCarousel__img}></img>
-                <div onClick={() => setImgActive(imgActive + 1)} className={imgsCount + 1 == imgActive ? classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_right : classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_right + " " + classes.active}><svg viewBox="0 0 7.3 13">
-                    <desc>Right</desc>
-                    <polyline fill="none" stroke="#000000" strokeLinejoin="butt" strokeLinecap="butt" strokeWidth="1" points="0.5,0.5 6.5,6.5 0.5,12.5"></polyline>
-                </svg></div>
+                <img src={`/imgs/general/${navItemName}_sizes.jpg`} onError={(e) => disableSizesImg(e)} className={imgsCount + 1 == imgActiveIndex ? classes.imgCarousel__img + ' ' + classes.active : classes.imgCarousel__img}></img>
+                <div onClick={() => setImgActiveIndex(imgActiveIndex + 1)} className={imgsCount + 1 == imgActiveIndex ? classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_right : classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_right + " " + classes.active}>
+                    <img src="/imgs/icons/arrow.svg" alt="svg" />
+                </div>
             </div>
             <div className={classes.imgCarousel__mini}>
-                {arr.map((i, index) =>
-                    <img key={index} src={`/imgs/items/${item._id}_img${i}.jpg`} onClick={() => setImgActive(i)} className={i == imgActive ? classes.imgCarousel__imgMini + " " + classes.active : classes.imgCarousel__imgMini} />
+                {item.imgs.map((img, index) =>
+                    <img key={index} src={`/imgs/items/${item._id}_img${img.n}.jpg`} onClick={() => setImgActiveIndex(img.n)} className={img.n == imgActiveIndex ? classes.imgCarousel__imgMini + " " + classes.active : classes.imgCarousel__imgMini} />
                 )}
-                <img src={`/imgs/general/${navItemName}_sizes.jpg`} onError={(e) => disableSizesImg(e)} onClick={() => setImgActive(imgsCount + 1)} className={imgsCount + 1 == imgActive ? classes.imgCarousel__imgMini + " " + classes.active : classes.imgCarousel__imgMini}></img>
+                <img src={`/imgs/general/${navItemName}_sizes.jpg`} onError={(e) => disableSizesImg(e)} onClick={() => setImgActiveIndex(imgsCount + 1)} className={imgsCount + 1 == imgActiveIndex ? classes.imgCarousel__imgMini + " " + classes.active : classes.imgCarousel__imgMini}></img>
             </div>
         </div>
     );

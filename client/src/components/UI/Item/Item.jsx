@@ -32,7 +32,7 @@ const Item = ({ item, navItem, navItems }) => {
         <Link to={`/${navItem}/${item._id}`} state={{ isNew }}>
             <div className={classes.item}>
                 <img onMouseOver={mouseOver} onMouseOut={mouseOut} src={`/imgs/items/${item._id}_img1.jpg`} alt="item" className={classes.item__img + " " + classes.item__img_1} />
-                {item.imgs_count > 1
+                {item.imgs.length > 1
                     ? <img onMouseOver={mouseOver} onMouseOut={mouseOut} src={`/imgs/items/${item._id}_img2.jpg`} alt="item" className={classes.item__img + " " + classes.item__img_2} />
                     : <img onMouseOver={mouseOver} onMouseOut={mouseOut} onError={(e) => disableHover(e)} src={`/imgs/general/${navItem}_sizes.jpg`} alt="item" className={classes.item__img + " " + classes.item__img_2} />
                 }

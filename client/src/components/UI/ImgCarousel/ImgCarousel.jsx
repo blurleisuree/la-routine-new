@@ -55,12 +55,14 @@ const ImgCarousel = ({ item, navItemName, changeColor, activeColor }) => {
                     <img src="/imgs/icons/arrow.svg" alt="svg" />
                 </div>
             </div>
-            <div className={classes.imgCarousel__mini}>
-                {item.imgs.map((img, index) =>
-                    <img key={index} src={`/imgs/items/${item._id}_img${img.n}.jpg`} onClick={() => setImgActiveIndex(img.n)} className={img.n == imgActiveIndex ? classes.imgCarousel__imgMini + " " + classes.active : classes.imgCarousel__imgMini} />
-                )}
-                <img src={`/imgs/general/${navItemName}_sizes.jpg`} onError={(e) => disableSizesImg(e)} onClick={() => setImgActiveIndex(imgsCount + 1)} className={imgsCount + 1 == imgActiveIndex ? classes.imgCarousel__imgMini + " " + classes.active : classes.imgCarousel__imgMini}></img>
-            </div>
+            {item.imgs.length > 1 &&
+                <div className={classes.imgCarousel__mini}>
+                    {item.imgs.map((img, index) =>
+                        <img key={index} src={`/imgs/items/${item._id}_img${img.n}.jpg`} onClick={() => setImgActiveIndex(img.n)} className={img.n == imgActiveIndex ? classes.imgCarousel__imgMini + " " + classes.active : classes.imgCarousel__imgMini} />
+                    )}
+                    <img src={`/imgs/general/${navItemName}_sizes.jpg`} onError={(e) => disableSizesImg(e)} onClick={() => setImgActiveIndex(imgsCount + 1)} className={imgsCount + 1 == imgActiveIndex ? classes.imgCarousel__imgMini + " " + classes.active : classes.imgCarousel__imgMini}></img>
+                </div>
+            }
         </div>
     );
 };

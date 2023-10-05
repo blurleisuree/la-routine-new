@@ -6,7 +6,6 @@
     cursor: pointer;
     position: relative;
     margin: 0 20px 70px;
-
 }
 
 .item__img {
@@ -14,6 +13,7 @@
     transition: all 0.15s ease-out;
     height: 360px;
     width: 360px;
+    object-fit: cover;
     background: radial-gradient(circle, rgba(191,191,191,0.1) 0%, rgba(150,150,150,0.1) 50%, rgba(204,204,204,0.1) 100%);
 }
 

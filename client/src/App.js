@@ -65,42 +65,16 @@ export default App;
 
 // db.items.insertMany([
 //   {
-//     name: 'LA ROUTINE MAGAZINE',
-//     type: 'Version 2023',
-//     price: '2 500',
+//     name: 'Sling "MY LIFE IS"',
+//     type: 'Black',
+//     price: '490',
 //     sizes: [],
-//     colors: [],
-//     code: 'magazine',
-//     new: false,
-//     imgs_count: 8,
-//     catalog_id: ObjectId('6509fbe4e0c959f228fe60cf'),
-//     available: true,
-//     description: 'LA ROUTINE MAGAZINE 2023;ㅤ;2016 - 2023;ㅤ;А4 Portrait Style Book.;ㅤ;150 Pages.'
-//   },
-//   {
-//     name: 'PostCard',
-//     type: 'Index-Print',
-//     price: '300',
-//     sizes: [],
-//     colors: [],
-//     code: 'card',
-//     new: false,
-//     imgs_count: 8,
-//     catalog_id: ObjectId('6509fbe4e0c959f228fe60cf'),
-//     available: true,
-//     description: '- Размер А6.;ㅤ;-Рандом карточки;ㅤ;- В комплекте 5 индес принтов.;ㅤ;- Сделаны из картона.'
-//   },
-//   {
-//     name: 'Photo',
-//     type: '30 x 40',
-//     price: '2 500',
-//     sizes: [],
-//     colors: [],
-//     code: 'photo',
-//     new: false,
-//     imgs_count: 1,
-//     catalog_id: ObjectId('6509fbe4e0c959f228fe60cf'),
+//     colors: ['Black'],
+//     code: 'sling',
+//     new: true,
+//     catalog_id: ObjectId('6509fbe4e0c959f228fe60d1'),
 //     available: false,
-//     description: '- Размер 30см на 40см.;ㅤ;- В комплекте 1 фотография и рамка.;ㅤ;- Является объектом домашнего декора.'
+//     description: 'One Size;ㅤ;Максимальная длина: 1,5 метра.',
+//     imgs: [{n: 1, color: 'black'}, {n: 2, color: 'black'}],
 //   },
 // ])

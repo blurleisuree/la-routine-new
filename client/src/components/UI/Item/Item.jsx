@@ -24,8 +24,7 @@ const Item = ({ item, navItem, navItems }) => {
 
     // На случай если нет второй картинки и размерной сетки
     const disableHover = (e) => {
-        e.target.style.display = 'none';
-        e.target.previousElementSibling.style.pointerEvents = 'none';
+        e.target.parentNode.style.pointerEvents = 'none';
     }
 
     return (

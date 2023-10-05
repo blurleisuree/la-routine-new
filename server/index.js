@@ -67,17 +67,14 @@ app.get('/catalog', (req, res) => {
 // Для каталога
 app.get('/:id', (req, res) => {
     let url = req.url.replace('/', '');
-    const n = req.query.limitCount;
+    const n = req.query.skipCount;
 
     // Чтобы убирать из ссылки параметры запроса (для поиска по базе)
     if (n) {
-        url = url.replace(`?limitCount=${n}`, '')
+        url = url.replace(`?skipCount=${n}`, '')
     }
 
-    // const limitCount = Number(n) || 3;
-    const skipCount = Number(n - 3) || 0
-
-    // console.log(limitCount, skipCount)
+    const skipCount = Number(n) || 0
 
     db.collection('catalog').findOne({ name: url })
         .then((catalogItem) => {
@@ -98,17 +95,14 @@ app.get('/:id', (req, res) => {
 // Для new (по умолчанию)
 app.get('/', (req, res) => {
     let url = req.url;
-    const n = req.query.limitCount;
+    const n = req.query.skipCount;
 
     // Чтобы убирать из ссылки параметры запроса (для поиска по базе)
     if (n) {
-        url = url.replace(`?limitCount=${n}`, '')
+        url = url.replace(`?skipCount=${n}`, '')
     }
-
-    // const limitCount = Number(n) || 3;
-    const skipCount = Number(n - 3) || 0
-
-    console.log(skipCount)
+    
+    const skipCount = Number(n) || 0
 
     const items = [];
     db.collection('items').find({ new: true }).skip(skipCount).limit(3)

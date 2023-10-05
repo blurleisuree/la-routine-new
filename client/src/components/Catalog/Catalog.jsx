@@ -16,7 +16,7 @@ const Catalog = (props) => {
         if (!pathname.match(/\d/)) { // Проверка есть ли в ссылке цифры (чтобы не перерендерить каталог когда открыт Item)
             fetchItems()
             setAllProductsLoaded(false)
-            setLimitCount(3)
+            setSkipCount(0)
         }
     }, [pathname]);
 
@@ -27,17 +27,17 @@ const Catalog = (props) => {
         setItemsCount(json.count)
     }
 
-    const [limitCount, setLimitCount] = useState(3);
+    const [skipCount, setSkipCount] = useState(0);
     const [allProductsLoaded, setAllProductsLoaded] = useState(false);
 
     async function loadMore() {
-        const res = await fetch(`http://localhost:3001${pathname}?limitCount=${limitCount + 3}`);
+        const res = await fetch(`http://localhost:3001${pathname}?skipCount=${skipCount + 3}`);
         const json = await res.json()
         if (!json.items[0]) { // Если получаем пустой массив
             setAllProductsLoaded(true);
         }
         setItems([...items, ...json.items])
-        setLimitCount(limitCount + 3)
+        setSkipCount(skipCount + 3)
     }
 
     const navItems = useOutletContext();

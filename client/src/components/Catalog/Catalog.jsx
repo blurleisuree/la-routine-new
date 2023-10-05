@@ -64,7 +64,7 @@ const Catalog = (props) => {
                             {items.map((item, index) => <Item key={item._id} item={item} navItem={props.navItem} navItems={navItems} />)}
                         </div >
                         {itemsCount == items.length
-                            ? console.log()
+                            ? false
                             : <button onClick={loadMore} className={allProductsLoaded ? classes.catalog__btn + " " + classes.disabled : classes.catalog__btn}>Загрузить ещё</button>
                         }
                     </>

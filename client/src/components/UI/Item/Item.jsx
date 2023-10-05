@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 
 import classes from './Item.module.css';
@@ -27,8 +27,16 @@ const Item = ({ item, navItem, navItems }) => {
         e.target.parentNode.style.pointerEvents = 'none';
     }
 
+    // const [isBags, setIsBags] = useState(false);
+    // useEffect(() => {
+    //     if (navItem == 'bags') {
+    //         setIsBags(true)
+    //     }
+    // }, [])
+
     return (
         <Link to={`/${navItem}/${item._id}`} state={{ isNew }}>
+            {/* <div className={isBags ? classes.item + classes.item_bag : classes.item}> */}
             <div className={classes.item}>
                 <img onMouseOver={mouseOver} onMouseOut={mouseOut} src={`/imgs/items/${item._id}_img1.jpg`} alt="item" className={classes.item__img + " " + classes.item__img_1} />
                 {item.imgs.length > 1

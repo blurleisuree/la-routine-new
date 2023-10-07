@@ -29,10 +29,6 @@ function App() {
     params: { color: 'white', size: 'L' },
   }, {item: {price: '4 560'}}, {item: {price: '12 450'}}]);
 
-  // const updateBascke = (item, params) {
-  //   setBasket([...basket, item])
-  // }
-
   return (
     !navItems
       ? <p>Is Loading...</p>

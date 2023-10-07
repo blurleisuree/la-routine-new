@@ -9,10 +9,7 @@ const Select = ({ name, onChange, arr, activeColor }) => {
             <label className={classes.label} htmlFor={name}>{name}</label>
             <select className={classes.select} onChange={onChange} name={name} value={activeColor}>
                 {arr.map((item) =>
-                       <option value={item} key={item}>{item}</option>
-                    // item == activeColor
-                    //     ? <option selected value={item} key={item}>{item}</option>
-                    //     : <option value={item} key={item}>{item}</option>
+                    <option value={item} key={item}>{item}</option>
                 )}
             </select>
         </div>

@@ -1,0 +1,85 @@
+.basketItemVisible {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.basketItemVisible__img {
+    max-width: 70px;
+    display: block;
+    object-fit: contain;
+}
+
+.basketItemVisible__infoWrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 148px;
+    margin-left: 5px;
+}
+
+.basketItemVisible__name {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.55;
+}
+
+.basketItemVisible__param {
+    opacity: .7;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.basketItemVisible__countBlock {
+    display: flex;
+    justify-content: space-between;
+    min-width: 63px;
+    align-items: center;
+    margin-left: 5px;
+}
+
+.basketItemVisible__price {
+    margin-left: 5px;
+}
+
+.basketItemVisible__btn {
+    max-width: 16px;
+    display: block;
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+.basketItemVisible__input {
+    min-width: 21px;
+    width: 21px;
+    max-width: 100px;
+    margin: 0 5px;
+    font-size: 16px;
+    line-height: 16px;
+    margin: 0 5px;
+    padding: 2px 5px;
+    color: #000;
+    border: 1px solid transparent;
+}
+
+.basketItemVisible__input:focus {
+    border: 1px solid black;
+}
+
+.basketItemVisible__input:hover {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.basketItemVisible:hover .basketItemVisible__btn {
+    opacity: 1;
+}
+
+.basketItemVisible__remove {
+    max-width: 18px;
+    display: block;
+    opacity: 0.4;
+    cursor: pointer;
+    margin-left: 5px;
+}
+.basketItemVisible:hover .basketItemVisible__remove {
+    opacity: 1;
+}

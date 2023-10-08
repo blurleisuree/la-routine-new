@@ -1,0 +1,27 @@
+.basketItemRemove {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.basketItemRemove__respBlock {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+.basketItemRemove__returnText {
+    font-size: 16px;
+    opacity: 1;
+    cursor: pointer;
+    font-weight: 500;
+    font-style: italic;
+    display: block;
+}
+.basketItemRemove__deleteMessage {
+    font-size: 14px;
+    opacity: 0.7;
+    max-width: 300px;
+}
+.basketItemRemove__returnText:first-of-type {
+    margin-right: 25px;
+}

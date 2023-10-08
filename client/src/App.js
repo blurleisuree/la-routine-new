@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './styles/App.css';
@@ -24,18 +24,13 @@ function App() {
     setNavItems(json);
   }
 
-  const [basket, setBasket] = useState([{
-    item: { _id: "ObjectId('650c77a3f5fdc020eb0ca1d3')", name: 'La Routine Tee "RED GIRL"', type: 'Tee / Photo', price: '2 690', code: 'red-girl', catalog_id: "ObjectId('6509fbe4e0c959f228fe60ca')" },
-    params: { color: 'white', size: 'L' },
-  }, {item: {price: '4 560'}}, {item: {price: '12 450'}}]);
-
   return (
     !navItems
       ? <p>Is Loading...</p>
       : <div className="App">
         <BrowserRouter>
           <Routes >
-            <Route path='/' element={<Main navItems={navItems} basket={basket} />}>
+            <Route path='/' element={<Main navItems={navItems} />}>
               <Route index element={<Catalog />} />
               {navItems.map((navItem, index) =>
                 <Route path={'/' + navItem.name} key={navItem._id} element={< Catalog navItem={navItem.name} />}>

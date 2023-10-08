@@ -1,0 +1,10 @@
+.basketItem {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100px;
+}
+

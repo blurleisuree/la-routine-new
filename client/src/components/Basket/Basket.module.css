@@ -1,3 +1,59 @@
-.bascket__wrapper {}
+.basket__wrapper {
+    display: block;
+    position: fixed;
+    height: 100vh;
+    width: 30%;
+    background-color: white;
+    top: 0;
+    right: 0;
+    box-sizing: border-box;
+    padding: 40px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
+    transition: all .3s ease;
+    overflow: auto;
+    transform: translateX(100%);
+}
 
-.bascket__wrapper.active {}
+.basket__wrapper.active {
+    transform: translateX(0);
+}
+.basket__cross {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    cursor: pointer;
+}
+.basket__title {
+    font-size: 24px;
+    line-height: 1.35;
+    font-weight: 600;
+    color: #000000;
+}
+.basket__line {
+    width: 100%;
+    background-color: #000000;
+    opacity: 0.3;
+    height: 1px;
+    margin-top: 20px;
+    display: block;
+}
+.basket__price {
+    font-size: 16px;
+    text-align: right;
+    font-weight: 600;
+    color: #000;
+    margin-top: 12px;
+}
+.basket__btn {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    height: 60px;
+    font-weight: 700;
+
+}

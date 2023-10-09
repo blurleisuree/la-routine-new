@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import classes from './ItemCard.module.css';
@@ -69,6 +69,8 @@ const ItemCard = ({ navItem }) => {
         });
     };
 
+    const addItemToBasket = useOutletContext();
+
     return (
         <div className={classes.itemCard}>
             {item && params &&
@@ -90,7 +92,7 @@ const ItemCard = ({ navItem }) => {
                 <div className={redirectIsActive ? classes.itemCard__wrapper + " " + classes.redirect : classes.itemCard__wrapper}>
                     <div className={classes.itemCard__inner}>
                         <ImgCarousel item={item} navItemName={navItem.name} changeColor={changeColor} activeColor={params.color} />
-                        <InfoBlock item={item} selectOption={selectOption} params={params} desc={navItem.description} />
+                        <InfoBlock item={item} selectOption={selectOption} params={params} desc={navItem.description} addItemToBasket={addItemToBasket}/>
                     </div>
                     {navItem.sizesVisible && < Tabs />}
                 </div>

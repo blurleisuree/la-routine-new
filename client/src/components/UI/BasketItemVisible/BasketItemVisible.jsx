@@ -2,33 +2,38 @@ import React, { useEffect, useState, useMemo } from 'react';
 
 import classes from './BasketItemVisible.module.css';
 
-function BasketItemVisible({ item, changeRemoveItemActive, changeItemCount }) {
-
-    const [inputValue, setInputValue] = useState(1);
-
-    // Для изменения ширины инпута в зависимости от количества разрядов числа
-    const changeWidth = (e) => {
-        setInputValue(Number(e.target.value))
-    }
+function BasketItemVisible({ item, changeRemoveItemActive, changeItemCount, index }) {
 
     // Для просчета цены
     const [price, setPrice] = useState(0);
-    const calcPrice = () => {
-        let itemPrice = item.item.price.replace(' ', '');
-        itemPrice = Number(itemPrice);
-        setPrice(itemPrice * inputValue);
+    useMemo(() => {
+        setPrice(item.count * Number(item.item.price.replace(' ', '')))
+    }, [item])
+
+    // Для кнопок +/-
+    const changeCount = (value) => {
+        if (value > 99) {
+            return changeItemCount(index, 99);
+        }
+        if (value < 1) {
+            return changeRemoveItemActive(1)
+        }
+        changeItemCount(index, value);
     }
 
-    // При смене количества товара
-    useMemo(() => {
-        calcPrice()
-        if (inputValue > 99) {
-            setInputValue(99)
+    // Для инпута
+    const changeInputValue = (value) => {
+        if (isNaN(value)) {
+            return changeItemCount(index, 1);
         }
-        if (inputValue < 1) {
-            changeRemoveItemActive(1)
+        if (value > 99) {
+            return changeItemCount(index, 99);
         }
-    }, [inputValue])
+        if (value == 0) {
+            return changeItemCount(index, 1);
+        }
+        changeItemCount(index, value);
+    }
 
     return (
         <div className={classes.basketItemVisible}>
@@ -40,12 +45,12 @@ function BasketItemVisible({ item, changeRemoveItemActive, changeItemCount }) {
                 <p className={classes.basketItemVisible__param}>{item.item.code}</p>
             </div>
             <div className={classes.basketItemVisible__countBlock}>
-                <img src="/imgs/icons/minus.svg" alt="minus" className={classes.basketItemVisible__btn} onClick={() => setInputValue(inputValue - 1)} />
-                <input className={classes.basketItemVisible__input} value={inputValue} style={{ width: `calc(8px * ${inputValue.toString().length} + 16px)` }} onChange={(e) => changeWidth(e)}></input>
-                <img src="/imgs/icons/plus.svg" alt="plus" className={classes.basketItemVisible__btn} onClick={() => setInputValue(inputValue + 1)} />
+                <img src="/imgs/icons/minus.svg" alt="minus" className={classes.basketItemVisible__btn} onClick={() => changeCount(item.count - 1)} />
+                <input className={classes.basketItemVisible__input} value={item.count} style={{ width: `calc(8px * ${item.count.toString().length} + 16px)` }} onChange={(e) => changeInputValue(Number(e.target.value))}></input>
+                <img src="/imgs/icons/plus.svg" alt="plus" className={classes.basketItemVisible__btn} onClick={() => changeCount(item.count + 1)} />
             </div>
             <p className={classes.basketItemVisible__price}>{price.toLocaleString('ru')} р.</p>
-            <img src="/imgs/icons/remove.svg" alt="remove" className={classes.basketItemVisible__remove} onClick={() => changeRemoveItemActive(1)}/>
+            <img src="/imgs/icons/remove.svg" alt="remove" className={classes.basketItemVisible__remove} onClick={() => changeRemoveItemActive(1)} />
         </div>
     );
 }

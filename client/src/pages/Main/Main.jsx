@@ -14,10 +14,27 @@ function Main({ navItems, }) {
   const [loadAfterItem, setLoadAfterItem] = useState(useLocation().state);
 
 
-  const [basket, setBasket] = useState([{
-    item: { _id: "650c77a3f5fdc020eb0ca1d3", name: 'La Routine Tee "RED GIRL"', type: 'Tee / Photo', price: '2 690', code: 'red-girl', catalog_id: "ObjectId('6509fbe4e0c959f228fe60ca')" },
-    params: { color: 'white', size: 'L' }, count: 1
-  }, { item: { _id: '312', price: '4 560' }, count: 1 }, { item: { _id: '31222', price: '12 450' }, count: 1 }]);
+  // const [basket, setBasket] = useState([{
+  //   item: { _id: "650c77a3f5fdc020eb0ca1d3", name: 'La Routine Tee "RED GIRL"', type: 'Tee / Photo', price: '2 690', code: 'red-girl', catalog_id: "ObjectId('6509fbe4e0c959f228fe60ca')" },
+  //   params: { color: 'white', size: 'L' }, count: 1
+  // }, { item: { _id: '312', price: '4 560' }, count: 1 }, { item: { _id: '31222', price: '12 450' }, count: 1 }]);
+
+
+  const [basket, setBasket] = useState([]);
+  const addItemToBasket = (item, params) => {
+    const itemIsNew = basket.some(basketItem => basketItem.item._id !== item._id);
+    const paramsAreDifferent = basket.some(basketItem => basketItem.params.color === params.color && basketItem.params.size === params.size)
+
+    console.log(!itemIsNew)
+    if (!itemIsNew) {
+      const newItem = { item, params, count: 1 };
+      setBasket([...basket, newItem]);
+    }
+  }
+
+  useMemo(() => {
+    console.log(basket);
+  }, [basket]);
 
   const deleteItemFromBasket = (index) => {
     let newBasket = basket;
@@ -33,7 +50,7 @@ function Main({ navItems, }) {
 
   // Посчитать итоговую сумму товаров
   const [generalPrice, setGeneralPrice] = useState(0);
-  const calcPrice = (basket) => {
+  const calcPrice = () => {
     return basket.reduce((prevPrice, currentItem) => {
       let price = currentItem.item.price;
       price = Number(price.replace(' ', ''));
@@ -41,26 +58,29 @@ function Main({ navItems, }) {
       return prevPrice + price
     }, 0)
   }
-  useEffect(() => {
-    // Последнее - разделение на разряды
-    setGeneralPrice(calcPrice(basket).toLocaleString('ru'))
-  }, [])
 
   const changeItemCount = (index, count) => {
-    let newBasket = basket
-    newBasket[index].count = count
+    let newBasket = basket.map((item, i) => {
+      if (i == index) {
+        return { ...item, count: count }
+      }
+      return item
+    })
     setBasket(newBasket);
-    console.log(basket)
   }
+
+  useMemo(() => {
+    setGeneralPrice(calcPrice())
+  }, [basket])
 
   return (
     <div className={loadAfterItem ? classes.main + " " + classes.active : classes.main}>
       <Logo />
       <NavBar navItems={navItems} />
-      <Outlet context={navItems} />
+      <Outlet context={{ navItems, addItemToBasket }} />
       <Footer />
 
-      <Basket basket={basket} basketIsActive={basketIsActive} toggleBasketIsActive={toggleBasketIsActive} generalPrice={generalPrice} deleteItemFromBasket={deleteItemFromBasket} changeItemCount={changeItemCount}/>
+      <Basket basket={basket} basketIsActive={basketIsActive} toggleBasketIsActive={toggleBasketIsActive} generalPrice={generalPrice} deleteItemFromBasket={deleteItemFromBasket} changeItemCount={changeItemCount} />
       {basket && !basketIsActive && basket.length != 0 ? <BasketButton basket={basket} toggleBasketIsActive={toggleBasketIsActive} generalPrice={generalPrice} /> : false}
     </div>
   );

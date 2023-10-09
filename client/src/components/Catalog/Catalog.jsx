@@ -40,7 +40,8 @@ const Catalog = (props) => {
         setSkipCount(skipCount + 3)
     }
 
-    const navItems = useOutletContext();
+    const navItems = useOutletContext().navItems;
+    const addItemToBasket = useOutletContext().addItemToBasket;
 
     let title;
     !props.navItem
@@ -55,7 +56,7 @@ const Catalog = (props) => {
             <Helmet>
                 <title>{title}</title>
             </Helmet>
-            <Outlet />
+            <Outlet context={addItemToBasket}/>
             {!items || !items[0] || pathname.match(/\d/)
                 ? <h1 className={classes.miss}>Товары отсутвуют.</h1>
                 : (

@@ -18,7 +18,7 @@ function BasketItem({ item, deleteItemFromBasket, index, changeItemCount }) {
         <div className={classes.basketItem}>
             {removeItemActive
                 ? <BasketItemRemove item={item} changeRemoveItemActive={changeRemoveItemActive} deleteItemFromBasket={deleteItemFromBasket} index={index}/>
-                : <BasketItemVisible item={item} changeRemoveItemActive={changeRemoveItemActive} changeItemCount={changeItemCount}/>
+                : <BasketItemVisible item={item} changeRemoveItemActive={changeRemoveItemActive} changeItemCount={changeItemCount} index={index}/>
             }
         </div>
     );

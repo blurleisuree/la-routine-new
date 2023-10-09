@@ -4,7 +4,7 @@ import Select from '../Select/Select.jsx';
 
 import classes from './InfoBlock.module.css';
 
-const InfoBlock = ({ item, params, selectOption, desc }) => {
+const InfoBlock = ({ item, params, selectOption, desc, addItemToBasket }) => {
 
     // У некоторых товаров разнное описание внутри одной категории (оно пишется вручную в товаре) + последнее else на случай если описания нигде нет
     let descriptionArr = [];
@@ -32,7 +32,7 @@ const InfoBlock = ({ item, params, selectOption, desc }) => {
             {item.colors[0] && <Select name={'color'} onChange={selectOption} arr={item.colors} activeColor={params.color} />}
             {item.sizes[0] && <Select name={'size'} onChange={selectOption} arr={item.sizes} />}
             {item.available
-                ? <div className={classes.infoBlock__btn}>buy</div>
+                ? <div className={classes.infoBlock__btn} onClick={()=> addItemToBasket(item, params)}>buy</div>
                 : <div className={classes.infoBlock__btn + " " + classes.notAvailable}>not avaible</div>
             }
             {descriptionArr.map((str, index) =>

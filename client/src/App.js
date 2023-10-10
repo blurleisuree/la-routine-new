@@ -24,13 +24,21 @@ function App() {
     setNavItems(json);
   }
 
+  const [overlayIsActive, setOverlayIsActive] = useState(false);
+  const [isClickedOnOverlay, setIsClickedOnOverlay] = useState(false);
+  const disableAnOverlay = () => {
+    setOverlayIsActive(false);
+    setIsClickedOnOverlay(true);
+  }
+
   return (
     !navItems
       ? <p>Is Loading...</p>
       : <div className="App">
+        <div className={`overlay ${overlayIsActive}`} onClick={(e) => disableAnOverlay(e)}></div>
         <BrowserRouter>
           <Routes >
-            <Route path='/' element={<Main navItems={navItems} />}>
+            <Route path='/' element={<Main navItems={navItems} setOverlayIsActive={setOverlayIsActive} isClickedOnOverlay={isClickedOnOverlay} setIsClickedOnOverlay={setIsClickedOnOverlay}/>}>
               <Route index element={<Catalog />} />
               {navItems.map((navItem, index) =>
                 <Route path={'/' + navItem.name} key={navItem._id} element={< Catalog navItem={navItem.name} />}>

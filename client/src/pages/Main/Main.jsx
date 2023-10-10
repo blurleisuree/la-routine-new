@@ -9,47 +9,42 @@ import Footer from '../../components/Footer/Footer.jsx';
 import Basket from '../../components/Basket/Basket.jsx';
 import BasketButton from '../../components/UI/BasketButton/BasketButton.jsx';
 
-function Main({ navItems, }) {
+function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOnOverlay }) {
 
   const [loadAfterItem, setLoadAfterItem] = useState(useLocation().state);
 
-
-  // const [basket, setBasket] = useState([{
-  //   item: { _id: "650c77a3f5fdc020eb0ca1d3", name: 'La Routine Tee "RED GIRL"', type: 'Tee / Photo', price: '2 690', code: 'red-girl', catalog_id: "ObjectId('6509fbe4e0c959f228fe60ca')" },
-  //   params: { color: 'white', size: 'L' }, count: 1
-  // }, { item: { _id: '312', price: '4 560' }, count: 1 }, { item: { _id: '31222', price: '12 450' }, count: 1 }]);
-
-
   const [basket, setBasket] = useState([]);
   const addItemToBasket = (item, params) => {
-    let itemIsNew;
+    setBasketIsActive(1)
+    // Обновление состояния оверлея чтобы он работал
+    setIsClickedOnOverlay(false)
 
+    let itemIsNew;
     // Если в корзине нет ни одного товара
     if (!basket.length) {
       itemIsNew = true;
     }
-
     // Если корзина не пустая (id !=)
     if (!itemIsNew) {
       itemIsNew = !basket.some(basketItem => basketItem.item._id == item._id);
     }
-
     // Если одинаковые id проверка на одинаковые params
     if (!itemIsNew) {
       const itemsWithSameId = basket.filter((basketItem) => basketItem.item._id == item._id);
       itemIsNew = !itemsWithSameId.some((basketItem) => basketItem.params.color == params.color && basketItem.params.size == params.size)
     }
-
     // Если все проверки пройдены
     if (itemIsNew) {
       const newItem = { item, params, count: 1 };
       setBasket([...basket, newItem]);
+    } else {
+      // Если полностью одинаковые товара - увеличить количество товаров в корзине на 1
+      const basketItem = basket.find((basketItem) => basketItem.item._id == item._id && basketItem.params.color == params.color && basketItem.params.size == params.size);
+      basketItem.count += 1;
+      setBasket([...basket]);
     }
+    // Плохо что 4 перебора в функции
   }
-
-  useMemo(() => {
-    console.log(basket);
-  }, [basket]);
 
   const deleteItemFromBasket = (index) => {
     let newBasket = basket;
@@ -61,6 +56,8 @@ function Main({ navItems, }) {
   const [basketIsActive, setBasketIsActive] = useState(0);
   const toggleBasketIsActive = (value) => {
     setBasketIsActive(value)
+    // Обновление состояния оверлея чтобы он работал
+    setIsClickedOnOverlay(!value)
   }
 
   // Посчитать итоговую сумму товаров
@@ -84,9 +81,36 @@ function Main({ navItems, }) {
     setBasket(newBasket);
   }
 
+  const getBasketFromLS = () => {
+    return JSON.parse(localStorage.getItem("userBasket"));
+  }
+  useEffect(() => {
+    setBasket(getBasketFromLS())
+    console.log(basket)
+  }, [])
+
   useMemo(() => {
     setGeneralPrice(calcPrice())
+    console.log('memo: ' + basket)
+    // Надо чтобы ls не обновлялся при определении состояния корзины
+    // localStorage.setItem("userBasket", JSON.stringify(basket));
   }, [basket])
+
+  useMemo(() => {
+    if (basketIsActive) {
+      document.body.classList.add('active');
+      setOverlayIsActive('active')
+    } else {
+      document.body.classList.remove('active')
+      setOverlayIsActive(false)
+    }
+  }, [basketIsActive])
+
+  useEffect(() => {
+    if (isClickedOnOverlay) {
+      setBasketIsActive(false)
+    }
+  }, [isClickedOnOverlay])
 
   return (
     <div className={loadAfterItem ? classes.main + " " + classes.active : classes.main}>

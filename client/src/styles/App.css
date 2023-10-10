@@ -112,3 +112,18 @@ legend {
 body {
     font-family: "Arial", sans-serif;
 }
+body.active {
+    overflow: hidden;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    background-color: black;
+    opacity: 0.5;
+    width: 100%;
+    height: 100vh;
+}
+.overlay.active {
+    display: block;
+}

@@ -22,11 +22,26 @@ function Main({ navItems, }) {
 
   const [basket, setBasket] = useState([]);
   const addItemToBasket = (item, params) => {
-    const itemIsNew = basket.some(basketItem => basketItem.item._id !== item._id);
-    const paramsAreDifferent = basket.some(basketItem => basketItem.params.color === params.color && basketItem.params.size === params.size)
+    let itemIsNew;
 
-    console.log(!itemIsNew)
+    // Если в корзине нет ни одного товара
+    if (!basket.length) {
+      itemIsNew = true;
+    }
+
+    // Если корзина не пустая (id !=)
     if (!itemIsNew) {
+      itemIsNew = !basket.some(basketItem => basketItem.item._id == item._id);
+    }
+
+    // Если одинаковые id проверка на одинаковые params
+    if (!itemIsNew) {
+      const itemsWithSameId = basket.filter((basketItem) => basketItem.item._id == item._id);
+      itemIsNew = !itemsWithSameId.some((basketItem) => basketItem.params.color == params.color && basketItem.params.size == params.size)
+    }
+
+    // Если все проверки пройдены
+    if (itemIsNew) {
       const newItem = { item, params, count: 1 };
       setBasket([...basket, newItem]);
     }

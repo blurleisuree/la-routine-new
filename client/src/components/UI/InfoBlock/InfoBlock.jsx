@@ -3,8 +3,9 @@ import React from "react";
 import Select from '../Select/Select.jsx';
 
 import classes from './InfoBlock.module.css';
+import { redirect } from "react-router-dom";
 
-const InfoBlock = ({ item, params, selectOption, desc, addItemToBasket }) => {
+const InfoBlock = ({ item, params, selectOption, desc, addItemToBasket, redirect }) => {
 
     // У некоторых товаров разнное описание внутри одной категории (оно пишется вручную в товаре) + последнее else на случай если описания нигде нет
     let descriptionArr = [];
@@ -24,6 +25,11 @@ const InfoBlock = ({ item, params, selectOption, desc, addItemToBasket }) => {
         dash = '-'
     };
 
+    const onClickToBtn = () => {
+        redirect();
+        addItemToBasket(item, params);
+    }
+
     return (
         <div className={classes.infoBlock}>
             <h2 className={classes.infoBlock__name}>{item.name}</h2>
@@ -32,7 +38,7 @@ const InfoBlock = ({ item, params, selectOption, desc, addItemToBasket }) => {
             {item.colors[0] && <Select name={'color'} onChange={selectOption} arr={item.colors} activeColor={params.color} />}
             {item.sizes[0] && <Select name={'size'} onChange={selectOption} arr={item.sizes} />}
             {item.available
-                ? <div className={classes.infoBlock__btn} onClick={()=> addItemToBasket(item, params)}>buy</div>
+                ? <div className={classes.infoBlock__btn} onClick={onClickToBtn}>buy</div>
                 : <div className={classes.infoBlock__btn + " " + classes.notAvailable}>not avaible</div>
             }
             {descriptionArr.map((str, index) =>

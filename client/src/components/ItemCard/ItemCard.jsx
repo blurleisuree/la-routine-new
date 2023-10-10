@@ -92,7 +92,7 @@ const ItemCard = ({ navItem }) => {
                 <div className={redirectIsActive ? classes.itemCard__wrapper + " " + classes.redirect : classes.itemCard__wrapper}>
                     <div className={classes.itemCard__inner}>
                         <ImgCarousel item={item} navItemName={navItem.name} changeColor={changeColor} activeColor={params.color} />
-                        <InfoBlock item={item} selectOption={selectOption} params={params} desc={navItem.description} addItemToBasket={addItemToBasket}/>
+                        <InfoBlock item={item} selectOption={selectOption} params={params} desc={navItem.description} addItemToBasket={addItemToBasket} redirect={redirect}/>
                     </div>
                     {navItem.sizesVisible && < Tabs />}
                 </div>

@@ -18,7 +18,7 @@ function Basket({ basket, basketIsActive, toggleBasketIsActive, generalPrice, de
       <h1 className={classes.basket__title}>Ваш заказ</h1>
       <div className={classes.basket__line}></div>
       {basket.map((item, index) =>
-        <BasketItem key={item.item._id} item={item} deleteItemFromBasket={deleteItemFromBasket} index={index} changeItemCount={changeItemCount} />
+        <BasketItem key={item.item._id + item.params.color + item.params.size} item={item} deleteItemFromBasket={deleteItemFromBasket} index={index} changeItemCount={changeItemCount} />
       )}
       <div className={classes.basket__line}></div>
       <p className={classes.basket__price}>Сумма: {generalPrice.toLocaleString('ru')} р.</p>

@@ -35,13 +35,26 @@ function BasketItemVisible({ item, changeRemoveItemActive, changeItemCount, inde
         changeItemCount(index, value);
     }
 
+    // Для того чтобы картинка товара соответстовала выбранному цвету
+    const [colorImgIndex, setColorImgIndex] = useState(1);
+    useEffect(() => {
+        const imgObj = item.item.imgs.find((img) => img.color == item.params.color);
+        setColorImgIndex(imgObj.n)
+    }, [])
+    const [paramsIsEmpty, setParamsIsEmpty] = useState(false);
+    useEffect(() => {
+        if (JSON.stringify(item.params) == "{}") {
+            setParamsIsEmpty(true);
+        }
+    }, [])
+
     return (
         <div className={classes.basketItemVisible}>
-            <img src={`/imgs/items/${item.item._id}_img1.jpg`} alt="item_img" className={classes.basketItemVisible__img} />
+            <img src={`/imgs/items/${item.item._id}_img${colorImgIndex}.jpg`} alt="item_img" className={classes.basketItemVisible__img} />
             <div className={classes.basketItemVisible__infoWrapper}>
                 <h3 className={classes.basketItemVisible__name}>{item.item.name}</h3>
-                {item.params ? <p className={classes.basketItemVisible__param}>Color: {item.params.color}</p> : false}
-                {item.params ? <p className={classes.basketItemVisible__param}>Size: {item.params.size}</p> : false}
+                {!paramsIsEmpty ? <p className={classes.basketItemVisible__param}>Color: {item.params.color}</p> : false}
+                {!paramsIsEmpty ? <p className={classes.basketItemVisible__param}>Size: {item.params.size}</p> : false}
                 <p className={classes.basketItemVisible__param}>{item.item.code}</p>
             </div>
             <div className={classes.basketItemVisible__countBlock}>

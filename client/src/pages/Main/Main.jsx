@@ -37,11 +37,13 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
     if (itemIsNew) {
       const newItem = { item, params, count: 1 };
       setBasket([...basket, newItem]);
+      localStorage.setItem("userBasket", JSON.stringify([...basket, newItem]))
     } else {
       // Если полностью одинаковые товара - увеличить количество товаров в корзине на 1
       const basketItem = basket.find((basketItem) => basketItem.item._id == item._id && basketItem.params.color == params.color && basketItem.params.size == params.size);
       basketItem.count += 1;
       setBasket([...basket]);
+      localStorage.setItem("userBasket", JSON.stringify([...basket]))
     }
     // Плохо что 4 перебора в функции
   }
@@ -50,6 +52,7 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
     let newBasket = basket;
     newBasket.splice(index, 1);
     setBasket([...newBasket]);
+    localStorage.setItem("userBasket", JSON.stringify(newBasket))
   }
 
   // Включить/Выключить корзину
@@ -79,21 +82,21 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
       return item
     })
     setBasket(newBasket);
+    localStorage.setItem("userBasket", JSON.stringify(newBasket))
   }
 
   const getBasketFromLS = () => {
     return JSON.parse(localStorage.getItem("userBasket"));
   }
   useEffect(() => {
-    setBasket(getBasketFromLS())
-    console.log(basket)
+    const ls = getBasketFromLS();
+    if (ls != null) {
+      setBasket(getBasketFromLS())
+    }
   }, [])
 
-  useMemo(() => {
+  useEffect(() => {
     setGeneralPrice(calcPrice())
-    console.log('memo: ' + basket)
-    // Надо чтобы ls не обновлялся при определении состояния корзины
-    // localStorage.setItem("userBasket", JSON.stringify(basket));
   }, [basket])
 
   useMemo(() => {

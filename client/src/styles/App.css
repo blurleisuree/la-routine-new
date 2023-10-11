@@ -114,6 +114,7 @@ body {
 }
 body.active {
     overflow: hidden;
+    margin-right: 15px;
 }
 .overlay {
     display: none;

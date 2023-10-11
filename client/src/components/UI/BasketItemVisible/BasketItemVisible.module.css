@@ -13,7 +13,7 @@
 .basketItemVisible__infoWrapper {
     display: flex;
     flex-direction: column;
-    max-width: 148px;
+    width: 148px;
     margin-left: 5px;
 }
 

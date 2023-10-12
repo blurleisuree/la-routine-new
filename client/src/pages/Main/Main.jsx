@@ -8,6 +8,7 @@ import NavBar from '../../components/Navbar/NavBar.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
 import Basket from '../../components/Basket/Basket.jsx';
 import BasketButton from '../../components/UI/BasketButton/BasketButton.jsx';
+import Checkout from '../../components/Checkout/Checkout.jsx';
 
 function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOnOverlay }) {
 
@@ -74,6 +75,7 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
     }, 0)
   }
 
+  // Изменение количества товаров в корзине
   const changeItemCount = (index, count) => {
     let newBasket = basket.map((item, i) => {
       if (i == index) {
@@ -85,6 +87,7 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
     localStorage.setItem("userBasket", JSON.stringify(newBasket))
   }
 
+  // Обновление корзины при загрузке страницы
   const getBasketFromLS = () => {
     return JSON.parse(localStorage.getItem("userBasket"));
   }
@@ -95,11 +98,13 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
     }
   }, [])
 
+  // Обновление суммы товаров при изменении корзины
   useEffect(() => {
     setGeneralPrice(calcPrice())
   }, [basket])
 
-  useMemo(() => {
+  // Переключение оверлея
+  useEffect(() => {
     if (basketIsActive) {
       document.body.classList.add('active');
       setOverlayIsActive('active')
@@ -115,6 +120,26 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
     }
   }, [isClickedOnOverlay])
 
+  const [checkoutIsActive, setCheckoutIsActive] = useState(false);
+  const closeCheckout = () => {
+    document.body.classList.remove('active');
+    setCheckoutIsActive(false)
+  }
+  const openCheckout = () => {
+    setBasketIsActive(false)
+    setOverlayIsActive(false)
+    // document.body.classList.add('active');
+    setCheckoutIsActive(true)
+  }
+
+  useEffect(() => {
+    if (checkoutIsActive) {
+      document.body.classList.add('active');
+    } else {
+      document.body.classList.remove('active');
+    }
+  }, [checkoutIsActive])
+
   return (
     <div className={loadAfterItem ? classes.main + " " + classes.active : classes.main}>
       <Logo />
@@ -122,7 +147,8 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
       <Outlet context={{ navItems, addItemToBasket }} />
       <Footer />
 
-      <Basket basket={basket} basketIsActive={basketIsActive} toggleBasketIsActive={toggleBasketIsActive} generalPrice={generalPrice} deleteItemFromBasket={deleteItemFromBasket} changeItemCount={changeItemCount} />
+      <Checkout basket={basket} checkoutIsActive={checkoutIsActive} closeCheckout={closeCheckout} />
+      <Basket basket={basket} basketIsActive={basketIsActive} toggleBasketIsActive={toggleBasketIsActive} generalPrice={generalPrice} deleteItemFromBasket={deleteItemFromBasket} changeItemCount={changeItemCount} openCheckout={openCheckout} />
       {basket && !basketIsActive && basket.length != 0 ? <BasketButton basket={basket} toggleBasketIsActive={toggleBasketIsActive} generalPrice={generalPrice} /> : false}
     </div>
   );

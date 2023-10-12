@@ -38,7 +38,7 @@ function App() {
         <div className={`overlay ${overlayIsActive}`} onClick={(e) => disableAnOverlay(e)}></div>
         <BrowserRouter>
           <Routes >
-            <Route path='/' element={<Main navItems={navItems} setOverlayIsActive={setOverlayIsActive} isClickedOnOverlay={isClickedOnOverlay} setIsClickedOnOverlay={setIsClickedOnOverlay}/>}>
+            <Route path='/' element={<Main navItems={navItems} setOverlayIsActive={setOverlayIsActive} isClickedOnOverlay={isClickedOnOverlay} setIsClickedOnOverlay={setIsClickedOnOverlay} />}>
               <Route index element={<Catalog />} />
               {navItems.map((navItem, index) =>
                 <Route path={'/' + navItem.name} key={navItem._id} element={< Catalog navItem={navItem.name} />}>

@@ -1,12 +1,12 @@
-import React, { useMemo } from 'react';
+import React, { useEffect } from 'react';
 
 import classes from './Basket.module.css';
 
 import BasketItem from '../UI/BascketItem/BasketItem.jsx';
 
-function Basket({ basket, basketIsActive, toggleBasketIsActive, generalPrice, deleteItemFromBasket, changeItemCount }) {
+function Basket({ basket, basketIsActive, toggleBasketIsActive, generalPrice, deleteItemFromBasket, changeItemCount, openCheckout }) {
 
-  useMemo(() => {
+  useEffect(() => {
     if (basket.length == 0) {
       toggleBasketIsActive(0)
     }
@@ -22,7 +22,7 @@ function Basket({ basket, basketIsActive, toggleBasketIsActive, generalPrice, de
       )}
       <div className={classes.basket__line}></div>
       <p className={classes.basket__price}>Сумма: {generalPrice.toLocaleString('ru')} р.</p>
-      <div className={classes.basket__btn}>Checkout</div>
+      <div className={classes.basket__btn} onClick={() => openCheckout()}>Checkout</div>
     </div>
   );
 }

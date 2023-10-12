@@ -41,14 +41,20 @@ const ImgCarousel = ({ item, navItemName, changeColor, activeColor }) => {
         };
     }, [activeColor]);
 
+    const onImgClick = (e) => {
+        // e.target.style.position = 'absolute';
+        // e.target.style.width = '100vh';
+        // console.log(e.target)
+    }
+
     return (
         <div className={classes.imgCarousel}>
             <div className={classes.imgCarousel__inner}>
                 <div onClick={() => setImgActiveIndex(imgActiveIndex - 1)} className={imgActiveIndex == 1 ? classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_left : classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_left + " " + classes.active}>
-                    <img src="/imgs/icons/arrow.svg" alt="svg" />
+                    <img src="/imgs/icons/arrow.svg" alt="svg"/>
                 </div>
                 {item.imgs.map((img) =>
-                    <img key={img.n} src={`/imgs/items/${item._id}_img${img.n}.jpg`} className={img.n == imgActiveIndex ? classes.imgCarousel__img + ' ' + classes.active : classes.imgCarousel__img}></img>
+                    <img key={img.n} onClick={(e) => onImgClick(e)} src={`/imgs/items/${item._id}_img${img.n}.jpg`} className={img.n == imgActiveIndex ? classes.imgCarousel__img + ' ' + classes.active : classes.imgCarousel__img}></img>
                 )}
                 <img src={`/imgs/general/${navItemName}_sizes.jpg`} onError={(e) => disableSizesImg(e)} className={imgsCount + 1 == imgActiveIndex ? classes.imgCarousel__img + ' ' + classes.active : classes.imgCarousel__img}></img>
                 <div onClick={() => setImgActiveIndex(imgActiveIndex + 1)} className={imgsCount + 1 == imgActiveIndex ? classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_right : classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_right + " " + classes.active}>

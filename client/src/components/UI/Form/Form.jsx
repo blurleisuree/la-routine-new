@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import classes from './Form.module.css';
 
 import Input from '../Input/Input.jsx';
+import Radio from '../Radio/Radio.jsx';
 
 const Form = () => {
 
@@ -12,41 +13,77 @@ const Form = () => {
 
     return (
         <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-            <Input name="fullName" labelText="Фамилия Имя Отчество" placeholder="ФИО" required={true} textarea={true}/>
+            <Input
+                name="fullName"
+                labelText="Фамилия Имя Отчество"
+                placeholder="ФИО"
+                required={true}
+                textarea={true}
+                type="text"
+                register={register}
+                errors={errors}
+            />
+            <Input
+                name="address"
+                labelText="ВАШ ПОЛНЫЙ АДРЕС + ИНДЕКС"
+                placeholder="Страна / Город / Улица / Квартира / Индекс ( Почтовое отделение привязывается автоматически по индексу)"
+                required={true}
+                textarea={true}
+                type="text"
+                register={register}
+                errors={errors}
+            />
+            <Input
+                name="email"
+                labelText="Ваш Email"
+                placeholder="Вся информация по срокам отправки и куда приходит трек-номер написана на сайте в FAQ."
+                required={true}
+                textarea={false}
+                subtitleText="Вся информация по срокам отправки и куда приходит трек-номер написана на сайте в FAQ."
+                type="text"
+                register={register}
+                errors={errors}
+            />
+            <Input
+                name="number"
+                labelText="Телефонный номер"
+                placeholder="+7 (999) 999-99-99"
+                required={true}
+                textarea={false}
+                subtitleText="Трек-номер приходит ПОСЛЕ отправки!"
+                type="number"
+                register={register}
+                errors={errors}
+            />
 
-            {/* <label htmlFor="fullName" className={classes.label}>Фамилия Имя Отчество</label>
-            <textarea placeholder='ФИО' className={errors.fullName ? classes.input + " " + classes.textarea + " " + classes.inputError : classes.input + " " + classes.textarea} name="fullName" {...register("fullName", { required: true })} aria-invalid={errors.fullName ? "true" : "false"} />
-            {errors.fullName && errors.fullName.type === "required" && (
-                <span className={classes.error}>Обязательное поле</span>
-            )} */}
-
-            <label htmlFor="address" className={classes.label}>ВАШ ПОЛНЫЙ АДРЕС + ИНДЕКС</label>
-            <textarea placeholder='Страна / Город / Улица / Квартира / Индекс ( Почтовое отделение привязывается автоматически по индексу)' className={classes.input + " " + classes.textarea} name="address" {...register("address")} />
-
-            <label htmlFor="email" className={classes.label}>Ваш Email</label>
-            <p className={classes.subtitle}>Вся информация по срокам отправки и куда приходит трек-номер написана на сайте в FAQ.</p>
-            <input placeholder='Обязательно указывайте правильный Email для связи' className={classes.input} name="email" {...register("email", { required: true })} />
-
-            <label htmlFor="number" className={classes.label}>Телефонный номер</label>
-            <p className={classes.subtitle}>Трек-номер приходит ПОСЛЕ отправки!</p>
-            <input placeholder='+7 (999) 999-99-99' className={classes.input} name="number" {...register("number", { required: true })} />
-
-            <label className={classes.checkbox__wrapper} style={{ marginTop: "30px" }}>
-                <input type="radio" name="delivery" {...register("delivery", { required: true })} className={classes.checkbox} />
-                Доставка Почтой России 390 руб.
-            </label>
-            <label className={classes.checkbox__wrapper}>
-                <input type="radio" name="delivery" {...register("delivery", { required: true })} className={classes.checkbox} value="Доставка курьером ЕМС Почта России (МОСКВА) 490 руб." />
-                Доставка курьером ЕМС Почта России (МОСКВА) 490 руб.
-            </label>
-            <label className={classes.checkbox__wrapper}>
-                <input type="radio" name="delivery" {...register("delivery", { required: true })} className={classes.checkbox} value="Доставка по СНГ Почта России (Беларусь / Казахстан / и тд. ) 900 руб." />
-                Доставка по СНГ Почта России (Беларусь / Казахстан / и тд. ) 900 руб.
-            </label>
-            <label className={classes.checkbox__wrapper}>
-                <input type="radio" name="delivery" {...register("delivery", { required: true })} className={classes.checkbox} value="Мировая Доставка Почта России (Европа / Америка / и тд. ) 1600 руб." />
-                Мировая Доставка Почта России (Европа / Америка / и тд. ) 1600 руб.
-            </label>
+            <Radio
+                name='delivery'
+                value="Доставка Почтой России 390 руб."
+                errors={errors}
+                required={true}
+                register={register}
+            />
+            <Radio
+                name='delivery'
+                value="Доставка курьером ЕМС Почта России (МОСКВА) 490 руб."
+                errors={errors}
+                required={true}
+                register={register}
+            />
+            <Radio
+                name='delivery'
+                value="Доставка по СНГ Почта России (Беларусь / Казахстан / и тд. ) 900 руб."
+                errors={errors}
+                required={true}
+                register={register}
+            />
+            <Radio
+                name='delivery'
+                value="Мировая Доставка Почта России (Европа / Америка / и тд. ) 1600 руб."
+                errors={errors}
+                required={true}
+                register={register}
+            />
 
             <button type="submit" className={classes.submit}>Checkout</button>
         </form>

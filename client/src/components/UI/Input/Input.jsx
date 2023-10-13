@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useForm } from 'react-hook-form';
 
 import classes from './Input.module.css';
 
-const Input = ({ name, labelText, placeholder, required, textarea }) => {
+const Input = ({ name, labelText, placeholder, textarea, register, errors, required, subtitleText, type }) => {
 
-    const { register, formState: { errors } } = useForm();
 
     const [inputClasses, setInputClasses] = useState('');
     useEffect(() => {
@@ -19,24 +17,27 @@ const Input = ({ name, labelText, placeholder, required, textarea }) => {
     return (
         <div className={classes.input__wrapper}>
             <label htmlFor={name} className={classes.label}>{labelText}</label>
+            {subtitleText && <p className={classes.subtitle}>{subtitleText}</p>}
             {textarea
                 ? <textarea
+                    type={type}
                     placeholder={placeholder}
-                    className={errors.name ? inputClasses + " " + classes.inputError : inputClasses}
+                    className={errors[name] ? inputClasses + " " + classes.inputError : inputClasses}
                     name={name}
                     {...register(name, { required: required })}
-                    aria-invalid={errors.name ? "true" : "false"}
+                    aria-invalid={errors[name] ? "true" : "false"}
                 />
                 : <input
+                    type={type}
                     placeholder={placeholder}
-                    className={errors.name ? inputClasses + " " + classes.inputError : inputClasses}
+                    className={errors[name] ? inputClasses + " " + classes.inputError : inputClasses}
                     name={name}
                     {...register(name, { required: required })}
-                    aria-invalid={errors.name ? "true" : "false"}
+                    aria-invalid={errors[name] ? "true" : "false"}
                 />
             }
 
-            {errors.name && errors.name.type === "required" && (
+            {errors[name] && errors[name].type === "required" && (
                 <span className={classes.error}>Обязательное поле</span>
             )}
         </div>

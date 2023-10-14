@@ -101,7 +101,7 @@ app.get('/', (req, res) => {
     if (n) {
         url = url.replace(`?skipCount=${n}`, '')
     }
-    
+
     const skipCount = Number(n) || 0
 
     const items = [];
@@ -114,4 +114,35 @@ app.get('/', (req, res) => {
                 })
         })
         .catch(() => handleError(res, "Something goes wrong"));
+});
+
+// Отправка письма
+const nodemailer = require("nodemailer");
+const transporter = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+        user: "ipishir@gmail.com",
+        pass: "mxlt oumh azuv mjce",
+    },
+});
+
+app.post("/:id/mail", (req, res) => {
+    const { fullName, address, email, number, delivery } = req.body;
+
+    const mailOptions = {
+        from: "ipishir@gmail.com",
+        to: email,
+        subject: "Спасибо за заказ!",
+        text: "Заказ оформлен, ваш трек код:",
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log("Ошибка при отправке письма: " + error);
+            res.status(500).send({res: "Ошибка при отправке письма"});
+        } else {
+            console.log({res: "Письмо отправлено: " + info.response});
+            res.status(200).send({res: "Письмо отправлено: " + info.response});
+        }
+    });
 });

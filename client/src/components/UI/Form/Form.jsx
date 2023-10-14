@@ -1,18 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useLocation } from 'react-router-dom';
 
 import classes from './Form.module.css';
 
 import Input from '../Input/Input.jsx';
 import Radio from '../Radio/Radio.jsx';
 
-const Form = ({toggleState}) => {
+const Form = ({ toggleState }) => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => {
-        console.log(data);
+        sendMail(data)
         setFormData({ fullName: "", address: "", email: "", number: "", delivery: "" });
     };
+
+    const pathname = useLocation().pathname
+    async function sendMail(data) {
+        const res = await fetch(`http://localhost:3001${pathname}/mail`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                fullName: data.fullName,
+                address: data.address,
+                email: data.email,
+                number: data.number,
+                delivery: data.delivery
+            })
+        });
+        const json = await res.json()
+        console.log(json)
+    }
 
     // Чтобы formData не перезаписывалась при её объявлении
     const initialData = localStorage.getItem('formData');

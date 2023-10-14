@@ -50,48 +50,23 @@ const Catalog = (props) => {
             ? title = "Magazine / Photo"
             : title = props.navItem[0].toUpperCase() + props.navItem.slice(1);
 
-    // Оба варианта работают (оптимизировать чтобы красиво было)
     return (
-        <>
+        <div className={classes.catalog__wrapper}>
             <Helmet>
                 <title>{title}</title>
             </Helmet>
-            <Outlet context={addItemToBasket}/>
+            <Outlet context={addItemToBasket} />
             {!items || !items[0] || pathname.match(/\d/)
                 ? <h1 className={classes.miss}>Товары отсутвуют.</h1>
-                : (
-                    <>
-                        <div className={classes.catalog}>
-                            {items.map((item, index) => <Item key={item._id} item={item} navItem={props.navItem} navItems={navItems} />)}
-                        </div >
-                        {itemsCount == items.length
-                            ? false
-                            : <button onClick={loadMore} className={allProductsLoaded ? classes.catalog__btn + " " + classes.disabled : classes.catalog__btn}>Загрузить ещё</button>
-                        }
-                    </>
-                )
+                : <div className={classes.catalog}>
+                    {items.map((item) => <Item key={item._id} item={item} navItem={props.navItem} navItems={navItems} />)}
+                    {itemsCount !== items.length &&
+                        <button onClick={loadMore} className={allProductsLoaded ? classes.catalog__btn + " " + classes.disabled : classes.catalog__btn}>Загрузить ещё</button>
+                    }
+                </div>
             }
-        </>
+        </div>
     )
-
-    // if (!items || !items[0] || pathname.match(/\d/)) { // последнее условие для того чтобы скрывать товары когда открыт один
-    //     return (
-    //         <>
-    //             <Outlet />
-    //             <h1 className={classes.miss}>Товары отсутвуют.</h1>
-    //         </>
-    //     )
-    // } else {
-    //     return (
-    //         <>
-    //             <Outlet />
-    //             <div className={classes.catalog}>
-    //                 {items.map((item, index) => <Item key={item._id} item={item} navItem={navItem} itemIndex={index} navItems={navItems} />)}
-    //             </div >
-    //             <button onClick={loadMore} className={allProductsLoaded ? classes.catalog__btn + " " + classes.disabled : classes.catalog__btn}>Загрузить ещё</button>
-    //         </>
-    //     )
-    // }
 };
 
 export default Catalog;

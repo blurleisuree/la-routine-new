@@ -28,7 +28,7 @@ const Item = ({ item, navItem, navItems }) => {
     }
 
     return (
-        <Link to={`/${navItem}/${item._id}`} state={{ isNew }}>
+        <Link to={`/${navItem}/${item._id}`} state={{ isNew }} className={classes.item__wrapper}>
             <div className={classes.item}>
                 <img onMouseOver={mouseOver} onMouseOut={mouseOut} src={`/imgs/items/${item._id}_img1.jpg`} alt="item" className={classes.item__img + " " + classes.item__img_1} />
                 {item.imgs.length > 1

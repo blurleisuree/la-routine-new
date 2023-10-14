@@ -8,18 +8,16 @@
     margin: 80px auto 0;
 }
 
-
 .miss {
     text-align: center;
     margin: 200px auto 0;
     display: block;
     font-size: 20px;
     font-weight: 500;
-
 }
 
 .catalog__btn {
-    margin: 0 auto 50px;
+    margin: 0 auto;
     display: inline-block;
     color: #ffffff;
     background-color: #000000;

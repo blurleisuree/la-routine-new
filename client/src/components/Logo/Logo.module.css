@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     max-width: 220px;
-    padding: 45px 0;
+    margin-top: 45px;
     box-sizing: border-box;
     max-width: 1200px;
 }

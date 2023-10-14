@@ -31,13 +31,23 @@ const Catalog = (props) => {
     const [allProductsLoaded, setAllProductsLoaded] = useState(false);
 
     async function loadMore() {
-        const res = await fetch(`http://localhost:3001${pathname}?skipCount=${skipCount + 3}`);
+        const res = await fetch(`http://localhost:3001${pathname}?skipCount=${skipCount + skipCountValue}&limitValue=${limitValue}`);
         const json = await res.json()
         if (!json.items[0]) { // Если получаем пустой массив
             setAllProductsLoaded(true);
         }
         setItems([...items, ...json.items])
-        setSkipCount(skipCount + 3)
+        setSkipCount(skipCount + skipCountValue)
+    }
+
+    async function loadItems() {
+        const res = await fetch(`http://localhost:3001${pathname}?skipCount=${skipCount + skipCountValue}&limitValue=${limitValue}`);
+        const json = await res.json()
+        if (!json.items[0]) { // Если получаем пустой массив
+            setAllProductsLoaded(true);
+        }
+        setItems([...items, ...json.items])
+        setSkipCount(skipCount + skipCountValue)
     }
 
     const navItems = useOutletContext().navItems;
@@ -50,6 +60,21 @@ const Catalog = (props) => {
             ? title = "Magazine / Photo"
             : title = props.navItem[0].toUpperCase() + props.navItem.slice(1);
 
+    // Для установки количества товаром в одном ряду (сколько прогружается товаров за раз)
+    // value 3 по дефолту
+    const [limitValue, setLimitValue] = useState(0);
+    const [skipCountValue, setSkipCountValue] = useState(0);
+    useEffect(() => {
+        if (pathname !== '/bags') {
+            console.log(true)
+            setLimitValue(3)
+            setSkipCountValue(3)
+        } else {
+            setLimitValue(4)
+            setSkipCountValue(4)
+        }
+    }, [pathname])
+
     return (
         <div className={classes.catalog__wrapper}>
             <Helmet>
@@ -59,7 +84,7 @@ const Catalog = (props) => {
             {!items || !items[0] || pathname.match(/\d/)
                 ? <h1 className={classes.miss}>Товары отсутвуют.</h1>
                 : <div className={classes.catalog}>
-                    {items.map((item) => <Item key={item._id} item={item} navItem={props.navItem} navItems={navItems} />)}
+                    {items.map((item) => <Item key={item._id} item={item} navItem={props.navItem} navItems={navItems} pathname={pathname} />)}
                     {itemsCount !== items.length &&
                         <button onClick={loadMore} className={allProductsLoaded ? classes.catalog__btn + " " + classes.disabled : classes.catalog__btn}>Загрузить ещё</button>
                     }

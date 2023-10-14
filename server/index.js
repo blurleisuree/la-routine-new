@@ -66,20 +66,19 @@ app.get('/catalog', (req, res) => {
 
 // Для каталога
 app.get('/:id', (req, res) => {
-    let url = req.url.replace('/', '');
-    const n = req.query.skipCount;
+    const limitValue = Number(req.query.limitValue) || 3
+    const skipCount = Number(req.query.skipCount) || 0
 
     // Чтобы убирать из ссылки параметры запроса (для поиска по базе)
-    if (n) {
-        url = url.replace(`?skipCount=${n}`, '')
+    let url = req.url.replace('/', '');
+    if (req.query.limitCount || req.query.skipCount) {
+        url = url.replace(/\?.*$/, "")
     }
-
-    const skipCount = Number(n) || 0
 
     db.collection('catalog').findOne({ name: url })
         .then((catalogItem) => {
             const items = [];
-            db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).sort({ new: -1 }).skip(skipCount).limit(3) // sort для того чтобы первые элементы были new
+            db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).sort({ new: -1 }).skip(skipCount).limit(limitValue) // sort для того чтобы первые элементы были new
                 .forEach((item) => items.push(item))
                 .then(() => {
                     db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).count()
@@ -94,18 +93,17 @@ app.get('/:id', (req, res) => {
 
 // Для new (по умолчанию)
 app.get('/', (req, res) => {
-    let url = req.url;
-    const n = req.query.skipCount;
+    const limitCount = Number(req.query.limitCount) || 3
+    const skipCount = Number(req.query.skipCount) || 0
 
     // Чтобы убирать из ссылки параметры запроса (для поиска по базе)
-    if (n) {
-        url = url.replace(`?skipCount=${n}`, '')
+    let url = req.url;
+    if (req.query.limitCount || req.query.skipCount) {
+        url = url.replace(/\?.*$/, "")
     }
 
-    const skipCount = Number(n) || 0
-
     const items = [];
-    db.collection('items').find({ new: true }).skip(skipCount).limit(3)
+    db.collection('items').find({ new: true }).skip(skipCount).limit(limitCount)
         .forEach((item) => items.push(item))
         .then(() => {
             db.collection('items').find({ new: true }).count()
@@ -139,10 +137,10 @@ app.post("/:id/mail", (req, res) => {
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.log("Ошибка при отправке письма: " + error);
-            res.status(500).send({res: "Ошибка при отправке письма"});
+            res.status(500).send({ res: "Ошибка при отправке письма" });
         } else {
-            console.log({res: "Письмо отправлено: " + info.response});
-            res.status(200).send({res: "Письмо отправлено: " + info.response});
+            console.log({ res: "Письмо отправлено: " + info.response });
+            res.status(200).send({ res: "Письмо отправлено: " + info.response });
         }
     });
 });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './styles/App.css';
@@ -55,34 +55,3 @@ function App() {
 }
 
 export default App;
-
-// db.items.insertOne(
-//   {
-//     name: '',
-//     type: '',
-//     price: '',
-//     sizes: [],
-//     colors: [],
-//     code: '',
-//     new: ,
-//     imgs_count: ,
-//     catalog_id: ObjectId(),
-// available: ,
-//   }
-// )
-
-// db.items.insertMany([
-//   {
-//     name: 'La Routine Bag',
-//     type: 'Black / Logo',
-//     price: '5 990',
-//     sizes: [],
-//     colors: [],
-//     code: 'T3-Nylon',
-//     new: true,
-//     catalog_id: ObjectId('6509fbe4e0c959f228fe60d0'),
-//     available: false,
-//     description: 'Bag - Нейлон;Logo- Рефлективная сумка;ㅤ;Вместимость ≈ 1.9 Л;ㅤ;Замеры;ㅤ;длина;27,5 см;ширина;9,5 см;высота;20 см;ㅤ;Сроки отправки данной сумки 2-4 недели',
-//     imgs: [{ n: 1 }, { n: 2 }, { n: 3 }, { n: 4 }, { n: 5 }, { n: 6 }, { n: 7 }, { n: 8 }, { n: 9 }, { n: 10 }],
-//   }
-// ])

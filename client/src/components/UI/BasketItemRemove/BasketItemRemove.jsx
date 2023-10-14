@@ -4,8 +4,6 @@ import classes from './BasketItemRemove.module.css';
 
 function BasketItemRemove({ item, changeRemoveItemActive, deleteItemFromBasket, index }) {
 
-   
-
     return (
         <div className={classes.basketItemRemove}>
             <p className={classes.basketItemRemove__deleteMessage}>Вы уверены что хотите удалить "{item.item.name}"?</p>

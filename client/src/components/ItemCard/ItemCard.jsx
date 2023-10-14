@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
@@ -46,7 +46,7 @@ const ItemCard = ({ navItem }) => {
 
     // Состояние выбранных параметров товара (цвет + размер)
     const [params, setParams] = useState(null)
-    useMemo(() => {
+    useEffect(() => {
         if (item) {
             return setParams({ color: item.colors[0], size: item.sizes[0] })
         }
@@ -92,7 +92,7 @@ const ItemCard = ({ navItem }) => {
                 <div className={redirectIsActive ? classes.itemCard__wrapper + " " + classes.redirect : classes.itemCard__wrapper}>
                     <div className={classes.itemCard__inner}>
                         <ImgCarousel item={item} navItemName={navItem.name} changeColor={changeColor} activeColor={params.color} />
-                        <InfoBlock item={item} selectOption={selectOption} params={params} desc={navItem.description} addItemToBasket={addItemToBasket} redirect={redirect}/>
+                        <InfoBlock item={item} selectOption={selectOption} params={params} desc={navItem.description} addItemToBasket={addItemToBasket} redirect={redirect} />
                     </div>
                     {navItem.sizesVisible && < Tabs />}
                 </div>

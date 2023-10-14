@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import classes from './Main.module.css';
@@ -16,7 +16,11 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
 
   const [basket, setBasket] = useState([]);
   const addItemToBasket = (item, params) => {
-    setBasketIsActive(1)
+    // Чтобы анимация срабатывала
+    setTimeout(() => {
+      setBasketIsActive(1)
+    }, 250)
+
     // Обновление состояния оверлея чтобы он работал
     setIsClickedOnOverlay(false)
 
@@ -107,7 +111,10 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
   useEffect(() => {
     if (basketIsActive) {
       document.body.classList.add('active');
-      setOverlayIsActive('active')
+      // Чтобы анимация срабатывала
+      setTimeout(() => {
+        setOverlayIsActive('active')
+      }, 0)
     } else {
       document.body.classList.remove('active')
       setOverlayIsActive(false)

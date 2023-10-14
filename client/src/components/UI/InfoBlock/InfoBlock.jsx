@@ -3,7 +3,6 @@ import React from "react";
 import Select from '../Select/Select.jsx';
 
 import classes from './InfoBlock.module.css';
-import { redirect } from "react-router-dom";
 
 const InfoBlock = ({ item, params, selectOption, desc, addItemToBasket, redirect }) => {
 

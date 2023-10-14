@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import classes from './BasketItemVisible.module.css';
 
@@ -6,7 +6,7 @@ function BasketItemVisible({ item, changeRemoveItemActive, changeItemCount, inde
 
     // Для просчета цены
     const [price, setPrice] = useState(0);
-    useMemo(() => {
+    useEffect(() => {
         setPrice(item.count * Number(item.item.price.replace(' ', '')))
     }, [item])
 

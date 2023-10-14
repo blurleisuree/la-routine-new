@@ -147,8 +147,24 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
       <Outlet context={{ navItems, addItemToBasket }} />
       <Footer />
 
-      <Checkout basket={basket} checkoutIsActive={checkoutIsActive} closeCheckout={closeCheckout} />
-      <Basket basket={basket} basketIsActive={basketIsActive} toggleBasketIsActive={toggleBasketIsActive} generalPrice={generalPrice} deleteItemFromBasket={deleteItemFromBasket} changeItemCount={changeItemCount} openCheckout={openCheckout} />
+      <Checkout
+        basket={basket}
+        checkoutIsActive={checkoutIsActive}
+        closeCheckout={closeCheckout}
+        deleteItemFromBasket={deleteItemFromBasket}
+        changeItemCount={changeItemCount}
+        generalPrice={generalPrice}
+      />
+
+      <Basket
+        basket={basket}
+        basketIsActive={basketIsActive}
+        toggleBasketIsActive={toggleBasketIsActive}
+        generalPrice={generalPrice}
+        deleteItemFromBasket={deleteItemFromBasket}
+        changeItemCount={changeItemCount}
+        openCheckout={openCheckout}
+      />
       {basket && !basketIsActive && basket.length != 0 ? <BasketButton basket={basket} toggleBasketIsActive={toggleBasketIsActive} generalPrice={generalPrice} /> : false}
     </div>
   );

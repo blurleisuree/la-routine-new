@@ -47,7 +47,26 @@
     display: flex;
 }
 
-.checkout__basket {
+.checkout__rightside {
     box-sizing: border-box;
     padding-left: 40px;
+    width: 50%;
+}
+.checkout__basket {
+    max-height: 750px;
+    overflow: auto;
+}
+.checkout__priceBlock {
+    display: block;
+    margin-top: 60px;
+}
+.checkout__priceText {
+    font-size: 15px;
+    font-weight: 400;
+    text-align: right;
+}
+.checkout__priceText_general {
+    font-weight: 600;
+    font-size: 17px;
+    margin-top: 5px;
 }

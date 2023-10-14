@@ -6,14 +6,17 @@ import classes from './Form.module.css';
 import Input from '../Input/Input.jsx';
 import Radio from '../Radio/Radio.jsx';
 
-const Form = () => {
+const Form = ({toggleState}) => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = (data) => {
+        console.log(data);
+        setFormData({ fullName: "", address: "", email: "", number: "", delivery: "" });
+    };
 
     // Чтобы formData не перезаписывалась при её объявлении
     const initialData = localStorage.getItem('formData');
-    const initialFormData = initialData ? JSON.parse(initialData) : { fullName: "", address: "", email: "", phone: "", delivery: "" };
+    const initialFormData = initialData ? JSON.parse(initialData) : { fullName: "", address: "", email: "", number: "", delivery: "" };
 
     const [formData, setFormData] = useState(initialFormData);
 
@@ -23,6 +26,7 @@ const Form = () => {
 
     useEffect(() => {
         localStorage.setItem('formData', JSON.stringify(formData));
+        toggleState();
     }, [formData])
 
     return (
@@ -54,7 +58,7 @@ const Form = () => {
             <Input
                 name="email"
                 labelText="Ваш Email"
-                placeholder="Вся информация по срокам отправки и куда приходит трек-номер написана на сайте в FAQ."
+                placeholder="Обязательно указывайте правильный Email для связи"
                 required={true}
                 textarea={false}
                 subtitleText="Вся информация по срокам отправки и куда приходит трек-номер написана на сайте в FAQ."
@@ -82,7 +86,7 @@ const Form = () => {
 
             <Radio
                 name='delivery'
-                value="Доставка Почтой России 390 руб."
+                value="Доставка Почтой России 390 р."
                 errors={errors}
                 required={true}
                 register={register}
@@ -91,7 +95,7 @@ const Form = () => {
             />
             <Radio
                 name='delivery'
-                value="Доставка курьером ЕМС Почта России (МОСКВА) 490 руб."
+                value="Доставка курьером ЕМС Почта России (МОСКВА) 490 р."
                 errors={errors}
                 required={true}
                 register={register}
@@ -100,7 +104,7 @@ const Form = () => {
             />
             <Radio
                 name='delivery'
-                value="Доставка по СНГ Почта России (Беларусь / Казахстан / и тд. ) 900 руб."
+                value="Доставка по СНГ Почта России (Беларусь / Казахстан / и тд. ) 900 р."
                 errors={errors}
                 required={true}
                 register={register}
@@ -109,7 +113,7 @@ const Form = () => {
             />
             <Radio
                 name='delivery'
-                value="Мировая Доставка Почта России (Европа / Америка / и тд. ) 1600 руб."
+                value="Мировая Доставка Почта России (Европа / Америка / и тд. ) 1600 р."
                 errors={errors}
                 required={true}
                 register={register}

@@ -9,6 +9,7 @@
     opacity: 0;
     pointer-events: none;
     overflow: auto;
+    transition: 0.3s all;
 }
 
 .checkout.active {

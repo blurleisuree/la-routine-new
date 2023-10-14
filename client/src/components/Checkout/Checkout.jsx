@@ -31,6 +31,12 @@ const Checkout = ({ basket, checkoutIsActive, closeCheckout, deleteItemFromBaske
         }
     }, [basket])
 
+    // useEffect(() => {
+    //     if (checkoutIsActive) {
+
+    //     }
+    // }, [checkoutIsActive])
+
     return (
         <div className={checkoutIsActive ? classes.checkout + " " + classes.active : classes.checkout}>
             <div className={classes.checkout__top}>

@@ -66,7 +66,6 @@ app.get('/catalog', (req, res) => {
 
 // Для каталога
 app.get('/:id', (req, res) => {
-    const limitValue = Number(req.query.limitValue) || 3
     const skipCount = Number(req.query.skipCount) || 0
 
     // Чтобы убирать из ссылки параметры запроса (для поиска по базе)
@@ -93,7 +92,6 @@ app.get('/:id', (req, res) => {
 
 // Для new (по умолчанию)
 app.get('/', (req, res) => {
-    const limitCount = Number(req.query.limitCount) || 3
     const skipCount = Number(req.query.skipCount) || 0
 
     // Чтобы убирать из ссылки параметры запроса (для поиска по базе)

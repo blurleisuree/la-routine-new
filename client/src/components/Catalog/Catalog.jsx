@@ -50,21 +50,6 @@ const Catalog = (props) => {
             ? title = "Magazine / Photo"
             : title = props.navItem[0].toUpperCase() + props.navItem.slice(1);
 
-    // Для установки количества товаром в одном ряду (сколько прогружается товаров за раз)
-    // value 3 по дефолту
-    const [limitValue, setLimitValue] = useState(0);
-    const [skipCountValue, setSkipCountValue] = useState(0);
-    useEffect(() => {
-        if (pathname !== '/bags') {
-            console.log(true)
-            setLimitValue(3)
-            setSkipCountValue(3)
-        } else {
-            setLimitValue(4)
-            setSkipCountValue(4)
-        }
-    }, [pathname])
-
     return (
         <div className={classes.catalog__wrapper}>
             <Helmet>

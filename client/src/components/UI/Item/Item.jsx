@@ -27,16 +27,9 @@ const Item = ({ item, navItem, navItems, pathname }) => {
         e.target.parentNode.style.pointerEvents = 'none';
     }
 
-    const [isBags, setIsBags] = useState(false);
-    useEffect(() => {
-        if (pathname == "/bags") {
-            setIsBags(true);
-        }
-    }, [])
-
     return (
         <Link to={`/${navItem}/${item._id}`} state={{ isNew }} className={classes.item__wrapper}>
-            <div className={isBags ? classes.item + " " + classes.item_bags : classes.item}>
+            <div className={classes.item}>
                 <img onMouseOver={mouseOver} onMouseOut={mouseOut} src={`/imgs/items/${item._id}_img1.jpg`} alt="item" className={classes.item__img + " " + classes.item__img_1} />
                 {item.imgs.length > 1
                     ? <img onMouseOver={mouseOver} onMouseOut={mouseOut} src={`/imgs/items/${item._id}_img2.jpg`} alt="item" className={classes.item__img + " " + classes.item__img_2} />

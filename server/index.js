@@ -78,7 +78,7 @@ app.get('/:id', (req, res) => {
     db.collection('catalog').findOne({ name: url })
         .then((catalogItem) => {
             const items = [];
-            db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).sort({ new: -1 }).skip(skipCount).limit(limitValue) // sort для того чтобы первые элементы были new
+            db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).sort({ new: -1 }).skip(skipCount).limit(6) // sort для того чтобы первые элементы были new
                 .forEach((item) => items.push(item))
                 .then(() => {
                     db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).count()
@@ -103,7 +103,7 @@ app.get('/', (req, res) => {
     }
 
     const items = [];
-    db.collection('items').find({ new: true }).skip(skipCount).limit(limitCount)
+    db.collection('items').find({ new: true }).skip(skipCount).limit(6)
         .forEach((item) => items.push(item))
         .then(() => {
             db.collection('items').find({ new: true }).count()
@@ -144,3 +144,54 @@ app.post("/:id/mail", (req, res) => {
         }
     });
 });
+
+// app.get('/:id', (req, res) => {
+//     const limitValue = Number(req.query.limitValue)
+//     const skipCount = Number(req.query.skipCount)
+
+//     // Чтобы убирать из ссылки параметры запроса (для поиска по базе)
+//     let url = req.url.replace('/', '');
+//     if (req.query.limitValue || req.query.skipCount) {
+//         url = url.replace(/\?.*$/, "")
+//     }
+
+//     console.log(url, skipCount, limitValue);
+
+//     const items = [];
+//     db.collection('catalog').findOne({ name: url })
+//         .then((catalogItem) => {
+//             db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).sort({ new: -1 }).skip(skipCount).limit(limitValue) // sort для того чтобы первые элементы были new
+//                 .forEach((item) => items.push(item))
+//                 .then(() => {
+//                     db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).count()
+//                         .then((count) => {
+//                             res.status(200).json({ items, count });
+//                         })
+//                 })
+//                 .catch(() => handleError(res, "Something goes wrong"));
+//         })
+//         .catch(() => handleError(res, "Wrong id"));
+// });
+
+// // Для new (по умолчанию)
+// app.get('/', (req, res) => {
+//     const limitValue = Number(req.query.limitValue)
+//     const skipCount = Number(req.query.skipCount)
+
+//     // Чтобы убирать из ссылки параметры запроса (для поиска по базе)
+//     let url = req.url;
+//     if (req.query.limitValue || req.query.skipCount) {
+//         url = url.replace(/\?.*$/, "")
+//     }
+
+//     const items = [];
+//     db.collection('items').find({ new: true }).skip(skipCount).limit(limitValue)
+//         .forEach((item) => items.push(item))
+//         .then(() => {
+//             db.collection('items').find({ new: true }).count()
+//                 .then((count) => {
+//                     res.status(200).json({ items, count });
+//                 })
+//         })
+//         .catch(() => handleError(res, "Something goes wrong"));
+// });

@@ -31,23 +31,13 @@ const Catalog = (props) => {
     const [allProductsLoaded, setAllProductsLoaded] = useState(false);
 
     async function loadMore() {
-        const res = await fetch(`http://localhost:3001${pathname}?skipCount=${skipCount + skipCountValue}&limitValue=${limitValue}`);
+        const res = await fetch(`http://localhost:3001${pathname}?skipCount=${skipCount + 6}`);
         const json = await res.json()
         if (!json.items[0]) { // Если получаем пустой массив
             setAllProductsLoaded(true);
         }
         setItems([...items, ...json.items])
-        setSkipCount(skipCount + skipCountValue)
-    }
-
-    async function loadItems() {
-        const res = await fetch(`http://localhost:3001${pathname}?skipCount=${skipCount + skipCountValue}&limitValue=${limitValue}`);
-        const json = await res.json()
-        if (!json.items[0]) { // Если получаем пустой массив
-            setAllProductsLoaded(true);
-        }
-        setItems([...items, ...json.items])
-        setSkipCount(skipCount + skipCountValue)
+        setSkipCount(skipCount + 6)
     }
 
     const navItems = useOutletContext().navItems;

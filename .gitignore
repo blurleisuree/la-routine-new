@@ -1,0 +1,4 @@
+# dependencies
+/nodemodules
+/client/nodemodules
+/server/nodemodules

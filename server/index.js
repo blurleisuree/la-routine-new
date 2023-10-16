@@ -74,9 +74,9 @@ app.get('/:id', (req, res) => {
         url = url.replace(/\?.*$/, '')
     }
 
+    const items = []
     db.collection('catalog').findOne({ name: url })
         .then((catalogItem) => {
-            const items = []
             db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).sort({ new: -1 }).skip(skipCount).limit(6) // sort для того чтобы первые элементы были new
                 .forEach((item) => items.push(item))
                 .then(() => {

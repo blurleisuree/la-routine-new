@@ -29,7 +29,7 @@ function BasketItemVisible({ item, changeRemoveItemActive, changeItemCount, inde
         if (value > 99) {
             return changeItemCount(index, 99);
         }
-        if (value == 0) {
+        if (value === 0) {
             return changeItemCount(index, 1);
         }
         changeItemCount(index, value);
@@ -38,15 +38,15 @@ function BasketItemVisible({ item, changeRemoveItemActive, changeItemCount, inde
     // Для того чтобы картинка товара соответстовала выбранному цвету
     const [colorImgIndex, setColorImgIndex] = useState(1);
     useEffect(() => {
-        const imgObj = item.item.imgs.find((img) => img.color == item.params.color);
+        const imgObj = item.item.imgs.find((img) => img.color === item.params.color);
         setColorImgIndex(imgObj.n)
-    }, [])
+    }, [item])
     const [paramsIsEmpty, setParamsIsEmpty] = useState(false);
     useEffect(() => {
-        if (JSON.stringify(item.params) == "{}") {
+        if (JSON.stringify(item.params) === "{}") {
             setParamsIsEmpty(true);
         }
-    }, [])
+    }, [item])
 
     return (
         <div className={classes.basketItemVisible}>
@@ -59,7 +59,12 @@ function BasketItemVisible({ item, changeRemoveItemActive, changeItemCount, inde
             </div>
             <div className={classes.basketItemVisible__countBlock}>
                 <img src="/imgs/icons/minus.svg" alt="minus" className={classes.basketItemVisible__btn} onClick={() => changeCount(item.count - 1)} />
-                <input className={classes.basketItemVisible__input} value={item.count} style={{ width: `calc(8px * ${item.count.toString().length} + 16px)` }} onChange={(e) => changeInputValue(Number(e.target.value))}></input>
+                <input
+                    className={classes.basketItemVisible__input}
+                    value={item.count}
+                    style={{ width: `calc(8px * ${item.count.toString().length} + 16px)` }}
+                    onChange={(e) => changeInputValue(Number(e.target.value))}>
+                </input>
                 <img src="/imgs/icons/plus.svg" alt="plus" className={classes.basketItemVisible__btn} onClick={() => changeCount(item.count + 1)} />
             </div>
             <p className={classes.basketItemVisible__price}>{price.toLocaleString('ru')} р.</p>

@@ -16,7 +16,7 @@ const Item = ({ item, navItem, navItems, pathname }) => {
 
     if (!navItem) {
         navItems.forEach(el => {
-            if (el._id == item.catalog_id) {
+            if (el._id === item.catalog_id) {
                 navItem = el.name
             }
         });

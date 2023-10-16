@@ -26,7 +26,7 @@ const Checkout = ({ basket, checkoutIsActive, closeCheckout, deleteItemFromBaske
     }, [localStorageHasUpdated])
 
     useEffect(() => {
-        if (basket.length == 0) {
+        if (basket.length === 0) {
             closeCheckout();
         }
     }, [basket])
@@ -39,7 +39,7 @@ const Checkout = ({ basket, checkoutIsActive, closeCheckout, deleteItemFromBaske
                 <img src="/imgs/icons/cross.svg" alt="cross" onClick={() => closeCheckout()} />
             </div>
             <div className={classes.checkout__main}>
-                <Form toggleState={toggleState} clearBasket={clearBasket}/>
+                <Form toggleState={toggleState} clearBasket={clearBasket} />
                 <div className={classes.checkout__rightside}>
                     <div className={classes.checkout__basket}>
                         {basket.map((item, index) =>

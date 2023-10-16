@@ -46,7 +46,7 @@ const Catalog = (props) => {
     let title;
     !props.navItem
         ? title = "La Routine Magazine"
-        : props.navItem == 'magazine'
+        : props.navItem === 'magazine'
             ? title = "Magazine / Photo"
             : title = props.navItem[0].toUpperCase() + props.navItem.slice(1);
 

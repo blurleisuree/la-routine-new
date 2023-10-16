@@ -31,12 +31,12 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
     }
     // Если корзина не пустая (id !=)
     if (!itemIsNew) {
-      itemIsNew = !basket.some(basketItem => basketItem.item._id == item._id);
+      itemIsNew = !basket.some(basketItem => basketItem.item._id === item._id);
     }
     // Если одинаковые id проверка на одинаковые params
     if (!itemIsNew) {
-      const itemsWithSameId = basket.filter((basketItem) => basketItem.item._id == item._id);
-      itemIsNew = !itemsWithSameId.some((basketItem) => basketItem.params.color == params.color && basketItem.params.size == params.size)
+      const itemsWithSameId = basket.filter((basketItem) => basketItem.item._id === item._id);
+      itemIsNew = !itemsWithSameId.some((basketItem) => basketItem.params.color === params.color && basketItem.params.size === params.size)
     }
     // Если все проверки пройдены
     if (itemIsNew) {
@@ -45,7 +45,7 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
       localStorage.setItem("userBasket", JSON.stringify([...basket, newItem]))
     } else {
       // Если полностью одинаковые товара - увеличить количество товаров в корзине на 1
-      const basketItem = basket.find((basketItem) => basketItem.item._id == item._id && basketItem.params.color == params.color && basketItem.params.size == params.size);
+      const basketItem = basket.find((basketItem) => basketItem.item._id === item._id && basketItem.params.color === params.color && basketItem.params.size === params.size);
       basketItem.count += 1;
       setBasket([...basket]);
       localStorage.setItem("userBasket", JSON.stringify([...basket]))
@@ -87,7 +87,7 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
   // Изменение количества товаров в корзине
   const changeItemCount = (index, count) => {
     let newBasket = basket.map((item, i) => {
-      if (i == index) {
+      if (i === index) {
         return { ...item, count: count }
       }
       return item
@@ -178,7 +178,7 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
         changeItemCount={changeItemCount}
         openCheckout={openCheckout}
       />
-      {basket && !basketIsActive && basket.length != 0 ? <BasketButton basket={basket} toggleBasketIsActive={toggleBasketIsActive} generalPrice={generalPrice} /> : false}
+      {basket && !basketIsActive && basket.length !== 0 ? <BasketButton basket={basket} toggleBasketIsActive={toggleBasketIsActive} generalPrice={generalPrice} /> : false}
     </div>
   );
 }

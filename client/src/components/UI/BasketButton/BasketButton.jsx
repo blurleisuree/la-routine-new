@@ -10,7 +10,7 @@ function BasketButton({ basket, toggleBasketIsActive, generalPrice }) {
             return prevElement + currentElement.count
         }, 0)
         setTotalCount(countSum)
-    }, [])
+    }, [basket])
 
     return (
         <div className={classes.basketButton__wrapper} onClick={() => toggleBasketIsActive(1)}>

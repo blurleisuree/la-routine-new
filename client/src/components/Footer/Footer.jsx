@@ -12,19 +12,19 @@ const Footer = () => {
             <h1 className={classes.footerTitle}>© 2023 La Routine Magazine</h1>
             <ul className={classes.footerLinks}>
                 <li className={classes.footerLink}>
-                    <a href=""><img src='/imgs/icons/vk.svg'></img></a>
+                    <img src='/imgs/icons/vk.svg' alt="link"></img>
                 </li>
                 <li className={classes.footerLink}>
-                    <a href=""><img src='/imgs/icons/inst.svg'></img></a>
+                    <img src='/imgs/icons/inst.svg' alt="link"></img>
                 </li>
                 <li className={classes.footerLink}>
-                    <a href=""><img src='/imgs/icons/youtube.svg'></img></a>
+                    <img src='/imgs/icons/youtube.svg' alt="link"></img>
                 </li>
                 <li className={classes.footerLink}>
-                    <a href=""><img src='/imgs/icons/soundcloud.svg'></img></a>
+                    <img src='/imgs/icons/soundcloud.svg' alt="link"></img>
                 </li>
                 <li className={classes.footerLink}>
-                    <a href=""><img src='/imgs/icons/tg.svg'></img></a>
+                    <img src='/imgs/icons/tg.svg' alt="link"></img>
                 </li>
             </ul>
         </div>

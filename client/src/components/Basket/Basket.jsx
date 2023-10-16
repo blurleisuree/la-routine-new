@@ -7,7 +7,7 @@ import BasketItem from '../UI/BascketItem/BasketItem.jsx';
 function Basket({ basket, basketIsActive, toggleBasketIsActive, generalPrice, deleteItemFromBasket, changeItemCount, openCheckout }) {
 
   useEffect(() => {
-    if (basket.length == 0) {
+    if (basket.length === 0) {
       toggleBasketIsActive(0)
     }
   }, [basket])

@@ -1,4 +1,7 @@
 # dependencies
 /nodemodules
+package-lock.json
 /client/nodemodules
+/client/package-lock.json
 /server/nodemodules
+/server/package-lock.jsongit

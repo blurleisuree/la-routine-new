@@ -5,7 +5,7 @@ import classes from './Checkout.module.css';
 import Form from "../UI/Form/Form.jsx";
 import BasketItem from "../UI/BascketItem/BasketItem.jsx";
 
-const Checkout = ({ basket, checkoutIsActive, closeCheckout, deleteItemFromBasket, changeItemCount, generalPrice }) => {
+const Checkout = ({ basket, checkoutIsActive, closeCheckout, deleteItemFromBasket, changeItemCount, generalPrice, clearBasket }) => {
 
     // Чтобы отслеживать когда поменялось состояние формы
     const [localStorageHasUpdated, setLocalStorageHasUpdated] = useState(false);
@@ -39,7 +39,7 @@ const Checkout = ({ basket, checkoutIsActive, closeCheckout, deleteItemFromBaske
                 <img src="/imgs/icons/cross.svg" alt="cross" onClick={() => closeCheckout()} />
             </div>
             <div className={classes.checkout__main}>
-                <Form toggleState={toggleState} />
+                <Form toggleState={toggleState} clearBasket={clearBasket}/>
                 <div className={classes.checkout__rightside}>
                     <div className={classes.checkout__basket}>
                         {basket.map((item, index) =>

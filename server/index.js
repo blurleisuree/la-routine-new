@@ -122,7 +122,9 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-app.post("/:id/mail", (req, res) => {
+
+
+const mailRequest = (req, res) => {
     const { fullName, address, email, number, delivery } = req.body;
 
     const mailOptions = {
@@ -141,7 +143,11 @@ app.post("/:id/mail", (req, res) => {
             res.status(200).send({ res: "Письмо отправлено: " + info.response });
         }
     });
-});
+}
+
+app.post("/:id/mail", mailRequest);
+app.post("/mail", mailRequest);
+
 
 // app.get('/:id', (req, res) => {
 //     const limitValue = Number(req.query.limitValue)

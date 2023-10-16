@@ -60,6 +60,11 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
     localStorage.setItem("userBasket", JSON.stringify(newBasket))
   }
 
+  const clearBasket = () => {
+    setBasket([]);
+    localStorage.setItem("userBasket", JSON.stringify([]))
+  }
+
   // Включить/Выключить корзину
   const [basketIsActive, setBasketIsActive] = useState(0);
   const toggleBasketIsActive = (value) => {
@@ -161,6 +166,7 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
         deleteItemFromBasket={deleteItemFromBasket}
         changeItemCount={changeItemCount}
         generalPrice={generalPrice}
+        clearBasket={clearBasket}
       />
 
       <Basket

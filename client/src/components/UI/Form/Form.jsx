@@ -7,17 +7,22 @@ import classes from './Form.module.css';
 import Input from '../Input/Input.jsx';
 import Radio from '../Radio/Radio.jsx';
 
-const Form = ({ toggleState }) => {
+const Form = ({ toggleState, clearBasket }) => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => {
         sendMail(data)
+        clearBasket();
         setFormData({ fullName: "", address: "", email: "", number: "", delivery: "" });
     };
 
     const pathname = useLocation().pathname
     async function sendMail(data) {
-        const res = await fetch(`http://localhost:3001${pathname}/mail`, {
+        let url = `http://localhost:3001${pathname}/mail`;
+        if (pathname == '/') {
+            url = 'http://localhost:3001/mail';
+        }
+        const res = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

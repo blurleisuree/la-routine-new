@@ -6,7 +6,7 @@ import classes from './Catalog.module.css';
 
 import Item from '../UI/Item/Item.jsx';
 
-const Catalog = (props) => {
+const Catalog = ({navItem}) => {
 
     const [items, setItems] = useState(null);
     const [itemsCount, setItemsCount] = useState(null);
@@ -19,6 +19,10 @@ const Catalog = (props) => {
             setSkipCount(0)
         }
     }, [pathname]);
+
+    useEffect(() => {
+        console.log(navItem)
+    }, [navItem])
 
     async function fetchItems() {
         const res = await fetch(`http://localhost:3001${pathname}`);
@@ -44,11 +48,11 @@ const Catalog = (props) => {
     const addItemToBasket = useOutletContext().addItemToBasket;
 
     let title;
-    !props.navItem
+    !navItem
         ? title = "La Routine Magazine"
-        : props.navItem === 'magazine'
+        : navItem === 'magazine'
             ? title = "Magazine / Photo"
-            : title = props.navItem[0].toUpperCase() + props.navItem.slice(1);
+            : title = navItem[0].toUpperCase() + navItem.slice(1);
 
     return (
         <div className={classes.catalog__wrapper}>
@@ -59,7 +63,7 @@ const Catalog = (props) => {
             {!items || !items[0] || pathname.match(/\d/)
                 ? <h1 className={classes.miss}>Товары отсутвуют.</h1>
                 : <div className={classes.catalog}>
-                    {items.map((item) => <Item key={item._id} item={item} navItem={props.navItem} navItems={navItems} pathname={pathname} />)}
+                    {items.map((item) => <Item key={item._id} item={item} navItem={navItem} navItems={navItems} pathname={pathname} />)}
                     {itemsCount !== items.length &&
                         <button onClick={loadMore} className={allProductsLoaded ? classes.catalog__btn + " " + classes.disabled : classes.catalog__btn}>Загрузить ещё</button>
                     }

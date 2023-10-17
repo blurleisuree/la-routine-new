@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import classes from './ImgCarousel.module.css';
 
+import ImgComponent from "../ImgComponent/ImgComponent.jsx";
+
 const ImgCarousel = ({ item, navItemName, changeColor, activeColor }) => {
 
     const [imgActiveIndex, setImgActiveIndex] = useState(1);
@@ -54,19 +56,21 @@ const ImgCarousel = ({ item, navItemName, changeColor, activeColor }) => {
                     <img src="/imgs/icons/arrow.svg" alt="svg" />
                 </div>
                 {item.imgs.map((img) =>
-                    <img key={img.n}
+                    <ImgComponent
+                        key={img.n}
                         alt="mainImg"
-                        onClick={(e) => onImgClick(e)}
+                        onClick={onImgClick}
                         src={`/imgs/items/${item._id}_img${img.n}.jpg`}
-                        className={img.n === imgActiveIndex ? classes.imgCarousel__img + ' ' + classes.active : classes.imgCarousel__img}>
-                    </img>
+                        active={img.n === imgActiveIndex}
+                    />
                 )}
-                <img
+                <ImgComponent
                     alt="mainSizes"
+                    onClick={onImgClick}
                     src={`/imgs/general/${navItemName}_sizes.jpg`}
-                    onError={(e) => disableSizesImg(e)}
-                    className={imgsCount + 1 === imgActiveIndex ? classes.imgCarousel__img + ' ' + classes.active : classes.imgCarousel__img}>
-                </img>
+                    onError={(e) => disableSizesImg}
+                    active={imgsCount + 1 === imgActiveIndex}
+                />
                 <div onClick={() => setImgActiveIndex(imgActiveIndex + 1)} className={imgsCount + 1 === imgActiveIndex ? classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_right : classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_right + " " + classes.active}>
                     <img src="/imgs/icons/arrow.svg" alt="svg" />
                 </div>
@@ -74,20 +78,23 @@ const ImgCarousel = ({ item, navItemName, changeColor, activeColor }) => {
             {item.imgs.length > 1 &&
                 <div className={classes.imgCarousel__mini}>
                     {item.imgs.map((img, index) =>
-                        <img key={index}
+                        <ImgComponent
+                            key={index}
                             alt="miniImg"
                             src={`/imgs/items/${item._id}_img${img.n}.jpg`}
                             onClick={() => setImgActiveIndex(img.n)}
-                            className={img.n === imgActiveIndex ? classes.imgCarousel__imgMini + " " + classes.active : classes.imgCarousel__imgMini}
+                            active={img.n === imgActiveIndex}
+                            mini={true}
                         />
                     )}
-                    <img
+                    <ImgComponent
                         alt="miniSizes"
                         src={`/imgs/general/${navItemName}_sizes.jpg`}
                         onError={(e) => disableSizesImg(e)}
                         onClick={() => setImgActiveIndex(imgsCount + 1)}
-                        className={imgsCount + 1 === imgActiveIndex ? classes.imgCarousel__imgMini + " " + classes.active : classes.imgCarousel__imgMini}>
-                    </img>
+                        active={imgsCount + 1 === imgActiveIndex}
+                        mini={true}
+                    />
                 </div>
             }
         </div>

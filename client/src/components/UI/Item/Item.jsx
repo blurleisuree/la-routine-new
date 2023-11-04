@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from 'react-router-dom';
 
 import classes from './Item.module.css';
@@ -37,7 +37,7 @@ const Item = ({ item, navItem, navItems, pathname }) => {
                 }
                 <h2 className={classes.item__name}>{item.name}</h2>
                 <p className={classes.item__type}>{item.type}</p>
-                <p className={classes.item__price}>{item.price} р.</p>
+                <p className={classes.item__price}>{Number(item.price).toLocaleString('ru')} р.</p>
                 {item.new && <div className={classes.item__new}><p className={classes.item__newText}>new</p></div>}
             </div>
         </Link>

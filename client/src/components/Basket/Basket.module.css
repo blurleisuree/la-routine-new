@@ -62,3 +62,20 @@
     height: 60px;
     font-weight: 700;
 }
+
+@media screen and (max-width: 1440px) {
+    .basket__wrapper {
+        width: 40%;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .basket__wrapper {
+        width: 44%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .basket__wrapper {
+        width: 50%;
+    }
+}

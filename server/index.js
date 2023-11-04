@@ -138,6 +138,12 @@ const mailRequest = (req, res) => {
     })
 }
 
+// Для добавления новых товаров
+// app.post('/update', (req, res) => {
+//     const item = { ...req.body, new: Boolean(req.body.new), available: Boolean(req.body.available), catalog_id: req.body.catalog_id }
+//     db.collection('items').insertOne({ ...item, catalog_id: new ObjectId(item.catalog_id) })
+// })
+
 app.post('/:id/mail', mailRequest)
 app.post('/mail', mailRequest)
 

@@ -28,6 +28,10 @@ const ImgCarousel = ({ item, navItemName, changeColor, activeColor }) => {
         const imgActive = item.imgs[imgActiveIndex - 1];
         if (imgActive) {
             if (activeColor !== imgActive.color) {
+                // Если в db color указан как "" (если без этого imgActiveIndex ломается)
+                if (activeColor === "") {
+                    return
+                }
                 const even = (el) => {
                     return el.color === activeColor
                 }
@@ -43,12 +47,6 @@ const ImgCarousel = ({ item, navItemName, changeColor, activeColor }) => {
         };
     }, [activeColor]);
 
-    const onImgClick = (e) => {
-        // e.target.style.position = 'absolute';
-        // e.target.style.width = '100vh';
-        // console.log(e.target)
-    }
-
     return (
         <div className={classes.imgCarousel}>
             <div className={classes.imgCarousel__inner}>
@@ -59,18 +57,16 @@ const ImgCarousel = ({ item, navItemName, changeColor, activeColor }) => {
                     <ImgComponent
                         key={img.n}
                         alt="mainImg"
-                        onClick={onImgClick}
                         src={`/imgs/items/${item._id}_img${img.n}.jpg`}
                         active={img.n === imgActiveIndex}
                     />
                 )}
                 <ImgComponent
                     alt="mainSizes"
-                    onClick={onImgClick}
                     src={`/imgs/general/${navItemName}_sizes.jpg`}
-                    onError={(e) => disableSizesImg}
+                    onError={(e) => disableSizesImg(e)}
                     active={imgsCount + 1 === imgActiveIndex}
-                />
+                /> 
                 <div onClick={() => setImgActiveIndex(imgActiveIndex + 1)} className={imgsCount + 1 === imgActiveIndex ? classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_right : classes.imgCarousel__arrow + " " + classes.imgCarousel__arrow_right + " " + classes.active}>
                     <img src="/imgs/icons/arrow.svg" alt="svg" />
                 </div>

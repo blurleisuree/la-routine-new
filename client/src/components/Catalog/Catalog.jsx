@@ -20,10 +20,6 @@ const Catalog = ({navItem}) => {
         }
     }, [pathname]);
 
-    useEffect(() => {
-        console.log(navItem)
-    }, [navItem])
-
     async function fetchItems() {
         const res = await fetch(`http://localhost:3001${pathname}`);
         const json = await res.json()

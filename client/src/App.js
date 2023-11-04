@@ -7,6 +7,7 @@ import Main from './pages/Main/Main.jsx';
 import Faq from './pages/Faq/Faq.jsx'
 import Error from './pages/Error/Error.jsx';
 import ItemCard from './components/ItemCard/ItemCard.jsx';
+// import Update from './pages/Update/Update.jsx';
 
 import Catalog from './components/Catalog/Catalog.jsx';
 
@@ -48,6 +49,8 @@ function App() {
               <Route path='/faq' element={<Faq />} />
               <Route path='*' element={<Error />} />
             </Route>
+            {/* Интерфейс для добавления новых товаров */}
+            {/* <Route path='/update' element={<Update />} /> */}
           </Routes>
         </BrowserRouter>
       </div >

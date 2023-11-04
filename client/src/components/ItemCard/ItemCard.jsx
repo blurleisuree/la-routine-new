@@ -95,9 +95,22 @@ const ItemCard = ({ navItem }) => {
             {item && params &&
                 <div className={redirectIsActive ? classes.itemCard__wrapper + " " + classes.redirect : classes.itemCard__wrapper}>
                     <div className={classes.itemCard__inner}>
-                        <ImgCarousel item={item} navItemName={navItem.name} changeColor={changeColor} activeColor={params.color} />
-                        <InfoBlock item={item} selectOption={selectOption} params={params} desc={navItem.description} addItemToBasket={addItemToBasket} redirect={redirect} />
+                        <ImgCarousel
+                            item={item}
+                            navItemName={navItem.name}
+                            changeColor={changeColor}
+                            activeColor={params.color}
+                        />
+                        <InfoBlock
+                            item={item}
+                            selectOption={selectOption}
+                            params={params}
+                            desc={navItem.description}
+                            addItemToBasket={addItemToBasket}
+                            redirect={redirect}
+                        />
                     </div>
+                    {/* Параметр указывающийся в бд для отображения размерной сетки */}
                     {navItem.sizesVisible && < Tabs />}
                 </div>
             }

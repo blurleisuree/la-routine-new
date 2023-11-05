@@ -71,7 +71,7 @@ const ItemCard = ({ navItem }) => {
     const addItemToBasket = useOutletContext();
 
     return (
-        <div className={classes.itemCard}>
+        <div className={classes.itemCard} style={{minHeight: document.body.scrollHeight}}>
             {item && params &&
                 <Helmet >
                     <title>{item.name}</title>

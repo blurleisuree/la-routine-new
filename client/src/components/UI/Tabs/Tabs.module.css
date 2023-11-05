@@ -65,7 +65,25 @@
     .tabs {
         max-width: 100%;
     }
+
     .tabsContent {
         padding: 0 40px 60px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .tabsContent {
+        padding: 0 20px 30px;
+    }
+    .tabsTop__title {
+        font-size: 15px;
+    }
+}
+@media screen and (max-width: 375px) {
+    .tabsContent {
+        padding: 0 15px 30px;
+    }
+    .tabsTop {
+        align-items: end;
     }
 }

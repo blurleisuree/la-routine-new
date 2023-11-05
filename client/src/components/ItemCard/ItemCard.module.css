@@ -82,12 +82,35 @@
     .itemCard__wrapper {
         max-width: 100%;
     }
+
     .itemCard__inner {
         padding: 0 30px;
     }
 }
+
 @media screen and (max-width: 575px) {
     .itemCard {
+        height: auto;
+    }
+
+    .itemCard__inner {
+        flex-direction: column;
+    }
+
+    .itemCard__wrapper {
+        margin: 40px auto 0;
+        padding-bottom: 30px;
     }
 }
 
+@media screen and (max-width: 425px) {
+    .itemCard__inner {
+        padding: 0 20px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .itemCard__inner {
+        padding: 0 15px;
+    }
+}

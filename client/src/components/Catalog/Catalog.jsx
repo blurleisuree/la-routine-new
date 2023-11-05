@@ -58,14 +58,16 @@ const Catalog = ({ navItem }) => {
                 <title>{title}</title>
             </Helmet>
             <Outlet context={addItemToBasket} />
-            {!items || !items[0] || pathname.match(/\d/)
-                ? <h1 className={classes.miss}>Товары отсутвуют.</h1>
-                : <div className={classes.catalog}>
-                    {items.map((item) => <Item key={item._id} item={item} navItem={navItem} navItems={navItems} pathname={pathname} toggleBasketIsActive={itemCardIsActive}/>)}
-                    {itemsCount !== items.length &&
-                        <button onClick={loadMore} className={allProductsLoaded ? classes.catalog__btn + " " + classes.disabled : classes.catalog__btn}>Загрузить ещё</button>
-                    }
-                </div>
+            {pathname.match(/\d/)
+                ? false
+                : !items || !items[0]
+                    ? <h1 className={classes.miss}>Товары отсутвуют.</h1>
+                    : <div className={classes.catalog}>
+                        {items.map((item) => <Item key={item._id} item={item} navItem={navItem} navItems={navItems} pathname={pathname} toggleBasketIsActive={itemCardIsActive} />)}
+                        {itemsCount !== items.length &&
+                            <button onClick={loadMore} className={allProductsLoaded ? classes.catalog__btn + " " + classes.disabled : classes.catalog__btn}>Загрузить ещё</button>
+                        }
+                    </div>
             }
         </div>
     )

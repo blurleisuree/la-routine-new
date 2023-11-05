@@ -32,3 +32,15 @@
     background-color: black;
     margin: 40px 0;
 }
+@media screen and (max-width: 768px) {
+    .faq {
+        width: 100%;
+        padding: 70px 20px;
+    }
+    .faq__title {
+        font-size: 1.3em;
+    }
+    .faq__text {
+        font-size: 1em;
+    }
+}

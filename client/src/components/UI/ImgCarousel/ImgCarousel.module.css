@@ -63,3 +63,15 @@
     flex-wrap: wrap;
     margin-top: 10px;
 }
+
+@media screen and (max-width: 1200px) {
+    .imgCarousel {
+        min-width: 50%;
+        width: 50%;
+    }
+    .imgCarousel__inner {
+        width: 100%;
+        min-width: 100%;
+        min-height: 500px;
+    }
+}

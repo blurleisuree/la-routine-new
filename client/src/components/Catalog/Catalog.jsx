@@ -6,7 +6,7 @@ import classes from './Catalog.module.css';
 
 import Item from '../UI/Item/Item.jsx';
 
-const Catalog = ({navItem}) => {
+const Catalog = ({ navItem }) => {
 
     const [items, setItems] = useState(null);
     const [itemsCount, setItemsCount] = useState(null);
@@ -50,6 +50,8 @@ const Catalog = ({navItem}) => {
             ? title = "Magazine / Photo"
             : title = navItem[0].toUpperCase() + navItem.slice(1);
 
+    const itemCardIsActive = useOutletContext().itemCardIsActive
+
     return (
         <div className={classes.catalog__wrapper}>
             <Helmet>
@@ -59,7 +61,7 @@ const Catalog = ({navItem}) => {
             {!items || !items[0] || pathname.match(/\d/)
                 ? <h1 className={classes.miss}>Товары отсутвуют.</h1>
                 : <div className={classes.catalog}>
-                    {items.map((item) => <Item key={item._id} item={item} navItem={navItem} navItems={navItems} pathname={pathname} />)}
+                    {items.map((item) => <Item key={item._id} item={item} navItem={navItem} navItems={navItems} pathname={pathname} toggleBasketIsActive={itemCardIsActive}/>)}
                     {itemsCount !== items.length &&
                         <button onClick={loadMore} className={allProductsLoaded ? classes.catalog__btn + " " + classes.disabled : classes.catalog__btn}>Загрузить ещё</button>
                     }

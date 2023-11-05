@@ -53,21 +53,72 @@
     padding-left: 40px;
     width: 50%;
 }
+
 .checkout__basket {
     max-height: 750px;
     overflow: auto;
 }
+
 .checkout__priceBlock {
     display: block;
     margin-top: 60px;
 }
+
 .checkout__priceText {
     font-size: 15px;
     font-weight: 400;
     text-align: right;
 }
+
 .checkout__priceText_general {
     font-weight: 600;
     font-size: 17px;
     margin-top: 5px;
+}
+
+.line {
+    width: 100%;
+    margin: 0 auto;
+    background-color: black;
+    height: 1px;
+    display: block;
+    opacity: 0.5;
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 1200px) {
+    .checkout__main {
+        width: 100%;
+        padding: 0 30px;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .checkout__main {
+        width: 100%;
+        flex-direction: column;
+        padding: 0 60px;
+    }
+
+    .checkout__rightside {
+        padding-left: 0;
+        width: 100%;
+    }
+    .checkout__priceBlock {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+@media screen and (max-width: 767px) {
+    
+}
+@media screen and (max-width: 575px) {
+    .checkout__main {
+        padding: 0 20px;
+    }
+
+    .checkout__rightside {
+        padding-left: 20px;
+        width: 100%;
+    }
 }

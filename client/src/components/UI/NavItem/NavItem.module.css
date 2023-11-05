@@ -17,3 +17,24 @@
 .navItemWrapper:last-child {
     padding: 0 0px 0 15px;
 }
+@media screen and (max-width: 1023px) {
+    .navItemWrapper {
+        margin-top: 5px;
+    }
+}
+@media screen and (max-width: 575px) {
+    .navItemWrapper {
+        margin-top: 15px;
+        padding: 0;
+    }
+    .navItemWrapper:first-child {
+        padding: 0;
+    }
+    
+    .navItemWrapper:last-child {
+        padding: 0;
+    }
+    .navItem {
+        font-size: 14px;
+    }
+}

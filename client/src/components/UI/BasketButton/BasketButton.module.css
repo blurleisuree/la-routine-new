@@ -91,3 +91,49 @@
     position: absolute;
     border-color: rgb(39, 39, 39) rgb(39, 39, 39) transparent transparent;
 }
+
+@media screen and (max-width: 767px) {
+    .basketButton__wrapper {
+        width: 75px;
+        height: 75px;
+        right: 20px;
+    }
+    .basketButton {
+        width: 65px;
+        height: 65px;
+        padding: 15px;
+    }
+    .basketButton:hover {
+        width: 85px;
+        height: 85px;
+    }
+    .basketButton__num {
+        width: 27px;
+        height: 27px;
+    }
+}
+@media screen and (max-width: 425px) {
+    .basketButton__wrapper {
+        right: 10px;
+    }
+}
+@media screen and (max-width: 375px) {
+    .basketButton__wrapper {
+        width: 65px;
+        height: 65px;
+        top: 130px;
+    }
+    .basketButton {
+        width: 55px;
+        height: 55px;
+        padding: 12px;
+    }
+    .basketButton:hover {
+        width: 75px;
+        height: 75px;
+    }
+    .basketButton__num {
+        width: 25px;
+        height: 25px;
+    }
+}

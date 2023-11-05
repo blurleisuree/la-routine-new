@@ -60,3 +60,12 @@
 .tabsContent__text_size {
     font-weight: 700;
 }
+
+@media screen and (max-width: 1200px) {
+    .tabs {
+        max-width: 100%;
+    }
+    .tabsContent {
+        padding: 0 40px 60px;
+    }
+}

@@ -156,7 +156,7 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
     <div className={loadAfterItem ? classes.main + " " + classes.active : classes.main}>
       <Logo />
       <NavBar navItems={navItems} />
-      <Outlet context={{ navItems, addItemToBasket }} />
+      <Outlet context={{ navItems, addItemToBasket, toggleBasketIsActive }} />
       <Footer />
 
       <Checkout
@@ -178,6 +178,7 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
         changeItemCount={changeItemCount}
         openCheckout={openCheckout}
       />
+
       {basket && !basketIsActive && basket.length !== 0 ? <BasketButton basket={basket} toggleBasketIsActive={toggleBasketIsActive} generalPrice={generalPrice} /> : false}
     </div>
   );

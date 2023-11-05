@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive'
 
 import classes from './BasketItemVisible.module.css';
 
@@ -48,28 +49,54 @@ function BasketItemVisible({ item, changeRemoveItemActive, changeItemCount, inde
         }
     }, [item])
 
+    const media = useMediaQuery({ query: '(max-width: 575px)' })
+
     return (
-        <div className={classes.basketItemVisible}>
-            <img src={`/imgs/items/${item.item._id}_img${colorImgIndex}.jpg`} alt="item_img" className={classes.basketItemVisible__img} />
-            <div className={classes.basketItemVisible__infoWrapper}>
-                <h3 className={classes.basketItemVisible__name}>{item.item.name}</h3>
-                {!paramsIsEmpty ? <p className={classes.basketItemVisible__param}>Color: {item.params.color}</p> : false}
-                {!paramsIsEmpty ? <p className={classes.basketItemVisible__param}>Size: {item.params.size}</p> : false}
-                <p className={classes.basketItemVisible__param}>{item.item.code}</p>
+        media
+            ? <div className={classes.basketItemVisible}>
+                <img src={`/imgs/items/${item.item._id}_img${colorImgIndex}.jpg`} alt="item_img" className={classes.basketItemVisible__img} />
+                <div className={classes.basketItemVisible__middleBlock}>
+                    <div className={classes.basketItemVisible__infoWrapper}>
+                        <h3 className={classes.basketItemVisible__name}>{item.item.name}</h3>
+                        {!paramsIsEmpty ? <p className={classes.basketItemVisible__param}>Color: {item.params.color}</p> : false}
+                        {!paramsIsEmpty ? <p className={classes.basketItemVisible__param}>Size: {item.params.size}</p> : false}
+                        <p className={classes.basketItemVisible__param}>{item.item.code}</p>
+                    </div>
+                    <div className={classes.basketItemVisible__countBlock}>
+                        <img src="/imgs/icons/minus.svg" alt="minus" className={classes.basketItemVisible__btn} onClick={() => changeCount(item.count - 1)} />
+                        <input
+                            className={classes.basketItemVisible__input}
+                            value={item.count}
+                            style={{ width: `calc(8px * ${item.count.toString().length} + 16px)` }}
+                            onChange={(e) => changeInputValue(Number(e.target.value))}>
+                        </input>
+                        <img src="/imgs/icons/plus.svg" alt="plus" className={classes.basketItemVisible__btn} onClick={() => changeCount(item.count + 1)} />
+                    </div>
+                    <p className={classes.basketItemVisible__price}>{price.toLocaleString('ru')} р.</p>
+                </div>
+                <img src="/imgs/icons/remove.svg" alt="remove" className={classes.basketItemVisible__remove} onClick={() => changeRemoveItemActive(1)} />
             </div>
-            <div className={classes.basketItemVisible__countBlock}>
-                <img src="/imgs/icons/minus.svg" alt="minus" className={classes.basketItemVisible__btn} onClick={() => changeCount(item.count - 1)} />
-                <input
-                    className={classes.basketItemVisible__input}
-                    value={item.count}
-                    style={{ width: `calc(8px * ${item.count.toString().length} + 16px)` }}
-                    onChange={(e) => changeInputValue(Number(e.target.value))}>
-                </input>
-                <img src="/imgs/icons/plus.svg" alt="plus" className={classes.basketItemVisible__btn} onClick={() => changeCount(item.count + 1)} />
+            : <div className={classes.basketItemVisible}>
+                <img src={`/imgs/items/${item.item._id}_img${colorImgIndex}.jpg`} alt="item_img" className={classes.basketItemVisible__img} />
+                <div className={classes.basketItemVisible__infoWrapper}>
+                    <h3 className={classes.basketItemVisible__name}>{item.item.name}</h3>
+                    {!paramsIsEmpty ? <p className={classes.basketItemVisible__param}>Color: {item.params.color}</p> : false}
+                    {!paramsIsEmpty ? <p className={classes.basketItemVisible__param}>Size: {item.params.size}</p> : false}
+                    <p className={classes.basketItemVisible__param}>{item.item.code}</p>
+                </div>
+                <div className={classes.basketItemVisible__countBlock}>
+                    <img src="/imgs/icons/minus.svg" alt="minus" className={classes.basketItemVisible__btn} onClick={() => changeCount(item.count - 1)} />
+                    <input
+                        className={classes.basketItemVisible__input}
+                        value={item.count}
+                        style={{ width: `calc(8px * ${item.count.toString().length} + 16px)` }}
+                        onChange={(e) => changeInputValue(Number(e.target.value))}>
+                    </input>
+                    <img src="/imgs/icons/plus.svg" alt="plus" className={classes.basketItemVisible__btn} onClick={() => changeCount(item.count + 1)} />
+                </div>
+                <p className={classes.basketItemVisible__price}>{price.toLocaleString('ru')} р.</p>
+                <img src="/imgs/icons/remove.svg" alt="remove" className={classes.basketItemVisible__remove} onClick={() => changeRemoveItemActive(1)} />
             </div>
-            <p className={classes.basketItemVisible__price}>{price.toLocaleString('ru')} р.</p>
-            <img src="/imgs/icons/remove.svg" alt="remove" className={classes.basketItemVisible__remove} onClick={() => changeRemoveItemActive(1)} />
-        </div>
     );
 }
 

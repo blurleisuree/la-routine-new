@@ -40,7 +40,42 @@
     padding: 0 3px;
     box-sizing: border-box;
 }
+
 .footerLink a {
     display: block;
     height: 30px;
+}
+
+@media screen and (max-width: 575px) {
+    .footer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footerClown {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footerTitle {
+        width: 100%;
+        margin-bottom: 25px;
+        margin-top: 15px;
+    }
+
+    .footerLinks {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .footerLink {
+        width: 40px;
+        margin: 0 3px;
+    }
+
+    .footerLink img {
+        width: 100%;
+    }
 }

@@ -33,7 +33,7 @@ const InfoBlock = ({ item, params, selectOption, desc, addItemToBasket, redirect
         <div className={classes.infoBlock}>
             <h2 className={classes.infoBlock__name}>{item.name}</h2>
             <span className={classes.infoBlock__code}>Артикул: <span className={classes.infoBlock__code_value}>{item.code}{dash}{params.color}</span></span>
-            <h3 className={classes.infoBlock__price}>{item.price} р.</h3>
+            <h3 className={classes.infoBlock__price}>{Number(item.price).toLocaleString('ru')} р.</h3>
             {item.colors[0] && <Select name={'color'} onChange={selectOption} arr={item.colors} activeColor={params.color} />}
             {item.sizes[0] && <Select name={'size'} onChange={selectOption} arr={item.sizes} />}
             {item.available

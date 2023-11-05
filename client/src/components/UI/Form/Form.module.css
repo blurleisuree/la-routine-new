@@ -17,3 +17,15 @@
     font-weight: 600;
     margin-top: 20px;
 }
+@media screen and (max-width: 1023px) {
+    .form {
+        padding-right: 0px; 
+        width: 100%;
+    }
+}
+@media screen and (max-width: 767px) {
+
+}
+@media screen and (max-width: 575px) {
+
+}

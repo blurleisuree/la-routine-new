@@ -4,6 +4,7 @@
     justify-content: space-between;
     width: 100%;
 }
+
 .basketItemVisible__img {
     max-width: 70px;
     display: block;
@@ -80,6 +81,41 @@
     cursor: pointer;
     margin-left: 5px;
 }
+
 .basketItemVisible:hover .basketItemVisible__remove {
     opacity: 1;
+}
+
+/* screen < 575px ---------------------- */
+.basketItemVisible__middleBlock {
+    width: 100%;
+    padding: 0 20px;
+}
+
+@media screen and (max-width: 575px) {
+    .basketItemVisible__countBlock {
+        max-width: 74px;
+        margin-top: 4px;
+    }
+    .basketItemVisible__name {
+        line-height: 1.25;
+        margin-bottom: 4px;
+    }
+    .basketItemVisible {
+        align-items: start;
+    }
+    .basketItemVisible__price {
+        margin-top: 4px;
+    }
+    .basketItemVisible__infoWrapper {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 374px) {
+    .basketItemVisible__middleBlock {
+        padding: 0 20px;
+    }
+    .basketItemVisible__infoWrapper {
+        width: 90%;
+    }
 }

@@ -31,6 +31,30 @@
     padding: 15px 30px;
     font-size: 14px;
 }
+
 .catalog__btn.disabled {
     display: none;
+}
+
+@media screen and (max-width: 1200px) {
+    .catalog {
+        max-width: 960px;
+    }
+}
+@media screen and (max-width: 1023px) {
+    .catalog {
+        max-width: 640px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .catalog {
+        max-width: 100%;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+@media screen and (max-width: 574px) {
+    .catalog {
+        justify-content: center;
+    }
 }

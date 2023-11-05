@@ -74,3 +74,43 @@
     text-align: center;
     text-transform: uppercase;
 }
+
+@media screen and (max-width: 1200px) {
+    .item {
+        width: 300px;
+    }
+    .item__wrapper {
+        margin: 0 10px 70px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .item {
+        width: 260px;
+    }
+}
+@media screen and (max-width: 574px) {
+    .item {
+        width: 100%;
+    }
+    .item__img {
+        width: 100%;
+        height: auto;
+        max-width: 400px;
+    }
+    .item__name {
+        font-size: 19px;
+        margin-top: 0;
+    }
+    .item__type {
+        font-size: 14px;
+    }
+    
+    .item__price {
+        font-size: 16px;
+    }
+}
+@media screen and (max-width: 374px) {
+    .item__name {
+        font-size: 18px;
+    }
+}

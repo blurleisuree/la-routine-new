@@ -5,3 +5,17 @@
     justify-content: center;
     margin-top: 45px;
 }
+
+@media screen and (max-width: 1023px) {
+    .navBar {
+        flex-wrap: wrap;
+        margin-top: 40px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .navBar {
+        flex-direction: column;
+        margin-top: 80px;
+    }
+}

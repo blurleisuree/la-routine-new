@@ -14,7 +14,7 @@ const ItemCard = ({ navItem }) => {
     const [item, setItems] = useState(null);
     const pathname = useLocation().pathname;
     async function fetchItems() {
-        const res = await fetch(`http://localhost:3001${pathname}`);
+        const res = await fetch(`http://31.129.42.2:3001${pathname}`);
         const json = await res.json()
         setItems(json)
     }

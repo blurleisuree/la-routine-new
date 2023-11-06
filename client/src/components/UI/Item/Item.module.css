@@ -92,6 +92,10 @@
     .item {
         width: 100%;
     }
+    .item__wrapper {
+     width: 100%;
+     margin: 0 auto 70px;
+    }
     .item__img {
         width: 100%;
         height: auto;
@@ -107,6 +111,10 @@
     
     .item__price {
         font-size: 16px;
+    }
+    .item__img_1 {
+        top: auto;
+        left:auto;
     }
 }
 @media screen and (max-width: 374px) {

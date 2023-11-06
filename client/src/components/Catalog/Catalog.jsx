@@ -21,7 +21,7 @@ const Catalog = ({ navItem }) => {
     }, [pathname]);
 
     async function fetchItems() {
-        const res = await fetch(`http://localhost:3001${pathname}`);
+        const res = await fetch(`http://31.129.42.2:3001${pathname}`);
         const json = await res.json()
         setItems(json.items)
         setItemsCount(json.count)
@@ -31,7 +31,7 @@ const Catalog = ({ navItem }) => {
     const [allProductsLoaded, setAllProductsLoaded] = useState(false);
 
     async function loadMore() {
-        const res = await fetch(`http://localhost:3001${pathname}?skipCount=${skipCount + 6}`);
+        const res = await fetch(`http://31.129.42.2:3001${pathname}?skipCount=${skipCount + 6}`);
         const json = await res.json()
         if (!json.items[0]) { // Если получаем пустой массив
             setAllProductsLoaded(true);

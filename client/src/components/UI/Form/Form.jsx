@@ -18,9 +18,9 @@ const Form = ({ toggleState, clearBasket }) => {
 
     const pathname = useLocation().pathname
     async function sendMail(data) {
-        let url = `http://localhost:3001${pathname}/mail`;
+        let url = `http://31.129.42.2:3001${pathname}/mail`;
         if (pathname === '/') {
-            url = 'http://localhost:3001/mail';
+            url = 'http://31.129.42.2:3001/mail';
         }
         const res = await fetch(url, {
             method: 'POST',

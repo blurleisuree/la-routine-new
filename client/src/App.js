@@ -20,7 +20,9 @@ function App() {
   }, []);
 
   async function fetchCatalog() {
-    const res = await fetch('http://localhost:3001/catalog');
+    // const res = await fetch('http://localhost:3001/catalog');
+    // Везде в запросах к серверу поменял на ip сервера (по умолчанию нужен localhost)
+    const res = await fetch('http://31.129.42.2:3001/catalog');
     const json = await res.json();
     setNavItems(json);
   }

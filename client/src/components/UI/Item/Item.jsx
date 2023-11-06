@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from 'react-router-dom';
 
 import classes from './Item.module.css';
@@ -25,6 +25,9 @@ const Item = ({ item, navItem, navItems, pathname }) => {
     // На случай если нет второй картинки и размерной сетки
     const disableHover = (e) => {
         e.target.parentNode.style.pointerEvents = 'none';
+        // Костыль без которого картинка становится минимального значения потому что высота определяется по второй которой в данном случае нет
+        const firstImgHeight = e.target.previousElementSibling.height
+        e.target.style.height = firstImgHeight + 'px'
     }
 
     return (

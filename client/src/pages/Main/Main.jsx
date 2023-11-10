@@ -179,7 +179,13 @@ function Main({ navItems, setOverlayIsActive, isClickedOnOverlay, setIsClickedOn
         openCheckout={openCheckout}
       />
 
-      {basket && !basketIsActive && basket.length !== 0 ? <BasketButton basket={basket} toggleBasketIsActive={toggleBasketIsActive} generalPrice={generalPrice} /> : false}
+      {basket && !basketIsActive && basket.length !== 0 &&
+        <BasketButton
+          basket={basket}
+          toggleBasketIsActive={toggleBasketIsActive}
+          generalPrice={generalPrice}
+        />
+      }
     </div>
   );
 }

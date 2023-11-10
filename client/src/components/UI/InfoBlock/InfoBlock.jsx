@@ -32,10 +32,26 @@ const InfoBlock = ({ item, params, selectOption, desc, addItemToBasket, redirect
     return (
         <div className={classes.infoBlock}>
             <h2 className={classes.infoBlock__name}>{item.name}</h2>
-            <span className={classes.infoBlock__code}>Артикул: <span className={classes.infoBlock__code_value}>{item.code}{dash}{params.color}</span></span>
+            <span className={classes.infoBlock__code}>
+                Артикул:
+                <span className={classes.infoBlock__code_value}>
+                    {item.code}{dash}{params.color}
+                </span>
+            </span>
             <h3 className={classes.infoBlock__price}>{Number(item.price).toLocaleString('ru')} р.</h3>
-            {item.colors[0] && <Select name={'color'} onChange={selectOption} arr={item.colors} activeColor={params.color} />}
-            {item.sizes[0] && <Select name={'size'} onChange={selectOption} arr={item.sizes} />}
+            {item.colors[0] &&
+                <Select
+                    name={'color'}
+                    onChange={selectOption}
+                    arr={item.colors}
+                    activeColor={params.color}
+                />}
+            {item.sizes[0] &&
+                <Select
+                    name={'size'}
+                    onChange={selectOption}
+                    arr={item.sizes}
+                />}
             {item.available
                 ? <div className={classes.infoBlock__btn} onClick={onClickToBtn}>buy</div>
                 : <div className={classes.infoBlock__btn + " " + classes.notAvailable}>not avaible</div>

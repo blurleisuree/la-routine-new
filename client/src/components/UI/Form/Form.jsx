@@ -7,6 +7,8 @@ import classes from './Form.module.css';
 import Input from '../Input/Input.jsx';
 import Radio from '../Radio/Radio.jsx';
 
+import serverUrl from '../../../data/serverUrl.js'
+
 const Form = ({ toggleState, clearBasket }) => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -18,9 +20,9 @@ const Form = ({ toggleState, clearBasket }) => {
 
     const pathname = useLocation().pathname
     async function sendMail(data) {
-        let url = `http://31.129.42.2:3001${pathname}/mail`;
+        let url = `${serverUrl}${pathname}/mail`;
         if (pathname === '/') {
-            url = 'http://31.129.42.2:3001/mail';
+            url = `http://${serverUrl}/mail`;
         }
         const res = await fetch(url, {
             method: 'POST',

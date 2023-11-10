@@ -29,7 +29,6 @@ const ItemCard = ({ navItem }) => {
         ? url = '/'
         : url = '..'
 
-
     useEffect(() => {
         fetchItems();
         if (navState) {
@@ -85,14 +84,7 @@ const ItemCard = ({ navItem }) => {
                     <span>←</span>
                     <p>More products</p>
                 </div>
-                <div className={classes.itemCard__cross}>
-                    <svg width="23px" height="23px" viewBox="0 0 23 23" version="1.1" >
-                        <g stroke="none" strokeWidth="1" fill="#000000" fillRule="evenodd">
-                            <rect transform="translate(11.313708, 11.313708) rotate(-45.000000) translate(-11.313708, -11.313708) " x="10.3137085" y="-3.6862915" width="2" height="30"></rect>
-                            <rect transform="translate(11.313708, 11.313708) rotate(-315.000000) translate(-11.313708, -11.313708) " x="10.3137085" y="-3.6862915" width="2" height="30"></rect>
-                        </g>
-                    </svg>
-                </div>
+                <img src="/imgs/icons/cross.svg" alt="cross" className={classes.itemCard__cross} />
             </div>
             {item && params &&
                 <div className={redirectIsActive ? classes.itemCard__wrapper + " " + classes.redirect : classes.itemCard__wrapper}>

@@ -33,10 +33,29 @@ const Item = ({ item, navItem, navItems, pathname }) => {
     return (
         <Link to={`/${navItem}/${item._id}`} state={{ isNew }} className={classes.item__wrapper}>
             <div className={classes.item}>
-                <img onMouseOver={mouseOver} onMouseOut={mouseOut} src={`/imgs/items/${item._id}_img1.jpg`} alt="item" className={classes.item__img + " " + classes.item__img_1} />
+                <img
+                    onMouseOver={mouseOver}
+                    onMouseOut={mouseOut}
+                    src={`/imgs/items/${item._id}_img1.jpg`}
+                    alt="item"
+                    className={classes.item__img + " " + classes.item__img_1}
+                />
                 {item.imgs.length > 1
-                    ? <img onMouseOver={mouseOver} onMouseOut={mouseOut} src={`/imgs/items/${item._id}_img2.jpg`} alt="item" className={classes.item__img + " " + classes.item__img_2} />
-                    : <img onMouseOver={mouseOver} onMouseOut={mouseOut} onError={(e) => disableHover(e)} src={`/imgs/general/${navItem}_sizes.jpg`} alt="item" className={classes.item__img + " " + classes.item__img_2} />
+                    ? <img
+                        onMouseOver={mouseOver}
+                        onMouseOut={mouseOut}
+                        src={`/imgs/items/${item._id}_img2.jpg`}
+                        alt="item"
+                        className={classes.item__img + " " + classes.item__img_2}
+                    />
+                    : <img
+                        onMouseOver={mouseOver}
+                        onMouseOut={mouseOut}
+                        onError={(e) => disableHover(e)}
+                        src={`/imgs/general/${navItem}_sizes.jpg`}
+                        alt="item"
+                        className={classes.item__img + " " + classes.item__img_2}
+                    />
                 }
                 <h2 className={classes.item__name}>{item.name}</h2>
                 <p className={classes.item__type}>{item.type}</p>

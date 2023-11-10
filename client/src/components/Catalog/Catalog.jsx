@@ -13,6 +13,11 @@ const Catalog = ({ navItem }) => {
     const [items, setItems] = useState(null);
     const [itemsCount, setItemsCount] = useState(null);
 
+    const [skipCount, setSkipCount] = useState(0);
+    const [allProductsLoaded, setAllProductsLoaded] = useState(false);
+    // Тут устанавливать через сколько товаров нужно загружать заново
+    const limitValue = 6;
+
     const pathname = useLocation().pathname
     useEffect(() => {
         if (!pathname.match(/\d/)) { // Проверка есть ли в ссылке цифры (чтобы не перерендерить каталог когда открыт Item)
@@ -28,11 +33,6 @@ const Catalog = ({ navItem }) => {
         setItems(json.items)
         setItemsCount(json.count)
     }
-
-    const [skipCount, setSkipCount] = useState(0);
-    // Тут устанавливать через сколько товаров нужно загружать заново
-    const limitValue = 6;
-    const [allProductsLoaded, setAllProductsLoaded] = useState(false);
 
     async function loadMore() {
         const res = await fetch(`${serverUrl}${pathname}?skipCount=${skipCount + limitValue}&limitValue=${limitValue}`);
@@ -67,9 +67,23 @@ const Catalog = ({ navItem }) => {
                 : !items || !items[0]
                     ? <h1 className={classes.miss}>Товары отсутвуют.</h1>
                     : <div className={classes.catalog}>
-                        {items.map((item) => <Item key={item._id} item={item} navItem={navItem} navItems={navItems} pathname={pathname} toggleBasketIsActive={itemCardIsActive} />)}
+                        {items.map((item) =>
+                            <Item
+                                key={item._id}
+                                item={item}
+                                navItem={navItem}
+                                navItems={navItems}
+                                pathname={pathname}
+                                toggleBasketIsActive={itemCardIsActive}
+                            />
+                        )}
                         {itemsCount !== items.length &&
-                            <button onClick={loadMore} className={allProductsLoaded ? classes.catalog__btn + " " + classes.disabled : classes.catalog__btn}>Загрузить ещё</button>
+                            <button
+                                onClick={loadMore}
+                                className={allProductsLoaded ? classes.catalog__btn + " " + classes.disabled : classes.catalog__btn}
+                            >
+                                Загрузить ещё
+                            </button>
                         }
                     </div>
             }

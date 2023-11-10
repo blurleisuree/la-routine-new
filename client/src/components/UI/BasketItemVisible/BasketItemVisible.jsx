@@ -42,10 +42,14 @@ function BasketItemVisible({ item, changeRemoveItemActive, changeItemCount, inde
         const imgObj = item.item.imgs.find((img) => img.color === item.params.color);
         setColorImgIndex(imgObj.n)
     }, [item])
-    const [paramsIsEmpty, setParamsIsEmpty] = useState(false);
+    const [colorIsEmpty, setColorIsEmpty] = useState(false);
+    const [sizeIsEmpty, setSizeIsEmpty] = useState(false);
     useEffect(() => {
-        if (JSON.stringify(item.params) === "{}") {
-            setParamsIsEmpty(true);
+        if (item.params.color === "") {
+            setColorIsEmpty(true)
+        }
+        if (item.params.size === "") {
+            setSizeIsEmpty(true)
         }
     }, [item])
 
@@ -58,8 +62,16 @@ function BasketItemVisible({ item, changeRemoveItemActive, changeItemCount, inde
                 <div className={classes.basketItemVisible__middleBlock}>
                     <div className={classes.basketItemVisible__infoWrapper}>
                         <h3 className={classes.basketItemVisible__name}>{item.item.name}</h3>
-                        {!paramsIsEmpty ? <p className={classes.basketItemVisible__param}>Color: {item.params.color}</p> : false}
-                        {!paramsIsEmpty ? <p className={classes.basketItemVisible__param}>Size: {item.params.size}</p> : false}
+                        {!colorIsEmpty &&
+                            <p className={classes.basketItemVisible__param}>
+                                Color: {item.params.color}
+                            </p>
+                        }
+                        {!sizeIsEmpty &&
+                            <p className={classes.basketItemVisible__param}>
+                                Size: {item.params.size}
+                            </p>
+                        }
                         <p className={classes.basketItemVisible__param}>{item.item.code}</p>
                     </div>
                     <div className={classes.basketItemVisible__countBlock}>
@@ -80,8 +92,16 @@ function BasketItemVisible({ item, changeRemoveItemActive, changeItemCount, inde
                 <img src={`/imgs/items/${item.item._id}_img${colorImgIndex}.jpg`} alt="item_img" className={classes.basketItemVisible__img} />
                 <div className={classes.basketItemVisible__infoWrapper}>
                     <h3 className={classes.basketItemVisible__name}>{item.item.name}</h3>
-                    {!paramsIsEmpty ? <p className={classes.basketItemVisible__param}>Color: {item.params.color}</p> : false}
-                    {!paramsIsEmpty ? <p className={classes.basketItemVisible__param}>Size: {item.params.size}</p> : false}
+                    {!colorIsEmpty &&
+                        <p className={classes.basketItemVisible__param}>
+                            Color: {item.params.color}
+                        </p>
+                    }
+                    {!sizeIsEmpty &&
+                        <p className={classes.basketItemVisible__param}>
+                            Size: {item.params.size}
+                        </p>
+                    }
                     <p className={classes.basketItemVisible__param}>{item.item.code}</p>
                 </div>
                 <div className={classes.basketItemVisible__countBlock}>

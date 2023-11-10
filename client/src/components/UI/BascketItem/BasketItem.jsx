@@ -13,12 +13,20 @@ function BasketItem({ item, deleteItemFromBasket, index, changeItemCount }) {
     const changeRemoveItemActive = (value) => {
         setRemoveItemActive(value)
     }
-    
+
     return (
         <div className={classes.basketItem}>
             {removeItemActive
-                ? <BasketItemRemove item={item} changeRemoveItemActive={changeRemoveItemActive} deleteItemFromBasket={deleteItemFromBasket} index={index}/>
-                : <BasketItemVisible item={item} changeRemoveItemActive={changeRemoveItemActive} changeItemCount={changeItemCount} index={index}/>
+                ? <BasketItemRemove
+                    item={item}
+                    changeRemoveItemActive={changeRemoveItemActive}
+                    deleteItemFromBasket={deleteItemFromBasket}
+                    index={index} />
+                : <BasketItemVisible
+                    item={item}
+                    changeRemoveItemActive={changeRemoveItemActive}
+                    changeItemCount={changeItemCount}
+                    index={index} />
             }
         </div>
     );

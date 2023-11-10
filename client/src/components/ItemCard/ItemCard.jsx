@@ -8,13 +8,15 @@ import InfoBlock from '../../components/UI/InfoBlock/InfoBlock.jsx';
 import Tabs from '../../components/UI/Tabs/Tabs.jsx';
 import ImgCarousel from "../../components/UI/ImgCarousel/ImgCarousel.jsx";
 
+import serverUrl from '../../data/serverUrl.js';
+
 const ItemCard = ({ navItem }) => {
 
     // Загрузка item'a
     const [item, setItems] = useState(null);
     const pathname = useLocation().pathname;
     async function fetchItems() {
-        const res = await fetch(`http://31.129.42.2:3001${pathname}`);
+        const res = await fetch(serverUrl + pathname);
         const json = await res.json()
         setItems(json)
     }
@@ -71,7 +73,7 @@ const ItemCard = ({ navItem }) => {
     const addItemToBasket = useOutletContext();
 
     return (
-        <div className={classes.itemCard} style={{minHeight: document.body.scrollHeight}}>
+        <div className={classes.itemCard} style={{ minHeight: document.body.scrollHeight }}>
             {item && params &&
                 <Helmet >
                     <title>{item.name}</title>

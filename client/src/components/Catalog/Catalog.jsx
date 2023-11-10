@@ -6,6 +6,8 @@ import classes from './Catalog.module.css';
 
 import Item from '../UI/Item/Item.jsx';
 
+import serverUrl from '../../data/serverUrl.js';
+
 const Catalog = ({ navItem }) => {
 
     const [items, setItems] = useState(null);
@@ -21,23 +23,25 @@ const Catalog = ({ navItem }) => {
     }, [pathname]);
 
     async function fetchItems() {
-        const res = await fetch(`http://31.129.42.2:3001${pathname}`);
+        const res = await fetch(`${serverUrl}${pathname}?limitValue=${limitValue}`);
         const json = await res.json()
         setItems(json.items)
         setItemsCount(json.count)
     }
 
     const [skipCount, setSkipCount] = useState(0);
+    // Тут устанавливать через сколько товаров нужно загружать заново
+    const limitValue = 6;
     const [allProductsLoaded, setAllProductsLoaded] = useState(false);
 
     async function loadMore() {
-        const res = await fetch(`http://31.129.42.2:3001${pathname}?skipCount=${skipCount + 6}`);
+        const res = await fetch(`${serverUrl}${pathname}?skipCount=${skipCount + limitValue}&limitValue=${limitValue}`);
         const json = await res.json()
         if (!json.items[0]) { // Если получаем пустой массив
             setAllProductsLoaded(true);
         }
         setItems([...items, ...json.items])
-        setSkipCount(skipCount + 6)
+        setSkipCount(skipCount + limitValue)
     }
 
     const navItems = useOutletContext().navItems;

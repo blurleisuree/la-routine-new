@@ -11,6 +11,8 @@ import ItemCard from './components/ItemCard/ItemCard.jsx';
 
 import Catalog from './components/Catalog/Catalog.jsx';
 
+import serverUrl from './data/serverUrl.js';
+
 function App() {
 
   const [navItems, setNavItems] = useState(null);
@@ -20,9 +22,7 @@ function App() {
   }, []);
 
   async function fetchCatalog() {
-    // const res = await fetch('http://localhost:3001/catalog');
-    // Везде в запросах к серверу поменял на ip сервера (по умолчанию нужен localhost)
-    const res = await fetch('http://31.129.42.2:3001/catalog');
+    const res = await fetch(`${serverUrl}/catalog`);
     const json = await res.json();
     setNavItems(json);
   }

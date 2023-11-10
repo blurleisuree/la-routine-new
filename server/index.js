@@ -7,8 +7,9 @@ const { connectToDb, getDb } = require('./db')
 
 app.use(express.json()) // позволяет читать данные из запроса
 app.use(function (req, res, next) {
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000') Снизу строка с ip облака
-    res.setHeader('Access-Control-Allow-Origin', 'http://31.129.42.2')
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+    // res.setHeader('Access-Control-Allow-Origin', 'http://31.129.42.2') строка с ip облака
+    // res.setHeader('Access-Control-Allow-Origin', '*') Или так Это для всех запросов (небезопасно)
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS, PATCH')
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers')
     next()
@@ -68,17 +69,16 @@ app.get('/catalog', (req, res) => {
 // Для каталога
 app.get('/:id', (req, res) => {
     const skipCount = Number(req.query.skipCount) || 0
+    const limitValue = Number(req.query.limitValue)
 
     // Чтобы убирать из ссылки параметры запроса (для поиска по базе)
     let url = req.url.replace('/', '')
-    if (req.query.limitCount || req.query.skipCount) {
-        url = url.replace(/\?.*$/, '')
-    }
+    url = url.replace(/\?.*/, '')
 
     const items = []
     db.collection('catalog').findOne({ name: url })
         .then((catalogItem) => {
-            db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).sort({ new: -1 }).skip(skipCount).limit(6) // sort для того чтобы первые элементы были new
+            db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).sort({ new: -1 }).skip(skipCount).limit(limitValue) // sort для того чтобы первые элементы были new
                 .forEach((item) => items.push(item))
                 .then(() => {
                     db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).count()
@@ -94,9 +94,10 @@ app.get('/:id', (req, res) => {
 // Для new (по умолчанию)
 app.get('/', (req, res) => {
     const skipCount = Number(req.query.skipCount) || 0
+    const limitValue = Number(req.query.limitValue)
 
     const items = []
-    db.collection('items').find({ new: true }).skip(skipCount).limit(6)
+    db.collection('items').find({ new: true }).skip(skipCount).limit(limitValue)
         .forEach((item) => items.push(item))
         .then(() => {
             db.collection('items').find({ new: true }).count()
@@ -139,62 +140,11 @@ const mailRequest = (req, res) => {
     })
 }
 
+app.post('/:id/mail', mailRequest)
+app.post('/mail', mailRequest)
+
 // Для добавления новых товаров
 // app.post('/update', (req, res) => {
 //     const item = { ...req.body, new: Boolean(req.body.new), available: Boolean(req.body.available), catalog_id: req.body.catalog_id }
 //     db.collection('items').insertOne({ ...item, catalog_id: new ObjectId(item.catalog_id) })
-// })
-
-app.post('/:id/mail', mailRequest)
-app.post('/mail', mailRequest)
-
-// app.get('/:id', (req, res) => {
-//     const limitValue = Number(req.query.limitValue)
-//     const skipCount = Number(req.query.skipCount)
-
-//     // Чтобы убирать из ссылки параметры запроса (для поиска по базе)
-//     let url = req.url.replace('/', '');
-//     if (req.query.limitValue || req.query.skipCount) {
-//         url = url.replace(/\?.*$/, "")
-//     }
-
-//     console.log(url, skipCount, limitValue);
-
-//     const items = [];
-//     db.collection('catalog').findOne({ name: url })
-//         .then((catalogItem) => {
-//             db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).sort({ new: -1 }).skip(skipCount).limit(limitValue) // sort для того чтобы первые элементы были new
-//                 .forEach((item) => items.push(item))
-//                 .then(() => {
-//                     db.collection('items').find({ catalog_id: new ObjectId(catalogItem._id) }).count()
-//                         .then((count) => {
-//                             res.status(200).json({ items, count });
-//                         })
-//                 })
-//                 .catch(() => handleError(res, "Something goes wrong"));
-//         })
-//         .catch(() => handleError(res, "Wrong id"));
-// });
-
-// // Для new (по умолчанию)
-// app.get('/', (req, res) => {
-//     const limitValue = Number(req.query.limitValue)
-//     const skipCount = Number(req.query.skipCount)
-
-//     // Чтобы убирать из ссылки параметры запроса (для поиска по базе)
-//     let url = req.url;
-//     if (req.query.limitValue || req.query.skipCount) {
-//         url = url.replace(/\?.*$/, "")
-//     }
-
-//     const items = [];
-//     db.collection('items').find({ new: true }).skip(skipCount).limit(limitValue)
-//         .forEach((item) => items.push(item))
-//         .then(() => {
-//             db.collection('items').find({ new: true }).count()
-//                 .then((count) => {
-//                     res.status(200).json({ items, count });
-//                 })
-//         })
-//         .catch(() => handleError(res, "Something goes wrong"));
 // })

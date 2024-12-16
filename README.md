@@ -97,6 +97,14 @@ We welcome contributions! To contribute:
 
 ---
 
+
+## Note
+This project is for educational purposes only and does not include licensing, support, or active maintenance.
+
+
+---
+
+
 ## Acknowledgments
 - Thanks to the La-Routine-New team for inspiration.
 - Special thanks to our early adopters for their feedback.

@@ -1,7 +1,7 @@
 const cors = require('cors')
 
 const allowedOrigins = [
-  'https://cloudy-disk-client.onrender.com',
+  'https://la-routine-new.onrender.com',
   'http://localhost:3000'
 ]
 

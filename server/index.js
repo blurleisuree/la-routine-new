@@ -7,15 +7,10 @@ const app = express()
 const { ObjectId } = require('mongodb')
 const { connectToDb, getDb } = require('./db')
 
-app.use(express.json()) // позволяет читать данные из запроса
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
-    // res.setHeader('Access-Control-Allow-Origin', 'http://31.129.42.2') строка с ip облака
-    // res.setHeader('Access-Control-Allow-Origin', '*') Или так Это для всех запросов (небезопасно)
-    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS, PATCH')
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers')
-    next()
-})
+const corsMiddleware = require('./middleware/cors.middleware')
+
+app.use(corsMiddleware)
+app.use(express.json())
 
 let db
 connectToDb((err) => {

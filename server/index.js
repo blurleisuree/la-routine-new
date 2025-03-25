@@ -1,4 +1,6 @@
 const express = require('express')
+require('dotenv').config()
+
 const PORT = process.env.PORT || 3001 // НЕ должен 3000 потому что фронт на 3000
 const app = express()
 

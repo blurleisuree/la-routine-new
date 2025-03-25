@@ -1,15 +1,16 @@
 const { MongoClient } = require('mongodb')
+require('dotenv').config()
 
-const URL = 'mongodb://localhost:27017/la-routine'
+const dbUrl = process.env.DATABASE_URL
 
 let dbConnection
 
 module.exports = {
     connectToDb: (cb) => {
-        MongoClient.connect(URL)
+        MongoClient.connect(dbUrl)
             .then((client) => {
                 console.log('Connected to MongoDB')
-                dbConnection = client.db() // в случае успешного подключения запишется результят этого подключения
+                dbConnection = client.db('la-routine') // в случае успешного подключения запишется результят этого подключения
                 return cb()
             })
             .catch((err) => {
